@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dramatics NYC
 
-## Getting Started
+A complete redesign of [dramaticsnyc.com](https://www.dramaticsnyc.com) — a warm, modern, conversion-focused site for New York's most enduring hair salon chain (est. 1984, five Manhattan locations).
 
-First, run the development server:
+Built to deploy on **Vercel** with zero configuration.
+
+## Stack
+
+- **Next.js 16** (App Router) + **React 19** + **TypeScript**
+- **Tailwind CSS v4** — warm editorial design system in `src/app/globals.css`
+- **Motion** (Framer Motion) — scroll reveals and entrance animations
+- **Lenis** — smooth scrolling
+- **next/font** — Fraunces (display serif) + Inter (UI), self-hosted & optimized
+
+## Routes
+
+- `/` — homepage (all sections)
+- `/book` — first-party booking page listing every salon's own online booking
+- `/shop` — full DNYC product catalog (22 products) with category filters; checkout hands off to the existing WooCommerce store
+- `/locations/[slug]` — one page per salon, reusing the original site's URL slugs so existing indexed links keep working after migration
+
+## Design language
+
+Cream paper backgrounds, gloss-black ink, pastel accent cards (apricot, pink, lilac, sage), fully rounded pill buttons, and a high-contrast serif display face. Light, airy, premium.
+
+## Booking conversion features
+
+- **Two-click rule:** Book CTA in the first viewport, sticky in the nav, and a mobile sticky bottom bar
+- **Per-location booking:** each salon card links to its own online booking page
+- Click-to-call phone numbers and visible hours on every location card
+- Social proof band with Google reviews link before the booking CTA
+
+## SEO & AEO
+
+- **Entity graph JSON-LD:** parent `Organization` + one `HairSalon` per location (`parentOrganization`-linked) with NAP, hours, and `ReserveAction`
+- **FAQPage schema** mirroring the visible FAQ accordion (answer-first content)
+- `sitemap.xml`, `robots.txt`, and `public/llms.txt` with structured business facts
+- Canonical URL, Open Graph/Twitter metadata, descriptive alt text throughout
+
+## Content accuracy
+
+All business facts (addresses, phones, hours, booking URLs, products, quotes) were pulled from the live dramaticsnyc.com and centralized in `src/lib/content.ts`.
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deploy to Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm i -g vercel
+vercel --prod
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Or push to GitHub and import at [vercel.com/new](https://vercel.com/new). No environment variables required.
 
-## Learn More
+## Notes
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `scripts/` contains Playwright screenshot helpers used during development.
+- `node scripts/sync-shop.mjs` re-syncs the product catalog (names, prices, ratings, images) from the WooCommerce store API into `src/lib/products-snapshot.json` and `public/img/products/`. Run it whenever products change.
+- **Shop checkout:** browsing happens on this site; "Add to Cart" hands off to the existing WooCommerce cart at dramaticsnyc.com. When this site replaces that domain, the old store must be kept alive on a subdomain (e.g. `store.dramaticsnyc.com`) or replaced with a headless commerce backend (Shopify/Stripe), and `buyUrl()` in `src/lib/shop.ts` updated accordingly.
+- Photography is licensed via Unsplash; swap in official salon photography in `public/img` when available (real photos out-convert stock by 30–50%).
+- Real salon videos live in `public/media` (converted from uploads in `downloads/` via macOS `avconvert`). Drop new photos/videos in `downloads/` and they can be converted and rotated into the Instagram section.
