@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { LOCATIONS } from "@/lib/content";
@@ -25,15 +26,16 @@ export default function BookPage() {
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-center text-ink-soft sm:text-lg">
             Every Dramatics NYC location takes online bookings. Pick the salon
-            that&apos;s most convenient for you, or call and we&apos;ll set you
-            up.
+            that&apos;s most convenient for you — we&apos;ll show you the map,
+            hours, and a direct book button.
           </p>
 
           <div className="mt-12 space-y-4">
             {LOCATIONS.map((loc) => (
-              <div
+              <Link
                 key={loc.id}
-                className="card-soft flex flex-col gap-5 border border-ink/8 bg-cream p-5 sm:flex-row sm:items-center"
+                href={`/locations/${loc.slug}`}
+                className="card-soft flex flex-col gap-5 border border-ink/8 bg-cream p-5 transition-colors hover:border-ink/20 hover:bg-paper sm:flex-row sm:items-center"
               >
                 <div className="relative hidden h-24 w-32 shrink-0 overflow-hidden rounded-2xl sm:block">
                   <Image
@@ -56,22 +58,14 @@ export default function BookPage() {
                   </p>
                 </div>
                 <div className="flex flex-wrap items-center gap-3">
-                  <a
-                    href={`tel:${loc.tel}`}
-                    className="btn-pill-outline px-5 py-3 text-sm"
-                  >
+                  <span className="btn-pill-outline pointer-events-none px-5 py-3 text-sm">
                     {loc.phone}
-                  </a>
-                  <a
-                    href={loc.bookingUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-pill px-6 py-3 text-sm"
-                  >
-                    Book Online
-                  </a>
+                  </span>
+                  <span className="btn-pill pointer-events-none px-6 py-3 text-sm">
+                    Choose Salon
+                  </span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import StickyBook from "@/components/StickyBook";
-import { LOCATIONS, SERVICES, SITE } from "@/lib/content";
+import { LOCATIONS, SERVICES, SITE, mapsEmbedUrl } from "@/lib/content";
 
 const SITE_URL = "https://www.dramaticsnyc.com";
 const ORG_ID = `${SITE_URL}/#organization`;
@@ -164,6 +164,30 @@ export default async function LocationPage({
             </a>
             <a href={`tel:${loc.tel}`} className="btn-pill-outline px-9 py-4 text-[0.95rem]">
               Call {loc.phone}
+            </a>
+          </div>
+
+          <div className="mt-10">
+            <h2 className="font-display text-2xl font-semibold sm:text-3xl">
+              Find us on the map
+            </h2>
+            <div className="card-soft relative mt-5 aspect-[16/9] overflow-hidden border border-ink/8 bg-tan">
+              <iframe
+                title={`Map of Dramatics NYC at ${loc.street}`}
+                src={mapsEmbedUrl(loc.maps)}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="absolute inset-0 h-full w-full border-0"
+                allowFullScreen
+              />
+            </div>
+            <a
+              href={loc.maps}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-underline mt-3 inline-block text-sm font-semibold"
+            >
+              Open in Google Maps →
             </a>
           </div>
 

@@ -114,6 +114,20 @@ export type Location = {
   quote?: string;
 };
 
+/** Convert a Google Maps search link into an embeddable iframe URL. */
+export function mapsEmbedUrl(maps: string) {
+  try {
+    const u = new URL(maps);
+    const q = u.searchParams.get("q");
+    if (q) {
+      return `https://maps.google.com/maps?q=${encodeURIComponent(q)}&z=16&output=embed`;
+    }
+  } catch {
+    /* fall through */
+  }
+  return `${maps}${maps.includes("?") ? "&" : "?"}output=embed`;
+}
+
 export const LOCATIONS: Location[] = [
   {
     id: "34th",
