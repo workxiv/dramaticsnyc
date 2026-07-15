@@ -65,13 +65,16 @@ export default function About() {
                 </div>
               </Reveal>
               <Reveal y={40} delay={0.08}>
-                <div className="group card-soft relative aspect-[3/4]">
-                  <Image
-                    src={IMG.aboutStyle}
-                    alt="A client with a fresh blowout at Dramatics NYC"
-                    fill
-                    sizes="(max-width: 1024px) 50vw, 25vw"
-                    className="img-cover object-cover"
+                <div className="group card-soft relative aspect-[3/4] overflow-hidden">
+                  <video
+                    src="/media/about-styling.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    aria-label="A Dramatics NYC colorist applying treatment at the salon"
+                    className="absolute inset-0 h-full w-full object-cover"
                   />
                 </div>
               </Reveal>

@@ -10,7 +10,6 @@ export const IMG = {
   salonPink: "/img/1521590832167-7bcbfaa6381f.jpg",
   salonBW: "/img/1560066984-138dadb4c035.jpg",
   salonModern: "/img/1633681926022-84c23e8cb2d6.jpg",
-  aboutStyle: "/img/real-about-style.jpg",
 } as const;
 
 /** First-party booking page — lists every salon's own online booking. */
