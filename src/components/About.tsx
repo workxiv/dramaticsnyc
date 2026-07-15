@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Reveal from "./Reveal";
+import AutoVideo from "./AutoVideo";
 import { ABOUT, IMG } from "@/lib/content";
 
 const STATS = [
@@ -66,14 +67,9 @@ export default function About() {
               </Reveal>
               <Reveal y={40} delay={0.08}>
                 <div className="group card-soft relative aspect-[3/4] overflow-hidden">
-                  <video
+                  <AutoVideo
                     src="/media/about-styling.mp4"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    preload="metadata"
-                    aria-label="A Dramatics NYC colorist applying treatment at the salon"
+                    label="A Dramatics NYC colorist applying treatment at the salon"
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                 </div>

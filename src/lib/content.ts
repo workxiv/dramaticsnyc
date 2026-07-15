@@ -1,12 +1,11 @@
 export const IMG = {
   heroPortrait: "/img/1492106087820-71f1a00d2b11.jpg",
-  beautyCloseup: "/img/1487412947147-5cebf100ffc2.jpg",
+  salonChairs: "/img/1600948836101-f9ffda59d250.jpg",
   colorVivid: "/img/1554519515-242161756769.jpg",
   styling: "/img/1562322140-8baeececf3df.jpg",
   /** real client results shot in our salons */
   cut: "/img/real-cut-style.jpg",
   treatment: "/img/real-treatment.jpg",
-  broadway91st: "/img/91st-broadway.jpg",
   salonPink: "/img/1521590832167-7bcbfaa6381f.jpg",
   salonBW: "/img/1560066984-138dadb4c035.jpg",
   salonModern: "/img/1633681926022-84c23e8cb2d6.jpg",
@@ -230,7 +229,7 @@ export const LOCATIONS: Location[] = [
       "Sun 9:00 am – 6:00 pm",
     ],
     openingHours: ["Mo-Sa 09:00-19:00", "Su 09:00-18:00"],
-    image: IMG.broadway91st,
+    image: IMG.salonChairs,
     maps: "https://maps.google.com/?q=2468+Broadway+New+York+NY+10025",
     bookingUrl: "https://dramatics2468broadway.salontarget.com/",
   },

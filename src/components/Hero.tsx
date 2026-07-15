@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "motion/react";
+import AutoVideo from "./AutoVideo";
 import { IMG, BOOKING_URL, SITE } from "@/lib/content";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -88,14 +89,9 @@ export default function Hero() {
           className="mt-14 grid grid-cols-3 gap-3 sm:mt-16 sm:gap-5"
         >
           <div className="card-soft relative mt-8 aspect-[3/4] overflow-hidden bg-apricot sm:mt-12">
-            <video
+            <AutoVideo
               src="/media/hero-cutting.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-label="A stylist cutting hair inside a Dramatics NYC salon"
+              label="A stylist cutting hair inside a Dramatics NYC salon"
               className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
@@ -110,14 +106,9 @@ export default function Hero() {
             />
           </div>
           <div className="card-soft relative mt-8 aspect-[3/4] overflow-hidden bg-lilac sm:mt-12">
-            <video
+            <AutoVideo
               src="/media/hero-flip.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-label="A client showing off a fresh style at Dramatics NYC"
+              label="A client showing off a fresh style at Dramatics NYC"
               className="absolute inset-0 h-full w-full object-cover"
             />
           </div>

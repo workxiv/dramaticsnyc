@@ -1,4 +1,5 @@
 import Reveal from "./Reveal";
+import AutoVideo from "./AutoVideo";
 import { SOCIAL } from "@/lib/content";
 
 const INSTAGRAM_URL =
@@ -57,14 +58,9 @@ export default function InstaFeed() {
                 aria-label={`${reel.label} — watch more on Instagram`}
                 className="group card-soft relative block aspect-[3/4] overflow-hidden bg-tan"
               >
-                <video
+                <AutoVideo
                   src={reel.src}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  aria-label={reel.label}
+                  label={reel.label}
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <span className="absolute right-3 top-3 rounded-full bg-paper/90 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.12em] opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100">
