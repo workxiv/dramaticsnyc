@@ -80,21 +80,23 @@ export default function Hero() {
           </a>
         </motion.div>
 
-        {/* Rounded image collage */}
+        {/* Rounded collage: real salon videos flanking the color portrait */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease, delay: 0.55 }}
           className="mt-14 grid grid-cols-3 gap-3 sm:mt-16 sm:gap-5"
         >
-          <div className="card-soft relative mt-8 aspect-[3/4] bg-apricot sm:mt-12">
-            <Image
-              src={IMG.cut}
-              alt="Precision haircut at a Dramatics NYC Manhattan salon"
-              fill
-              priority
-              sizes="(max-width: 640px) 33vw, 30vw"
-              className="object-cover"
+          <div className="card-soft relative mt-8 aspect-[3/4] overflow-hidden bg-apricot sm:mt-12">
+            <video
+              src="/media/hero-cutting.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label="A stylist cutting hair inside a Dramatics NYC salon"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
           <div className="card-soft relative aspect-[3/4] bg-pink">
@@ -107,14 +109,16 @@ export default function Hero() {
               className="object-cover"
             />
           </div>
-          <div className="card-soft relative mt-8 aspect-[3/4] bg-lilac sm:mt-12">
-            <Image
-              src={IMG.styling}
-              alt="Blowout styling service at Dramatics NYC"
-              fill
-              priority
-              sizes="(max-width: 640px) 33vw, 30vw"
-              className="object-cover"
+          <div className="card-soft relative mt-8 aspect-[3/4] overflow-hidden bg-lilac sm:mt-12">
+            <video
+              src="/media/hero-flip.mp4"
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label="A client showing off a fresh style at Dramatics NYC"
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
         </motion.div>

@@ -67,8 +67,8 @@ export default function About() {
               <Reveal y={40} delay={0.08}>
                 <div className="group card-soft relative aspect-[3/4]">
                   <Image
-                    src={IMG.barberBW}
-                    alt="Dramatics NYC stylist cutting a client's hair"
+                    src={IMG.aboutStyle}
+                    alt="A client with a fresh blowout at Dramatics NYC"
                     fill
                     sizes="(max-width: 1024px) 50vw, 25vw"
                     className="img-cover object-cover"

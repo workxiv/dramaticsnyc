@@ -1,25 +1,28 @@
-import Image from "next/image";
 import Reveal from "./Reveal";
-import { IMG, SOCIAL } from "@/lib/content";
+import { SOCIAL } from "@/lib/content";
 
 const INSTAGRAM_URL =
   SOCIAL.find((s) => s.label === "Instagram")?.href ??
   "https://instagram.com/dramaticsnycsalons";
 
-function ReelVideo({ src, label }: { src: string; label: string }) {
-  return (
-    <video
-      src={src}
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="metadata"
-      aria-label={label}
-      className="h-full w-full object-cover"
-    />
-  );
-}
+const REELS = [
+  {
+    src: "/media/insta-storefront.mp4",
+    label: "The Dramatics NYC storefront in Manhattan",
+  },
+  {
+    src: "/media/insta-red-curls.mp4",
+    label: "Rich red curls colored and styled at Dramatics NYC",
+  },
+  {
+    src: "/media/insta-foiling.mp4",
+    label: "A colorist foiling highlights at Dramatics NYC",
+  },
+  {
+    src: "/media/insta-75th-broadway.mp4",
+    label: "The corner of W 75th St and Broadway near our salon",
+  },
+];
 
 export default function InstaFeed() {
   return (
@@ -45,44 +48,31 @@ export default function InstaFeed() {
         </div>
 
         <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
-          <Reveal y={36}>
-            <div className="card-soft relative aspect-[3/4] bg-tan">
-              <ReelVideo
-                src="/media/salon-reel-1.mp4"
-                label="Inside a Dramatics NYC salon"
-              />
-            </div>
-          </Reveal>
-          <Reveal y={36} delay={0.06}>
-            <div className="group card-soft relative aspect-[3/4] bg-tan">
-              <Image
-                src={IMG.colorVivid}
-                alt="Vivid hair color by Dramatics NYC colorists"
-                fill
-                sizes="(max-width: 1024px) 50vw, 25vw"
-                className="img-cover object-cover"
-              />
-            </div>
-          </Reveal>
-          <Reveal y={36} delay={0.12}>
-            <div className="card-soft relative aspect-[3/4] bg-tan">
-              <ReelVideo
-                src="/media/salon-reel-2.mp4"
-                label="Styling at Dramatics NYC"
-              />
-            </div>
-          </Reveal>
-          <Reveal y={36} delay={0.18}>
-            <div className="group card-soft relative aspect-[3/4] bg-tan">
-              <Image
-                src={IMG.treatment}
-                alt="Hair treatment service at Dramatics NYC"
-                fill
-                sizes="(max-width: 1024px) 50vw, 25vw"
-                className="img-cover object-cover"
-              />
-            </div>
-          </Reveal>
+          {REELS.map((reel, i) => (
+            <Reveal key={reel.src} y={36} delay={0.06 * i}>
+              <a
+                href={INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${reel.label} — watch more on Instagram`}
+                className="group card-soft relative block aspect-[3/4] overflow-hidden bg-tan"
+              >
+                <video
+                  src={reel.src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label={reel.label}
+                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <span className="absolute right-3 top-3 rounded-full bg-paper/90 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.12em] opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100">
+                  View on Instagram ↗
+                </span>
+              </a>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

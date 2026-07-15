@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Reveal from "./Reveal";
 import { BOOKING_URL, SERVICES, SITE } from "@/lib/content";
 
@@ -42,17 +43,36 @@ export default function Services() {
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">
                     {service.description}
                   </p>
-                  <a
-                    href={BOOKING_URL}
-                    className="btn-pill mt-6 self-start px-6 py-3 text-sm"
-                  >
-                    Book this service
-                  </a>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    <a
+                      href={BOOKING_URL}
+                      className="btn-pill px-6 py-3 text-sm"
+                    >
+                      Book this service
+                    </a>
+                    <Link
+                      href={`/services#${service.id}`}
+                      className="btn-pill-outline px-6 py-3 text-sm"
+                    >
+                      See prices
+                    </Link>
+                  </div>
                 </div>
               </div>
             </Reveal>
           ))}
         </div>
+
+        <Reveal delay={0.15}>
+          <div className="mt-12 text-center">
+            <Link
+              href="/services"
+              className="btn-pill-outline px-8 py-4 text-[0.9rem]"
+            >
+              View the full price list
+            </Link>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

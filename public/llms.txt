@@ -2,6 +2,13 @@
 
 > Dramatics NYC is a hair salon chain with 5 locations in Manhattan, New York City, operating since 1984. Services: Cutting & Styling, Hair Coloring, and Hair Treatments. DNYC hair care products are made of up to 96% natural ingredients, paraben and sulfate free, and cruelty-free.
 
+## Services & Prices
+- Full price list: https://www.dramaticsnyc.com/services (all prices determined by hair length and texture)
+- Cutting & Styling: Blow Dry $45–$65, Shampoo & Cut (only) $42 (first available stylist, no booking needed), Shampoo Cut & Style $65–$85, Updos $60–$120
+- Hair Coloring: Single Process $80–$90 (no PPD, no PTD), Color Gloss $60–$70, Partial Highlights $90–$150, Full Highlights $150–$300, Double Process $100–$250, Balayage $175–$300
+- Hair Treatments: Conditioning $25–$45, Dramaplex $25–$50, Botox $80–$150, Keratin $150–$350 (formaldehyde-free $350), Relaxer $150–$250, Volumizing $150–$250
+- Work guaranteed for 7 days. MasterCard, Visa, and American Express accepted.
+
 ## Booking
 - Book online: https://www.dramaticsnyc.com/book
 - Every location also has its own online booking page and accepts phone bookings.

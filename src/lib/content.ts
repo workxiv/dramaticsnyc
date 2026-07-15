@@ -3,12 +3,14 @@ export const IMG = {
   beautyCloseup: "/img/1487412947147-5cebf100ffc2.jpg",
   colorVivid: "/img/1554519515-242161756769.jpg",
   styling: "/img/1562322140-8baeececf3df.jpg",
-  cut: "/img/1605497788044-5a32c7078486.jpg",
-  treatment: "/img/1595476108010-b4d1f102b1b1.jpg",
+  /** real client results shot in our salons */
+  cut: "/img/real-cut-style.jpg",
+  treatment: "/img/real-treatment.jpg",
+  broadway91st: "/img/91st-broadway.jpg",
   salonPink: "/img/1521590832167-7bcbfaa6381f.jpg",
   salonBW: "/img/1560066984-138dadb4c035.jpg",
   salonModern: "/img/1633681926022-84c23e8cb2d6.jpg",
-  barberBW: "/img/1503951914875-452162b0f3f1.jpg",
+  aboutStyle: "/img/real-about-style.jpg",
 } as const;
 
 /** First-party booking page — lists every salon's own online booking. */
@@ -229,14 +231,14 @@ export const LOCATIONS: Location[] = [
       "Sun 9:00 am – 6:00 pm",
     ],
     openingHours: ["Mo-Sa 09:00-19:00", "Su 09:00-18:00"],
-    image: IMG.beautyCloseup,
+    image: IMG.broadway91st,
     maps: "https://maps.google.com/?q=2468+Broadway+New+York+NY+10025",
     bookingUrl: "https://dramatics2468broadway.salontarget.com/",
   },
 ];
 
 export const NAV_LINKS = [
-  { label: "Services", href: "/#services" },
+  { label: "Services", href: "/services" },
   { label: "About", href: "/#house" },
   { label: "Salons", href: "/#salons" },
   { label: "Shop", href: "/shop" },

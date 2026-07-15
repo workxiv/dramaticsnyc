@@ -99,8 +99,8 @@ export default function Home() {
         <Services />
         <Trust />
         <Locations />
-        <Shop />
         <InstaFeed />
+        <Shop />
         <Faq />
       </main>
       <Footer />
