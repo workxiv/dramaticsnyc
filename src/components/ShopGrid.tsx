@@ -36,7 +36,7 @@ function ProductCard({ p, index }: { p: ShopProduct; index: number }) {
       transition={{ duration: 0.5, delay: 0.04 * (index % 8) }}
       className="group card-soft flex h-full flex-col border border-ink/8 bg-paper p-3"
     >
-      <div className="relative aspect-square overflow-hidden rounded-[1.25rem] bg-cream">
+      <div className="relative aspect-square overflow-hidden rounded-[1.25rem] bg-white">
         <Image
           src={p.image}
           alt={`${p.name} — DNYC hair product`}
@@ -62,15 +62,15 @@ function ProductCard({ p, index }: { p: ShopProduct; index: number }) {
         <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-ink-soft">
           {p.blurb}
         </p>
-        <div className="mt-4 flex items-center justify-between gap-3">
-          <span className="font-display text-lg font-semibold text-coral">
+        <div className="mt-4 flex flex-col gap-2.5 lg:flex-row lg:items-center lg:justify-between lg:gap-3">
+          <span className="whitespace-nowrap font-display text-lg font-semibold text-coral">
             {p.priceRange ?? p.price}
           </span>
           <a
             href={buyUrl(p)}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-pill px-5 py-2.5 text-[0.8rem]"
+            className="btn-pill w-full whitespace-nowrap px-5 py-2.5 text-[0.8rem] lg:w-auto"
           >
             {p.hasOptions ? "Choose Size" : "Add to Cart"}
           </a>

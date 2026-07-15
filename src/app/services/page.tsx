@@ -69,8 +69,11 @@ export default function ServicesPage() {
           {/* Hero */}
           <div className="mx-auto max-w-3xl text-center">
             <p className="eyebrow text-coral">Services &amp; Price List</p>
-            <h1 className="display-fluid mt-5 font-display font-medium text-balance">
-              Great hair, honest prices.
+            <h1 className="display-fluid mt-5">
+              <em className="text-flow">Great hair,</em>
+              <span className="block whitespace-nowrap pt-[0.12em]">
+                honest prices.
+              </span>
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-ink-soft sm:text-lg">
               All prices are determined by the length and texture of your hair

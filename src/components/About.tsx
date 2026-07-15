@@ -19,8 +19,9 @@ export default function About() {
               <p className="eyebrow text-coral">About Us</p>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className="heading-fluid mt-5 font-display font-medium">
-                The most successful hair salon chain in New York.
+              <h2 className="heading-fluid mt-5">
+                The most <em className="text-flow">successful</em> hair salon
+                chain in New York.
               </h2>
             </Reveal>
             <Reveal delay={0.1}>

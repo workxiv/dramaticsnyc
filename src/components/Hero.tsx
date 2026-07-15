@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import AutoVideo from "./AutoVideo";
+import { Sparkle, SwipeUnderline } from "./NycArt";
 import { IMG, BOOKING_URL, SITE } from "@/lib/content";
 
 const ease = [0.16, 1, 0.3, 1] as const;
@@ -33,25 +34,39 @@ export default function Hero() {
           ))}
         </motion.div>
 
-        <h1 className="display-fluid mx-auto max-w-5xl font-display font-medium text-balance">
+        <h1 className="display-fluid relative mx-auto max-w-5xl text-balance">
           {["Hair Cuts & Color", "for New Yorkers."].map((line, i) => (
-            <span key={line} className="block overflow-hidden">
+            <span key={line} className="block overflow-visible">
               <motion.span
                 className="block"
-                initial={{ y: "105%" }}
-                animate={{ y: "0%" }}
+                initial={{ y: "40%", opacity: 0 }}
+                animate={{ y: "0%", opacity: 1 }}
                 transition={{ duration: 0.9, ease, delay: 0.1 + i * 0.12 }}
               >
                 {i === 0 ? (
                   <>
-                    Hair Cuts &amp; <em className="italic">Color</em>
+                    Hair Cuts &amp; <em className="text-flow">Color</em>
                   </>
                 ) : (
-                  line
+                  <span className="headline-swipe">
+                    for New Yorkers.
+                    <SwipeUnderline />
+                  </span>
                 )}
               </motion.span>
             </span>
           ))}
+
+          {/* NYC doodles */}
+          <motion.span
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, ease, delay: 0.9 }}
+            className="absolute -top-8 right-2 hidden text-coral sm:block"
+            aria-hidden
+          >
+            <Sparkle className="animate-bob h-9 w-9" />
+          </motion.span>
         </h1>
 
         <motion.p
@@ -88,7 +103,7 @@ export default function Hero() {
           transition={{ duration: 1, ease, delay: 0.55 }}
           className="mt-14 grid grid-cols-3 gap-3 sm:mt-16 sm:gap-5"
         >
-          <div className="card-soft relative mt-8 aspect-[3/4] overflow-hidden bg-apricot sm:mt-12">
+          <div className="card-soft relative aspect-[3/4] overflow-hidden bg-apricot sm:mt-12">
             <AutoVideo
               src="/media/hero-cutting.mp4"
               label="A stylist cutting hair inside a Dramatics NYC salon"
@@ -105,7 +120,7 @@ export default function Hero() {
               className="object-cover"
             />
           </div>
-          <div className="card-soft relative mt-8 aspect-[3/4] overflow-hidden bg-lilac sm:mt-12">
+          <div className="card-soft relative aspect-[3/4] overflow-hidden bg-lilac sm:mt-12">
             <AutoVideo
               src="/media/hero-flip.mp4"
               label="A client showing off a fresh style at Dramatics NYC"

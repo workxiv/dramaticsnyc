@@ -32,7 +32,7 @@ export default function InstaFeed() {
         <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <Reveal>
             <p className="eyebrow text-coral">Fresh from the salon floor</p>
-            <h2 className="heading-fluid mt-5 font-display font-medium">
+            <h2 className="heading-fluid keep-case mt-5">
               @dramaticsnycsalons
             </h2>
           </Reveal>

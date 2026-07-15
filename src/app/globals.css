@@ -19,6 +19,7 @@
   --color-coral: #d14424;
 
   --font-display: var(--font-fraunces), Georgia, serif;
+  --font-headline: var(--font-anton), "Arial Narrow", Impact, sans-serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -89,20 +90,101 @@ body {
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.28em;
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
+/* Big headlines: heavy condensed uppercase, "GREAT HAIR" poster style */
 .display-fluid {
-  font-size: clamp(2.75rem, 8.5vw, 7.5rem);
-  line-height: 1.02;
-  letter-spacing: -0.025em;
+  font-family: var(--font-headline) !important;
+  font-weight: 400 !important;
+  text-transform: uppercase;
+  font-size: clamp(3rem, 9.5vw, 8.5rem);
+  line-height: 0.96;
+  letter-spacing: 0.01em;
 }
 
 .heading-fluid {
-  font-size: clamp(2rem, 4.5vw, 4rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-family: var(--font-headline) !important;
+  font-weight: 400 !important;
+  text-transform: uppercase;
+  font-size: clamp(2.1rem, 4.8vw, 4.25rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.display-fluid em,
+.heading-fluid em {
+  font-style: normal;
+}
+
+.heading-fluid.keep-case {
+  text-transform: none;
+}
+
+/* ---------- Animated headline color ---------- */
+@keyframes ink-flow {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+.text-flow {
+  background: linear-gradient(
+    100deg,
+    var(--color-coral) 0%,
+    #a34dff 30%,
+    #f0439b 55%,
+    var(--color-coral) 85%
+  );
+  background-size: 250% 250%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: ink-flow 6s ease-in-out infinite;
+}
+
+/* Hand-drawn swipe under a headline word */
+.headline-swipe {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+.headline-swipe svg {
+  position: absolute;
+  left: -2%;
+  bottom: -0.14em;
+  width: 104%;
+  height: 0.1em;
+  overflow: visible;
+  opacity: 0.9;
+}
+.headline-swipe svg path {
+  /* wide gap + overshot offsets so the round end-caps never linger */
+  stroke-dasharray: 1 2;
+  stroke-dashoffset: 1.05;
+  animation: swipe-cycle 6.5s var(--ease-out-expo) 0.7s infinite;
+}
+/* Draw in, hold, follow through and exit, rest, then replay */
+@keyframes swipe-cycle {
+  0% {
+    stroke-dashoffset: 1.05;
+  }
+  16% {
+    stroke-dashoffset: 0;
+  }
+  52% {
+    stroke-dashoffset: 0;
+  }
+  68% {
+    stroke-dashoffset: -1.05;
+  }
+  100% {
+    stroke-dashoffset: -1.05;
+  }
 }
 
 /* ---------- Marquee ---------- */
@@ -227,9 +309,80 @@ details.faq-item[open] summary .faq-icon {
   transform: rotate(45deg);
 }
 
+/* ---------- Animated skyline ---------- */
+@keyframes skyline-twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}
+.skyline-window {
+  animation: skyline-twinkle 3.8s ease-in-out infinite;
+}
+
+@keyframes skyline-beacon {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+.skyline-beacon {
+  animation: skyline-beacon 2s ease-in-out infinite;
+}
+
+@keyframes skyline-drive {
+  from {
+    transform: translateX(-60px);
+  }
+  to {
+    transform: translateX(1500px);
+  }
+}
+.skyline-car {
+  animation: skyline-drive 17s linear infinite;
+}
+.skyline-car-2 {
+  animation: skyline-drive 23s linear infinite;
+  animation-delay: -14s;
+}
+
+/* Gentle float for NYC doodles */
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--bob-tilt, -4deg));
+  }
+  50% {
+    transform: translateY(-8px) rotate(var(--bob-tilt, -4deg));
+  }
+}
+.animate-bob {
+  animation: bob 4.5s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee {
+  .animate-marquee,
+  .text-flow,
+  .animate-bob,
+  .skyline-window,
+  .skyline-beacon,
+  .skyline-car,
+  .skyline-car-2,
+  .headline-swipe svg path {
     animation: none;
+  }
+  .skyline-car,
+  .skyline-car-2 {
+    display: none;
+  }
+  .headline-swipe svg path {
+    stroke-dashoffset: 0;
   }
   html {
     scroll-behavior: auto;

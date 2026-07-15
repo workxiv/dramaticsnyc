@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Reveal from "./Reveal";
+import { Skyline } from "./NycArt";
 import { BOOKING_URL, LOCATIONS, NAV_LINKS, SOCIAL } from "@/lib/content";
 
 export default function Footer() {
@@ -6,14 +8,22 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-ink text-paper">
+      {/* NYC skyline divider */}
+      <div
+        className="flex justify-center overflow-hidden bg-paper text-ink"
+        aria-hidden
+      >
+        <Skyline className="w-full min-w-[880px] shrink-0" />
+      </div>
+
       {/* Closing CTA */}
       <div className="mx-auto max-w-[1440px] px-5 py-20 text-center sm:px-8 sm:py-28 lg:px-12">
         <Reveal>
           <p className="eyebrow text-pink">Ready when you are</p>
         </Reveal>
         <Reveal delay={0.05}>
-          <h2 className="mx-auto mt-6 max-w-4xl font-display text-[clamp(2.4rem,7vw,6rem)] font-medium leading-[1.02] text-balance">
-            Book your next appointment today.
+          <h2 className="heading-fluid mx-auto mt-6 max-w-4xl text-balance">
+            Book your next <em className="text-flow">appointment</em> today.
           </h2>
         </Reveal>
         <Reveal delay={0.1}>
@@ -38,9 +48,13 @@ export default function Footer() {
       <div className="border-t border-paper/10">
         <div className="mx-auto grid max-w-[1440px] gap-12 px-5 py-14 sm:px-8 lg:grid-cols-12 lg:px-12">
           <div className="lg:col-span-4">
-            <div className="font-display text-2xl font-semibold">
-              Dramatics NYC
-            </div>
+            <Image
+              src="/img/logo-dramatics-light.png"
+              alt="Dramatics NYC"
+              width={972}
+              height={166}
+              className="h-7 w-auto sm:h-8"
+            />
             <p className="mt-4 max-w-xs text-sm text-paper/60">
               Hair Cuts &amp; Color for New Yorkers. Five Hair Salon locations
               in Manhattan since 1984.

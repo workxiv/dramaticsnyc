@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { NAV_LINKS, BOOKING_URL, PHONE_PRIMARY } from "@/lib/content";
 
@@ -32,12 +33,15 @@ export default function Nav() {
         }`}
       >
         <nav className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-4 sm:px-8 lg:px-12">
-          <a
-            href="/"
-            className="font-display text-xl font-semibold tracking-tight"
-            aria-label="Dramatics NYC home"
-          >
-            Dramatics NYC
+          <a href="/" aria-label="Dramatics NYC home" className="shrink-0">
+            <Image
+              src="/img/logo-dramatics.png"
+              alt="Dramatics NYC"
+              width={972}
+              height={166}
+              priority
+              className="h-[22px] w-auto sm:h-7"
+            />
           </a>
 
           <div className="hidden items-center gap-8 md:flex">
@@ -84,9 +88,13 @@ export default function Nav() {
             className="fixed inset-0 z-[60] flex flex-col bg-paper px-6 py-6 md:hidden"
           >
             <div className="flex items-center justify-between">
-              <span className="font-display text-xl font-semibold">
-                Dramatics NYC
-              </span>
+              <Image
+                src="/img/logo-dramatics.png"
+                alt="Dramatics NYC"
+                width={972}
+                height={166}
+                className="h-6 w-auto"
+              />
               <button
                 type="button"
                 onClick={() => setOpen(false)}

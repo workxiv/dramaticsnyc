@@ -42,7 +42,7 @@ export default function Shop() {
           {FEATURED_PRODUCTS.map((p, i) => (
             <Reveal key={p.id} delay={0.05 * i} y={40}>
               <div className="group card-soft flex h-full flex-col border border-ink/8 bg-paper p-3">
-                <div className="relative aspect-square overflow-hidden rounded-[1.25rem] bg-paper">
+                <div className="relative aspect-square overflow-hidden rounded-[1.25rem] bg-white">
                   <Image
                     src={p.image}
                     alt={`${p.name} — DNYC hair product`}
@@ -63,15 +63,15 @@ export default function Shop() {
                       <Stars rating={p.rating} count={p.reviewCount} />
                     </div>
                   ) : null}
-                  <div className="mt-3 flex flex-1 items-end justify-between gap-3">
-                    <span className="font-display text-lg font-semibold text-coral">
+                  <div className="mt-3 flex flex-1 flex-col justify-end gap-2.5 lg:flex-row lg:items-center lg:justify-between lg:gap-3">
+                    <span className="whitespace-nowrap font-display text-lg font-semibold text-coral">
                       {p.priceRange ?? p.price}
                     </span>
                     <a
                       href={buyUrl(p)}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="btn-pill px-5 py-2.5 text-[0.8rem]"
+                      className="btn-pill w-full whitespace-nowrap px-5 py-2.5 text-[0.8rem] lg:w-auto"
                     >
                       {p.hasOptions ? "Choose Size" : "Add to Cart"}
                     </a>

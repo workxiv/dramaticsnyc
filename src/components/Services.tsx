@@ -12,8 +12,9 @@ export default function Services() {
         <div className="mx-auto max-w-3xl text-center">
           <Reveal>
             <p className="eyebrow text-coral">Hair Salon Services</p>
-            <h2 className="heading-fluid mt-5 font-display font-medium text-balance">
-              Cutting, color &amp; treatment for every New Yorker.
+            <h2 className="heading-fluid mt-5 text-balance">
+              Cutting, <em className="text-flow">color</em>
+              {" & "}treatment for every New Yorker.
             </h2>
           </Reveal>
           <Reveal delay={0.1}>

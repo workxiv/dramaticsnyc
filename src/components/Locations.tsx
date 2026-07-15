@@ -1,5 +1,6 @@
 import Reveal from "./Reveal";
 import LocationCard from "./LocationCard";
+import { SubwayToken } from "./NycArt";
 import { BOOKING_URL, LOCATIONS } from "@/lib/content";
 
 export default function Locations() {
@@ -9,8 +10,9 @@ export default function Locations() {
         <div className="mx-auto max-w-3xl text-center">
           <Reveal>
             <p className="eyebrow text-coral">Hair Salon Finder</p>
-            <h2 className="heading-fluid mt-5 font-display font-medium text-balance">
-              Five salons across Manhattan.
+            <h2 className="heading-fluid mt-5 text-balance">
+              Five salons across{" "}
+              <em className="text-flow">Manhattan.</em>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
@@ -30,8 +32,12 @@ export default function Locations() {
           ))}
 
           <Reveal delay={0.3} y={40}>
-            <div className="card-soft flex h-full flex-col justify-between bg-lilac p-7">
-              <p className="font-display text-2xl font-semibold leading-snug sm:text-3xl">
+            <div className="card-soft relative flex h-full flex-col justify-between bg-lilac p-7">
+              <SubwayToken
+                letter="D"
+                className="animate-bob absolute right-6 top-6 h-12 w-12"
+              />
+              <p className="max-w-[80%] font-display text-2xl font-semibold leading-snug sm:text-3xl">
                 Not sure which salon is closest?
               </p>
               <div className="mt-6">
