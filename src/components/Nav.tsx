@@ -49,7 +49,7 @@ export default function Nav() {
               <a
                 key={link.href}
                 href={link.href}
-                className="link-underline text-[0.85rem] font-medium text-ink-soft transition-colors hover:text-ink"
+                className="link-underline text-base font-medium text-ink-soft transition-colors hover:text-ink"
               >
                 {link.label}
               </a>
@@ -59,7 +59,7 @@ export default function Nav() {
           <div className="flex items-center gap-3">
             <a
               href={BOOKING_URL}
-              className="btn-pill hidden px-6 py-3 text-[0.82rem] sm:inline-flex"
+              className="btn-pill hidden px-6 py-3 text-[0.9rem] sm:inline-flex"
             >
               Book Now
             </a>

@@ -45,7 +45,58 @@ export default function Hero() {
               >
                 {i === 0 ? (
                   <>
-                    Hair Cuts &amp; <em className="text-flow">Color</em>
+                    Hair Cuts &amp;{" "}
+                    <span className="relative inline-block">
+                      <em className="text-flow">Color</em>
+
+                      {/* Sparkle burst popping out of "Color" */}
+                      <span
+                        className="pointer-events-none absolute -right-[0.3em] -top-[0.26em] block h-[0.32em] w-[0.32em]"
+                        aria-hidden
+                      >
+                        {/* main sparkle: pops with overshoot, then lingers */}
+                        <motion.span
+                          className="absolute inset-0 text-coral"
+                          initial={{ scale: 0, rotate: -40 }}
+                          animate={{ scale: [0, 1.6, 0.85, 1], rotate: [-40, 15, 0, 0] }}
+                          transition={{
+                            duration: 0.7,
+                            delay: 0.9,
+                            times: [0, 0.45, 0.75, 1],
+                            ease: "easeOut",
+                          }}
+                        >
+                          <Sparkle className="animate-bob h-full w-full" />
+                        </motion.span>
+                        {/* mini pops that flash outward and vanish */}
+                        <motion.span
+                          className="absolute -left-[0.5em] top-[0.05em] h-[0.14em] w-[0.14em] text-[#f0439b]"
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{
+                            scale: [0, 1.2, 0],
+                            opacity: [0, 1, 0],
+                            x: ["0em", "-0.18em"],
+                            y: ["0em", "-0.22em"],
+                          }}
+                          transition={{ duration: 0.6, delay: 1.02, ease: "easeOut" }}
+                        >
+                          <Sparkle className="h-full w-full" />
+                        </motion.span>
+                        <motion.span
+                          className="absolute left-[0.28em] top-[0.3em] h-[0.1em] w-[0.1em] text-[#a34dff]"
+                          initial={{ scale: 0, opacity: 0 }}
+                          animate={{
+                            scale: [0, 1.2, 0],
+                            opacity: [0, 1, 0],
+                            x: ["0em", "0.24em"],
+                            y: ["0em", "0.1em"],
+                          }}
+                          transition={{ duration: 0.6, delay: 1.12, ease: "easeOut" }}
+                        >
+                          <Sparkle className="h-full w-full" />
+                        </motion.span>
+                      </span>
+                    </span>
                   </>
                 ) : (
                   <span className="headline-swipe">
@@ -56,17 +107,6 @@ export default function Hero() {
               </motion.span>
             </span>
           ))}
-
-          {/* NYC doodles */}
-          <motion.span
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, ease, delay: 0.9 }}
-            className="absolute -top-8 right-2 hidden text-coral sm:block"
-            aria-hidden
-          >
-            <Sparkle className="animate-bob h-9 w-9" />
-          </motion.span>
         </h1>
 
         <motion.p
