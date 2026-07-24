@@ -56,6 +56,106 @@ export function Taxi({ className = "" }: { className?: string }) {
   );
 }
 
+export function Scissors({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" className={className} aria-hidden fill="none">
+      {/* blades point right, handles left, pivot at (28,32) */}
+      <g className="scissors-blade-a">
+        <path
+          d="M28 32 L56 22c2.5-1 4 0.5 3 2.5L32 34Z"
+          fill="#b9b4a6"
+          stroke="#17150e"
+          strokeWidth="2"
+          strokeLinejoin="round"
+        />
+        <ellipse cx="14" cy="41" rx="8" ry="6" transform="rotate(24 14 41)" fill="none" stroke="#17150e" strokeWidth="2.6" />
+      </g>
+      <g className="scissors-blade-b">
+        <path
+          d="M28 32 L56 42c2.5 1 4-0.5 3-2.5L32 30Z"
+          fill="#d7d2c4"
+          stroke="#17150e"
+          strokeWidth="2"
+          strokeLinejoin="round"
+        />
+        <ellipse cx="14" cy="23" rx="8" ry="6" transform="rotate(-24 14 23)" fill="none" stroke="#17150e" strokeWidth="2.6" />
+      </g>
+      <circle cx="28" cy="32" r="3" fill="#17150e" />
+    </svg>
+  );
+}
+
+export function BlowDryer({ className = "" }: { className?: string }) {
+  // Classic dryer silhouette pointing right: barrel, tapered nozzle,
+  // angled handle, rear intake vent.
+  return (
+    <svg viewBox="0 0 88 72" className={className} aria-hidden fill="none">
+      {/* handle (behind barrel) */}
+      <g transform="rotate(16 30 36)">
+        <rect x="22" y="34" width="15" height="28" rx="7" fill="#ffc6e1" stroke="#17150e" strokeWidth="2.4" />
+        <rect x="26" y="40" width="7" height="5" rx="2" fill="#17150e" />
+      </g>
+      {/* cord */}
+      <path d="M32 64c3 4 8 4 10 0s7-4 9 0" stroke="#17150e" strokeWidth="2" strokeLinecap="round" fill="none" />
+      {/* barrel */}
+      <rect x="6" y="10" width="44" height="28" rx="14" fill="#cba2ff" stroke="#17150e" strokeWidth="2.4" />
+      {/* nozzle */}
+      <path d="M50 17 L66 20 V28 L50 31 Z" fill="#cba2ff" stroke="#17150e" strokeWidth="2.4" strokeLinejoin="round" />
+      <rect x="64" y="19" width="4" height="10" rx="1.5" fill="#17150e" />
+      {/* rear intake vent */}
+      <circle cx="16" cy="24" r="7" fill="#fbf8f1" stroke="#17150e" strokeWidth="2" />
+      <path d="M13 21l6 6M13 27l6-6" stroke="#17150e" strokeWidth="1.6" strokeLinecap="round" />
+      {/* barrel highlight */}
+      <path d="M14 15c8-2.5 22-2.5 30 0" stroke="#fbf8f1" strokeWidth="2.4" strokeLinecap="round" opacity="0.7" />
+      {/* air lines */}
+      <g className="dryer-air" stroke="#d14424" strokeWidth="2.6" strokeLinecap="round" opacity="0.9">
+        <path d="M72 19h9" />
+        <path d="M72 24h14" />
+        <path d="M72 29h9" />
+      </g>
+    </svg>
+  );
+}
+
+export function SubwayTrain({ className = "" }: { className?: string }) {
+  // Three-car NYC subway, front car on the right (travels left -> right)
+  const car = (x: number, front = false) => (
+    <g key={x} transform={`translate(${x} 0)`}>
+      <rect x="0" y="6" width="92" height="32" rx={front ? 9 : 6} fill="#d7d2c4" stroke="#17150e" strokeWidth="2.2" />
+      {/* windows */}
+      <rect x="8" y="12" width="20" height="11" rx="3" fill="#fbf8f1" stroke="#17150e" strokeWidth="1.6" />
+      <rect x="36" y="12" width="20" height="11" rx="3" fill="#fbf8f1" stroke="#17150e" strokeWidth="1.6" />
+      <rect x="64" y="12" width="20" height="11" rx="3" fill="#fbf8f1" stroke="#17150e" strokeWidth="1.6" />
+      {/* doors line */}
+      <path d="M32 27h28" stroke="#17150e" strokeWidth="1.4" opacity="0.5" />
+      {/* undercarriage + wheels */}
+      <rect x="4" y="36" width="84" height="4" rx="2" fill="#17150e" opacity="0.85" />
+      <rect x="12" y="40" width="14" height="5" rx="2.5" fill="#17150e" />
+      <rect x="66" y="40" width="14" height="5" rx="2.5" fill="#17150e" />
+      {front && (
+        <>
+          {/* headlight + route badge on the lead car */}
+          <circle cx="86" cy="30" r="2.6" fill="#f7c948" stroke="#17150e" strokeWidth="1.4" />
+          <circle cx="46" cy="30.5" r="5.5" fill="#d14424" />
+          <text x="46" y="34" textAnchor="middle" fontSize="8" fontWeight="bold" fill="#fbf8f1" fontFamily="sans-serif">
+            D
+          </text>
+        </>
+      )}
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 300 46" className={className} aria-hidden fill="none">
+      {car(0)}
+      {car(102)}
+      {car(204, true)}
+      {/* couplers */}
+      <rect x="92" y="20" width="10" height="5" rx="2" fill="#17150e" />
+      <rect x="194" y="20" width="10" height="5" rx="2" fill="#17150e" />
+    </svg>
+  );
+}
+
 /* ----- Animated NYC skyline with lit windows, driving cars, beacon ----- */
 
 const SKY_W = 1440;

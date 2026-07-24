@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
+import BrandLogo from "./BrandLogo";
+import ThemeToggle from "./ThemeToggle";
 import { NAV_LINKS, BOOKING_URL, PHONE_PRIMARY } from "@/lib/content";
 
 export default function Nav() {
@@ -34,14 +35,7 @@ export default function Nav() {
       >
         <nav className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-4 sm:px-8 lg:px-12">
           <a href="/" aria-label="Dramatics NYC home" className="shrink-0">
-            <Image
-              src="/img/logo-dramatics.png"
-              alt="Dramatics NYC"
-              width={972}
-              height={166}
-              priority
-              className="h-[22px] w-auto sm:h-7"
-            />
+            <BrandLogo priority />
           </a>
 
           <div className="hidden items-center gap-8 md:flex">
@@ -56,7 +50,8 @@ export default function Nav() {
             ))}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <ThemeToggle />
             <a
               href={BOOKING_URL}
               className="btn-pill hidden px-6 py-3 text-[0.9rem] sm:inline-flex"
@@ -88,14 +83,10 @@ export default function Nav() {
             className="fixed inset-0 z-[60] flex flex-col bg-paper px-6 py-6 md:hidden"
           >
             <div className="flex items-center justify-between">
-              <Image
-                src="/img/logo-dramatics.png"
-                alt="Dramatics NYC"
-                width={972}
-                height={166}
-                className="h-6 w-auto"
-              />
-              <button
+              <BrandLogo className="h-6 w-auto" />
+              <div className="flex items-center gap-2">
+                <ThemeToggle />
+                <button
                 type="button"
                 onClick={() => setOpen(false)}
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/15 text-xl"
@@ -103,6 +94,7 @@ export default function Nav() {
               >
                 ✕
               </button>
+              </div>
             </div>
             <div className="flex flex-1 flex-col justify-center gap-3">
               {NAV_LINKS.map((link, i) => (

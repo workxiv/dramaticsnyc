@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* ===========================================================
    DRAMATICS NYC — Warm Editorial Design System
    Cream paper, gloss-black ink, pastel accents, pill buttons.
@@ -17,6 +19,9 @@
   --color-apricot: #ffe5d6;
   --color-sage: #cfe0c3;
   --color-coral: #d14424;
+  /* Footer / inverse surfaces (stay dark in both themes) */
+  --color-inverse: #17150e;
+  --color-inverse-fg: #fbf8f1;
 
   --font-display: var(--font-fraunces), Georgia, serif;
   --font-headline: var(--font-anton), "Arial Narrow", Impact, sans-serif;
@@ -30,6 +35,42 @@
   --foreground: var(--color-ink);
 }
 
+/* Warm editorial night — preview palette */
+.dark {
+  --color-paper: #13110e;
+  --color-cream: #1a1712;
+  --color-ink: #f6efe3;
+  --color-ink-soft: #c4bdb0;
+  --color-ink-mute: #8a8275;
+  --color-tan: #2e2a22;
+  --color-pink: #ffc6e1;
+  --color-lilac: #cba2ff;
+  --color-apricot: #ffe5d6;
+  --color-sage: #cfe0c3;
+  --color-coral: #ff6b4a;
+  --color-inverse: #080706;
+  --color-inverse-fg: #f6efe3;
+
+  --background: var(--color-paper);
+  --foreground: var(--color-ink);
+}
+
+.dark .bg-pink {
+  background-color: color-mix(in srgb, var(--color-pink) 22%, var(--color-cream));
+}
+.dark .bg-lilac {
+  background-color: color-mix(in srgb, var(--color-lilac) 20%, var(--color-cream));
+}
+.dark .bg-apricot {
+  background-color: color-mix(in srgb, var(--color-apricot) 18%, var(--color-cream));
+}
+.dark .bg-sage {
+  background-color: color-mix(in srgb, var(--color-sage) 18%, var(--color-cream));
+}
+.dark .bg-tan {
+  background-color: var(--color-tan);
+}
+
 * {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -37,6 +78,11 @@
 
 html {
   scroll-behavior: smooth;
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
 }
 
 html.lenis,
@@ -61,7 +107,12 @@ body {
 
 ::selection {
   background: var(--color-ink);
-  color: var(--color-cream);
+  color: var(--color-paper);
+}
+
+.dark ::selection {
+  background: var(--color-coral);
+  color: var(--color-inverse-fg);
 }
 
 ::-webkit-scrollbar {
@@ -352,7 +403,308 @@ details.faq-item[open] summary .faq-icon {
   animation-delay: -14s;
 }
 
-/* Gentle float for NYC doodles */
+/* ===========================================================
+   Hero headline choreography
+   Shared 9s loop: dryer blows -> HAIR letters flutter.
+   Shared 12s loop: scissors dive -> period gets cut -> regrows.
+   6s loop: star pops out of COLOR. Traffic crosses on its own lanes.
+   =========================================================== */
+
+/* --- blow dryer: parked, recoils while blowing (9s, delay 1s) --- */
+.hero-dryer {
+  animation: dryer-recoil 9s ease-in-out 1s infinite;
+  transform-origin: 30% 60%;
+}
+@keyframes dryer-recoil {
+  0%,
+  8%,
+  46%,
+  100% {
+    transform: rotate(0deg) translateX(0);
+  }
+  12% {
+    transform: rotate(-6deg) translateX(-0.04em);
+  }
+  16%,
+  24%,
+  32% {
+    transform: rotate(-4deg) translateX(-0.03em);
+  }
+  20%,
+  28%,
+  36% {
+    transform: rotate(-7deg) translateX(-0.05em);
+  }
+  42% {
+    transform: rotate(-5deg) translateX(-0.03em);
+  }
+}
+
+/* air lines: gated to the blow phase, pulsing while on */
+.animate-dryer-blow .dryer-air {
+  opacity: 0;
+  animation: dryer-air-gate 9s linear 1s infinite;
+}
+@keyframes dryer-air-gate {
+  0%,
+  10%,
+  46%,
+  100% {
+    opacity: 0;
+  }
+  13%,
+  43% {
+    opacity: 1;
+  }
+}
+.animate-dryer-blow .dryer-air path {
+  animation: dryer-air-pulse 0.38s ease-in-out infinite;
+}
+.animate-dryer-blow .dryer-air path:nth-child(2) {
+  animation-delay: 0.09s;
+}
+.animate-dryer-blow .dryer-air path:nth-child(3) {
+  animation-delay: 0.18s;
+}
+@keyframes dryer-air-pulse {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateX(5px);
+    opacity: 1;
+  }
+}
+
+/* --- HAIR letters: blown to the right while the air is on --- */
+.hair-blow {
+  animation: hair-blow 9s ease-in-out infinite;
+  transform-origin: 50% 88%;
+  will-change: transform;
+}
+@keyframes hair-blow {
+  0%,
+  11%,
+  48%,
+  100% {
+    transform: skewX(0deg) rotate(0deg) translateX(0);
+  }
+  15% {
+    transform: skewX(9deg) rotate(2deg) translateX(0.015em);
+  }
+  19% {
+    transform: skewX(5deg) rotate(1deg) translateX(0.008em);
+  }
+  23% {
+    transform: skewX(10deg) rotate(2.5deg) translateX(0.018em);
+  }
+  27% {
+    transform: skewX(6deg) rotate(1.2deg) translateX(0.01em);
+  }
+  31% {
+    transform: skewX(9.5deg) rotate(2.2deg) translateX(0.016em);
+  }
+  35% {
+    transform: skewX(5.5deg) rotate(1deg) translateX(0.008em);
+  }
+  39% {
+    transform: skewX(8deg) rotate(1.8deg) translateX(0.013em);
+  }
+  44% {
+    transform: skewX(3deg) rotate(0.6deg) translateX(0.004em);
+  }
+}
+
+/* --- scissors: dive onto the period, snip, retreat (12s, delay 3s) --- */
+.hero-scissors {
+  opacity: 0;
+  animation: scissors-dive 12s ease-in-out 3s infinite;
+  transform-origin: 45% 50%;
+}
+@keyframes scissors-dive {
+  0%,
+  30%,
+  100% {
+    opacity: 0;
+    transform: translate(0.7em, -0.8em) rotate(20deg) scale(0.7);
+  }
+  6% {
+    opacity: 1;
+    transform: translate(0, -0.06em) rotate(75deg) scale(1);
+  }
+  10% {
+    transform: translate(0, 0.06em) rotate(75deg) scale(1);
+  }
+  13% {
+    transform: translate(0, -0.02em) rotate(75deg) scale(1);
+  }
+  16% {
+    transform: translate(0, 0.05em) rotate(75deg) scale(1);
+  }
+  22% {
+    opacity: 1;
+    transform: translate(0.5em, -0.7em) rotate(35deg) scale(0.9);
+  }
+  28% {
+    opacity: 0;
+    transform: translate(0.8em, -1em) rotate(20deg) scale(0.75);
+  }
+}
+
+.scissors-blade-a,
+.scissors-blade-b {
+  transform-origin: 28px 32px;
+}
+.scissors-blade-a {
+  animation: blade-a 0.5s ease-in-out infinite;
+}
+.scissors-blade-b {
+  animation: blade-b 0.5s ease-in-out infinite;
+}
+@keyframes blade-a {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-11deg);
+  }
+}
+@keyframes blade-b {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(11deg);
+  }
+}
+
+/* --- the period: gets snipped off, falls, then regrows (12s, delay 3s) --- */
+.hero-period {
+  animation: period-cut 12s ease-in 3s infinite;
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+}
+@keyframes period-cut {
+  0%,
+  9% {
+    transform: none;
+    opacity: 1;
+  }
+  11% {
+    transform: translate(0.01em, 0.03em) rotate(8deg);
+    opacity: 1;
+  }
+  14% {
+    transform: translate(0.05em, 0.3em) rotate(40deg);
+    opacity: 1;
+  }
+  20% {
+    transform: translate(0.12em, 1em) rotate(90deg);
+    opacity: 0;
+  }
+  44% {
+    transform: scale(0.2);
+    opacity: 0;
+  }
+  48% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+  52%,
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* --- star pops out of COLOR (6s loop, staggered via inline delay) --- */
+.star-main {
+  animation: star-twinkle 3.4s ease-in-out 2s infinite;
+}
+@keyframes star-twinkle {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.18) rotate(9deg);
+  }
+}
+.star-pop {
+  opacity: 0;
+  transform: scale(0);
+  animation: star-pop 6s ease-out infinite;
+}
+@keyframes star-pop {
+  0%,
+  16%,
+  100% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+  3% {
+    opacity: 1;
+    transform: translate(calc(var(--px) * 0.35), calc(var(--py) * 0.35))
+      scale(1.15);
+  }
+  8% {
+    opacity: 1;
+    transform: translate(calc(var(--px) * 0.8), calc(var(--py) * 0.8)) scale(0.9);
+  }
+  14% {
+    opacity: 0;
+    transform: translate(var(--px), var(--py)) scale(0);
+  }
+}
+
+/* --- traffic lanes --- */
+.hero-train {
+  left: 0;
+  animation: lane-ltr 20s linear 2s infinite;
+  transform: translateX(-40vw);
+}
+.hero-train-rumble {
+  animation: train-rumble 0.34s linear infinite;
+}
+@keyframes train-rumble {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-1.5px);
+  }
+}
+.hero-taxi-behind {
+  left: 0;
+  animation: lane-ltr 13s linear 8s infinite;
+  transform: translateX(-40vw);
+}
+.hero-car-front {
+  left: 0;
+  animation: lane-rtl 15s linear 5.5s infinite;
+  transform: translateX(115vw);
+}
+@keyframes lane-ltr {
+  from {
+    transform: translateX(-40vw);
+  }
+  to {
+    transform: translateX(115vw);
+  }
+}
+@keyframes lane-rtl {
+  from {
+    transform: translateX(115vw);
+  }
+  to {
+    transform: translateX(-40vw);
+  }
+}
 @keyframes bob {
   0%,
   100% {
@@ -366,6 +718,15 @@ details.faq-item[open] summary .faq-icon {
   animation: bob 4.5s ease-in-out infinite;
 }
 
+/* On phones the dryer/scissors actors are hidden, so the letters they act on
+   must stay still too */
+@media (max-width: 639px) {
+  .hair-blow,
+  .hero-period {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
   .text-flow,
@@ -374,11 +735,26 @@ details.faq-item[open] summary .faq-icon {
   .skyline-beacon,
   .skyline-car,
   .skyline-car-2,
+  .hair-blow,
+  .hero-dryer,
+  .hero-scissors,
+  .hero-period,
+  .star-main,
+  .star-pop,
+  .hero-train,
+  .hero-train-rumble,
+  .hero-taxi-behind,
+  .hero-car-front,
+  .scissors-blade-a,
+  .scissors-blade-b,
+  .animate-dryer-blow .dryer-air,
+  .animate-dryer-blow .dryer-air path,
   .headline-swipe svg path {
     animation: none;
   }
   .skyline-car,
-  .skyline-car-2 {
+  .skyline-car-2,
+  .hero-actor {
     display: none;
   }
   .headline-swipe svg path {

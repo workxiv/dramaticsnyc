@@ -36,7 +36,7 @@ function ProductCard({ p, index }: { p: ShopProduct; index: number }) {
       transition={{ duration: 0.5, delay: 0.04 * (index % 8) }}
       className="group card-soft flex h-full flex-col border border-ink/8 bg-paper p-3"
     >
-      <div className="relative aspect-square overflow-hidden rounded-[1.25rem] bg-white">
+      <div className="relative aspect-square overflow-hidden rounded-[1.25rem] bg-white dark:bg-cream">
         <Image
           src={p.image}
           alt={`${p.name} — DNYC hair product`}

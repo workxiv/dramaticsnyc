@@ -42,7 +42,7 @@ export default function Shop() {
           {FEATURED_PRODUCTS.map((p, i) => (
             <Reveal key={p.id} delay={0.05 * i} y={40}>
               <div className="group card-soft flex h-full flex-col border border-ink/8 bg-paper p-3">
-                <div className="relative aspect-square overflow-hidden rounded-[1.25rem] bg-white">
+                <div className="relative aspect-square overflow-hidden rounded-[1.25rem] bg-white dark:bg-cream">
                   <Image
                     src={p.image}
                     alt={`${p.name} — DNYC hair product`}
