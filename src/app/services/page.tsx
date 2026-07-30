@@ -12,7 +12,7 @@ const ORG_ID = `${SITE_URL}/#organization`;
 export const metadata: Metadata = {
   title: "Services & Prices — Haircuts, Color & Treatments",
   description:
-    "Dramatics NYC service price list: haircuts from $42, blowouts $45–$65, single process color $80–$90, balayage $175–$300, keratin $150–$350, and more. All prices determined by hair length and texture.",
+    "Dramatics NYC service price list: haircuts from $44, blowouts $50–$70, single process color $85–$95, balayage $195–$325, keratin $175–$375, and more. All prices determined by hair length and texture.",
   alternates: {
     canonical: `${SITE_URL}/services`,
   },
