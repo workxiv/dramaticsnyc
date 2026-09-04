@@ -12,11 +12,13 @@ Current state (checked 2026-09-03):
 
 ## Open question before DNS changes
 
-**Is anyone using an @dramaticsnyc.com mailbox?** The MX record says mail is delivered to the VPS. If yes, the VPS must stay up for mail, and the A/MX records below must be split so web goes to Vercel while mail keeps going to the VPS. If no one uses it (contact email on the registration is a Gmail address), mail can be ignored and the VPS can be retired after cutover.
+**Is anyone using an @dramaticsnyc.com mailbox?** The MX record says mail is delivered to the VPS. Status on 2026-09-03: **not sure**, so treat mail as in use: keep the VPS running and apply the mail-preserving records in step 2. To find out for certain, log into the VPS control panel (Liquid Web → My servers → host.dramaticsnyc.com → manage) and look for mailboxes under the domain, or ask the salon managers whether they receive anything at an @dramaticsnyc.com address. The registrar contact is dramaticsnycs@gmail.com, which suggests day-to-day mail is Gmail.
 
 ## Pre-cutover checklist
 
-- [ ] Square env vars set in Vercel (Production): `SQUARE_ACCESS_TOKEN`, `SQUARE_LOCATION_ID`, `SQUARE_ENVIRONMENT=production`, `NEXT_PUBLIC_SITE_URL=https://www.dramaticsnyc.com`
+- [x] `SQUARE_LOCATION_ID=L3A1TA4C6BBCK` and `SQUARE_ENVIRONMENT=production` set in Vercel (Production) on 2026-09-03
+- [ ] `SQUARE_ACCESS_TOKEN` set in Vercel as a **Secret** (Production). Source: developer.squareup.com → "The Healthy Color website integration" → Credentials → Production → Access token. Redeploy after adding it (env changes need a new deployment).
+- [ ] Leave `NEXT_PUBLIC_SITE_URL` unset: the checkout route derives the post-payment redirect from the request host, so it works on dramaticsnyc.vercel.app before cutover and on www.dramaticsnyc.com after, with no change.
 - [ ] Latest `main` deployed and green on dramaticsnyc.vercel.app
 - [ ] Real test order placed on dramaticsnyc.vercel.app (use a real card for $1 item or Square sandbox), refund it from Square Dashboard
 - [ ] Square Dashboard → Orders shows the order with shipping address
