@@ -16,7 +16,7 @@ from scipy import ndimage
 
 SRC = "public/img/products"
 # Products photographed as dark packaging (safe to keep a soft shadow pass).
-DARK = {"38403", "38421", "38422", "38423", "38424", "38425", "40040", "41152", "41158", "42263", "21988"}
+DARK = {"38403", "38421", "38422", "38423", "38424", "38425", "40040", "40042", "41152", "41158", "42263", "21988"}
 # Dark products with a pale part below the dark body that is product, not shadow
 # (Dutch Treat's white pump base). Everything else pale under the base is shadow.
 PALE_BASE = {"40042"}
