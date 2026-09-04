@@ -38,6 +38,13 @@ export type ShopProduct = {
 type SnapshotProduct = Omit<ShopProduct, "slug" | "detail" | "blurb">;
 
 /**
+ * Bump whenever files in public/img/products change. Product image URLs carry
+ * this as a query string so browsers and the image CDN fetch fresh copies
+ * instead of serving a cached version under the same file name.
+ */
+export const PRODUCT_IMAGE_VERSION = "3";
+
+/**
  * Catalog = pricing/stock/images from the WooCommerce snapshot, merged with
  * hand-written, CBD-free copy from product-details.ts (which wins for name
  * and blurb). Products without editorial content are hidden from the shop.
@@ -51,6 +58,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = (snapshot as SnapshotProduct[])
       name: detail.name,
       blurb: detail.summary,
       slug: detail.slug,
+      image: `${p.image}?v=${PRODUCT_IMAGE_VERSION}`,
       detail,
     };
   });
