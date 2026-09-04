@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import StickyBook from "@/components/StickyBook";
-import { LOCATIONS, SERVICES, SITE, mapsEmbedUrl } from "@/lib/content";
+import { LOCATIONS, SERVICES, SITE, mapsEmbedUrl, jsonLdString } from "@/lib/content";
 
 const SITE_URL = "https://www.dramaticsnyc.com";
 const ORG_ID = `${SITE_URL}/#organization`;
@@ -76,7 +76,7 @@ export default async function LocationPage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
       <Nav />
       <main className="bg-paper pt-28 sm:pt-36">

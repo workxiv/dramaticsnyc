@@ -19,7 +19,10 @@ export default async function ThankYouPage({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const sp = await searchParams;
-  const orderId = typeof sp.orderId === "string" ? sp.orderId : null;
+  const rawOrderId = typeof sp.orderId === "string" ? sp.orderId : "";
+  // Square order ids are URL-safe tokens; ignore anything else before it
+  // reaches the Square API or the page.
+  const orderId = /^[A-Za-z0-9_-]{8,64}$/.test(rawOrderId) ? rawOrderId : null;
   const order = orderId ? await retrieveOrder(orderId) : null;
   const paid = order ? order.state === "COMPLETED" || (order.tenders?.length ?? 0) > 0 : false;
 

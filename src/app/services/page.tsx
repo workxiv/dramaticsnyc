@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import StickyBook from "@/components/StickyBook";
 import ServicesExplorer from "@/components/ServicesExplorer";
 import { SERVICE_CATEGORIES, SERVICE_POLICIES } from "@/lib/services";
-import { BOOKING_URL } from "@/lib/content";
+import { BOOKING_URL, jsonLdString } from "@/lib/content";
 
 const SITE_URL = "https://www.dramaticsnyc.com";
 const ORG_ID = `${SITE_URL}/#organization`;
@@ -61,7 +61,7 @@ export default function ServicesPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
       <Nav />
       <main className="bg-cream pt-28 sm:pt-36">

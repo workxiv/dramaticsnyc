@@ -87,15 +87,17 @@ body {
   font-family: var(--font-display);
 }
 
-.text-balance {
-  text-wrap: balance;
-}
+@layer components {
+  .text-balance {
+    text-wrap: balance;
+  }
 
-.eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.28em;
-  font-size: 1rem;
-  font-weight: 700;
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-size: 1rem;
+    font-weight: 700;
+  }
 }
 
 /* Big headlines: heavy condensed uppercase, "GREAT HAIR" poster style */
@@ -207,6 +209,7 @@ body {
   animation-play-state: paused;
 }
 
+@layer components {
 /* ---------- Link underline ---------- */
 .link-underline {
   position: relative;
@@ -289,6 +292,7 @@ body {
 .card-soft {
   border-radius: 1.75rem;
   overflow: hidden;
+}
 }
 
 .img-cover {

@@ -135,7 +135,7 @@ export default function CartDrawer() {
                           <button
                             type="button"
                             onClick={() => cart.remove(l.key)}
-                            className="text-xs text-ink-mute underline-offset-2 hover:text-coral hover:underline"
+                            className="-mr-2 -mt-1 rounded-full px-2 py-1.5 text-xs text-ink-mute underline-offset-2 hover:text-coral hover:underline"
                           >
                             Remove
                           </button>
@@ -147,7 +147,7 @@ export default function CartDrawer() {
                               onClick={() =>
                                 cart.setQuantity(l.key, l.quantity - 1)
                               }
-                              className="h-8 w-8 text-base"
+                              className="h-9 w-9 text-base"
                               aria-label={`Decrease ${l.product.name} quantity`}
                             >
                               −
@@ -160,7 +160,7 @@ export default function CartDrawer() {
                               onClick={() =>
                                 cart.setQuantity(l.key, l.quantity + 1)
                               }
-                              className="h-8 w-8 text-base"
+                              className="h-9 w-9 text-base"
                               aria-label={`Increase ${l.product.name} quantity`}
                             >
                               +

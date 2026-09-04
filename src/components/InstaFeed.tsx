@@ -61,6 +61,7 @@ export default function InstaFeed() {
                 <AutoVideo
                   src={reel.src}
                   label={reel.label}
+                  lazy
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <span className="absolute right-3 top-3 rounded-full bg-paper/90 px-3 py-1.5 text-[0.65rem] font-bold uppercase tracking-[0.12em] opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100">

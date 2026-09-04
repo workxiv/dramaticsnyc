@@ -70,7 +70,7 @@ export default function LocationCard({ loc }: { loc: Location }) {
           type="button"
           onClick={() => setMapOpen((v) => !v)}
           aria-expanded={mapOpen}
-          className="mt-4 inline-flex items-center gap-2 self-start text-sm font-semibold text-ink-soft transition-colors hover:text-ink"
+          className="mt-3 inline-flex min-h-10 items-center gap-2 self-start py-2 text-sm font-semibold text-ink-soft transition-colors hover:text-ink"
         >
           <span
             className={`inline-flex h-6 w-6 items-center justify-center rounded-full border border-ink/15 text-[0.7rem] transition-transform duration-300 ${

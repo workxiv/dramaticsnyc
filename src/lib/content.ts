@@ -286,3 +286,11 @@ export const FAQS: Faq[] = [
       "Dramatics NYC has been in business since 1984 and is the most successful hair salon chain in New York, specializing in expert cutting and coloring techniques.",
   },
 ];
+
+/**
+ * Serialize JSON-LD for a <script type="application/ld+json"> tag. Escapes
+ * "<" so no value in the data can terminate the script element early.
+ */
+export function jsonLdString(data: unknown) {
+  return JSON.stringify(data).replace(/</g, "\\u003c");
+}

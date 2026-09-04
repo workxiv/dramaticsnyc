@@ -8,8 +8,35 @@ export const dynamic = "force-dynamic";
 
 const MAX_LINES = 30;
 const MAX_QTY = 20;
+const MAX_BODY_BYTES = 8 * 1024;
+
+// Best-effort per-instance rate limit (Vercel's WAF is the real backstop):
+// 20 checkout sessions per IP per 10 minutes is far above any real shopper.
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const RATE_MAX = 20;
+const hits = new Map<string, number[]>();
+function rateLimited(ip: string) {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) hits.clear();
+  return recent.length > RATE_MAX;
+}
 
 type IncomingItem = { productId: number; variantId: number; quantity: number };
+
+/** Only our own pages may start a checkout (blocks cross-site order spam). */
+function sameOrigin(req: Request) {
+  const origin = req.headers.get("origin");
+  const host = req.headers.get("x-forwarded-host") ?? req.headers.get("host");
+  if (!origin || !host) return true; // non-browser or same-origin fetch without Origin
+  try {
+    return new URL(origin).host === host;
+  } catch {
+    return false;
+  }
+}
 
 function siteOrigin(req: Request) {
   const proto = req.headers.get("x-forwarded-proto") ?? "https";
@@ -19,6 +46,16 @@ function siteOrigin(req: Request) {
 }
 
 export async function POST(req: Request) {
+  if (!sameOrigin(req)) {
+    return NextResponse.json({ error: "Forbidden." }, { status: 403 });
+  }
+  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "unknown";
+  if (rateLimited(ip)) {
+    return NextResponse.json(
+      { error: "Too many checkout attempts. Please wait a few minutes and try again." },
+      { status: 429 }
+    );
+  }
   if (!squareConfig()) {
     return NextResponse.json(
       { error: "Online checkout is temporarily unavailable. Please call your salon to order." },
@@ -28,7 +65,11 @@ export async function POST(req: Request) {
 
   let items: IncomingItem[];
   try {
-    const body = await req.json();
+    const raw = await req.text();
+    if (raw.length > MAX_BODY_BYTES) {
+      return NextResponse.json({ error: "Request too large." }, { status: 413 });
+    }
+    const body = JSON.parse(raw);
     items = Array.isArray(body?.items) ? body.items : [];
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });

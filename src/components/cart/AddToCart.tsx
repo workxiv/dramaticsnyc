@@ -57,7 +57,7 @@ export default function AddToCart({
                 aria-checked={active}
                 disabled={!v.inStock}
                 onClick={() => setVariantId(v.id)}
-                className={`rounded-full border px-3 py-1 text-[0.72rem] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
+                className={`min-h-8 rounded-full border px-3 py-1 text-[0.72rem] font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
                   active
                     ? "border-ink bg-ink text-paper"
                     : "border-ink/15 text-ink-soft hover:border-ink/40"
@@ -69,9 +69,10 @@ export default function AddToCart({
           })}
         </div>
       )}
+      {/* Stacked on narrow cards (2-up phone grids), side by side once there's room. */}
       <div
-        className={`flex items-center justify-between gap-3 ${
-          compact ? "" : "lg:gap-3"
+        className={`flex min-w-0 flex-col gap-2.5 ${
+          compact ? "" : "xl:flex-row xl:items-center xl:justify-between xl:gap-3"
         }`}
       >
         <span className="whitespace-nowrap font-display text-lg font-semibold text-coral">
@@ -80,7 +81,9 @@ export default function AddToCart({
         <button
           type="button"
           onClick={onAdd}
-          className="btn-pill whitespace-nowrap px-5 py-2.5 text-[0.8rem]"
+          className={`btn-pill w-full min-h-11 whitespace-nowrap px-4 py-2.5 text-[0.8rem] ${
+            compact ? "" : "xl:w-auto"
+          }`}
           aria-live="polite"
         >
           {justAdded ? "Added ✓" : "Add to Cart"}

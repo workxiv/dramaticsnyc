@@ -6,6 +6,11 @@ type AutoVideoProps = {
   src: string;
   label: string;
   className?: string;
+  /**
+   * Defer the download until the video is about to scroll into view.
+   * Use for anything below the fold; hero videos should stay eager.
+   */
+  lazy?: boolean;
 };
 
 /**
@@ -17,12 +22,30 @@ type AutoVideoProps = {
  * sets muted/playsInline imperatively and calls play() itself, retrying
  * on visibility and first interaction (covers Safari Low Power Mode).
  */
-export default function AutoVideo({ src, label, className }: AutoVideoProps) {
+export default function AutoVideo({ src, label, className, lazy = false }: AutoVideoProps) {
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    // Lazy videos get their src only when within ~300px of the viewport,
+    // so phones don't download several MB of MP4 for sections never reached.
+    let srcObserver: IntersectionObserver | null = null;
+    if (lazy && !el.getAttribute("src")) {
+      srcObserver = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            el.src = src;
+            el.load();
+            srcObserver?.disconnect();
+            srcObserver = null;
+          }
+        },
+        { rootMargin: "300px 0px" }
+      );
+      srcObserver.observe(el);
+    }
 
     el.muted = true;
     el.defaultMuted = true;
@@ -65,23 +88,25 @@ export default function AutoVideo({ src, label, className }: AutoVideoProps) {
     window.addEventListener("scroll", onFirstTouch, { passive: true });
 
     return () => {
+      srcObserver?.disconnect();
       el.removeEventListener("loadedmetadata", tryPlay);
       observer.disconnect();
       window.removeEventListener("touchstart", onFirstTouch);
       window.removeEventListener("click", onFirstTouch);
       window.removeEventListener("scroll", onFirstTouch);
     };
-  }, []);
+  }, [lazy, src]);
 
   return (
     <video
       ref={ref}
-      src={src}
+      src={lazy ? undefined : src}
+      data-src={lazy ? src : undefined}
       autoPlay
       muted
       loop
       playsInline
-      preload="metadata"
+      preload={lazy ? "none" : "metadata"}
       aria-label={label}
       className={className}
     />

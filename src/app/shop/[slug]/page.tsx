@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { jsonLdString } from "@/lib/content";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -119,22 +120,22 @@ export default async function ProductPage({
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify([jsonLd, breadcrumb]) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString([jsonLd, breadcrumb]) }}
       />
       <Nav />
       <main className="bg-cream pt-24 sm:pt-32">
         <div className="mx-auto max-w-[1440px] px-5 pb-20 sm:px-8 sm:pb-28 lg:px-12">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="text-xs text-ink-mute">
-            <ol className="flex flex-wrap items-center gap-2">
+            <ol className="flex flex-wrap items-center gap-1">
               <li>
-                <Link href="/shop" className="hover:text-ink">
+                <Link href="/shop" className="inline-block py-2 pr-1 hover:text-ink">
                   Shop
                 </Link>
               </li>
               <li aria-hidden>/</li>
               <li>
-                <Link href={categoryHref(p.category)} className="hover:text-ink">
+                <Link href={categoryHref(p.category)} className="inline-block px-1 py-2 hover:text-ink">
                   {p.category}
                 </Link>
               </li>
@@ -159,7 +160,7 @@ export default async function ProductPage({
                 />
                 <Link
                   href={categoryHref(p.category)}
-                  className="absolute left-5 top-5 rounded-full bg-paper/90 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] backdrop-blur transition-colors hover:bg-ink hover:text-paper"
+                  className="absolute left-4 top-4 rounded-full bg-paper/90 px-3.5 py-2 text-[0.68rem] font-bold uppercase tracking-[0.14em] backdrop-blur transition-colors hover:bg-ink hover:text-paper sm:left-5 sm:top-5"
                 >
                   {p.category}
                 </Link>

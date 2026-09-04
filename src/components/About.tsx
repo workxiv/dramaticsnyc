@@ -71,6 +71,7 @@ export default function About() {
                   <AutoVideo
                     src="/media/about-styling.mp4"
                     label="A Dramatics NYC colorist applying treatment at the salon"
+                    lazy
                     className="absolute inset-0 h-full w-full object-cover"
                   />
                 </div>

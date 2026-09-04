@@ -10,7 +10,7 @@ import InstaFeed from "@/components/InstaFeed";
 import Faq from "@/components/Faq";
 import StickyBook from "@/components/StickyBook";
 import Footer from "@/components/Footer";
-import { BOOKING_URL, FAQS, LOCATIONS, SITE, SOCIAL } from "@/lib/content";
+import { BOOKING_URL, FAQS, LOCATIONS, SITE, SOCIAL, jsonLdString } from "@/lib/content";
 
 const SITE_URL = "https://www.dramaticsnyc.com";
 const ORG_ID = `${SITE_URL}/#organization`;
@@ -89,7 +89,7 @@ export default function Home() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
       <SmoothScroll />
       <Nav />

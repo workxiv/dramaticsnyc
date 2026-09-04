@@ -4,7 +4,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ShopGrid from "@/components/ShopGrid";
 import { GIFT_CARDS_URL, SHOP_PRODUCTS, productPath } from "@/lib/shop";
-import { SITE } from "@/lib/content";
+import { SITE, jsonLdString } from "@/lib/content";
 
 const SITE_URL = "https://www.dramaticsnyc.com";
 
@@ -53,7 +53,7 @@ export default function ShopPage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: jsonLdString(jsonLd) }}
       />
       <Nav />
       <main className="bg-cream pt-28 sm:pt-36">

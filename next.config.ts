@@ -26,8 +26,60 @@ const LEGACY_PRODUCT_SLUGS: Record<string, string> = {
   giftcards: "",
 };
 
+/**
+ * Content Security Policy. Next.js needs inline scripts for hydration, so
+ * script-src keeps 'unsafe-inline' but still blocks every third-party origin
+ * except Vercel's preview toolbar. Frames are only allowed for the Google Maps
+ * embeds on location pages; nobody may frame this site.
+ */
+const CSP = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' https://vercel.live",
+  "style-src 'self' 'unsafe-inline'",
+  "img-src 'self' data: blob: https://images.unsplash.com https://*.vercel.com",
+  "font-src 'self' data:",
+  "media-src 'self'",
+  "connect-src 'self' https://vercel.live wss://ws-us3.pusher.com",
+  "frame-src https://maps.google.com https://www.google.com https://vercel.live",
+  "frame-ancestors 'none'",
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "upgrade-insecure-requests",
+].join("; ");
+
+const SECURITY_HEADERS = [
+  { key: "Content-Security-Policy", value: CSP },
+  { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()" },
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+];
+
 const nextConfig: NextConfig = {
   devIndicators: false,
+  poweredByHeader: false,
+  async headers() {
+    return [
+      { source: "/:path*", headers: SECURITY_HEADERS },
+      // Static assets: a day with background revalidation; the versioned
+      // product cutouts (?v=) can be cached hard. Later rules win on conflict.
+      {
+        source: "/(img|media)/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }],
+      },
+      {
+        source: "/img/products/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+      {
+        source: "/api/:path*",
+        headers: [{ key: "Cache-Control", value: "no-store" }],
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

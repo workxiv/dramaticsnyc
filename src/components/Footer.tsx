@@ -60,7 +60,7 @@ export default function Footer() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="link-underline hover:text-inverse-fg"
+                  className="link-underline inline-block py-1 hover:text-inverse-fg"
                 >
                   {s.label}
                 </a>
@@ -77,7 +77,7 @@ export default function Footer() {
                 <li key={l.href}>
                   <a
                     href={l.href}
-                    className="link-underline text-sm text-inverse-fg/70 hover:text-inverse-fg"
+                    className="link-underline inline-block py-1 text-sm text-inverse-fg/70 hover:text-inverse-fg"
                   >
                     {l.label}
                   </a>
@@ -97,7 +97,7 @@ export default function Footer() {
                   <p className="text-inverse-fg/50">{l.cityLine}</p>
                   <a
                     href={`tel:${l.tel}`}
-                    className="link-underline text-inverse-fg/70 hover:text-inverse-fg"
+                    className="link-underline inline-block py-1 text-inverse-fg/70 hover:text-inverse-fg"
                   >
                     {l.phone}
                   </a>
