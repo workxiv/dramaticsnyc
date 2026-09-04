@@ -2,8 +2,15 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "motion/react";
-import { SHOP_CATEGORIES, SHOP_PRODUCTS, type ShopProduct } from "@/lib/shop";
+import {
+  SHOP_CATEGORIES,
+  SHOP_PRODUCTS,
+  productPath,
+  toCartProduct,
+  type ShopProduct,
+} from "@/lib/shop";
 import AddToCart from "./cart/AddToCart";
 
 function Stars({ rating, count }: { rating: number; count: number }) {
@@ -32,7 +39,11 @@ function ProductCard({ p, index }: { p: ShopProduct; index: number }) {
       transition={{ duration: 0.5, delay: 0.04 * (index % 8) }}
       className="group card-soft flex h-full flex-col border border-ink/8 bg-paper p-3"
     >
-      <div className="relative aspect-square overflow-hidden rounded-[1.25rem] bg-white dark:bg-cream">
+      <Link
+        href={productPath(p)}
+        className="relative block aspect-square overflow-hidden rounded-[1.25rem] bg-white dark:bg-cream"
+        aria-label={`${p.name} details`}
+      >
         <Image
           src={p.image}
           alt={`${p.name} — DNYC hair product`}
@@ -43,11 +54,13 @@ function ProductCard({ p, index }: { p: ShopProduct; index: number }) {
         <span className="absolute left-3 top-3 rounded-full bg-paper/90 px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.12em] backdrop-blur">
           {p.category}
         </span>
-      </div>
+      </Link>
       <div className="flex flex-1 flex-col p-3">
         <div className="flex items-start justify-between gap-3">
           <h3 className="font-display text-lg font-semibold leading-tight">
-            {p.name}
+            <Link href={productPath(p)} className="hover:text-coral">
+              {p.name}
+            </Link>
           </h3>
         </div>
         {p.rating ? (
@@ -55,11 +68,11 @@ function ProductCard({ p, index }: { p: ShopProduct; index: number }) {
             <Stars rating={p.rating} count={p.reviewCount} />
           </div>
         ) : null}
-        <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-ink-soft">
-          {p.blurb}
+        <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-ink-soft">
+          {p.detail.tagline}
         </p>
         <div className="mt-4">
-          <AddToCart product={p} />
+          <AddToCart product={toCartProduct(p)} />
         </div>
       </div>
     </motion.div>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "./CartProvider";
-import type { ShopProduct } from "@/lib/shop";
+import type { CartProduct } from "@/lib/shop";
 
 /**
  * Add-to-cart control for a product card. Products with size options
@@ -12,7 +12,7 @@ export default function AddToCart({
   product,
   compact = false,
 }: {
-  product: ShopProduct;
+  product: CartProduct;
   compact?: boolean;
 }) {
   const { add } = useCart();

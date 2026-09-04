@@ -12,6 +12,7 @@ import {
   SHIPPING_CENTS,
   findVariant,
   lineKey,
+  type CartProduct,
   type ShopProduct,
   type ShopVariant,
 } from "@/lib/shop";
@@ -37,7 +38,7 @@ type CartState = {
   totalCents: number;
   isOpen: boolean;
   hydrated: boolean;
-  add: (product: ShopProduct, variant: ShopVariant, qty?: number) => void;
+  add: (product: CartProduct, variant: ShopVariant, qty?: number) => void;
   setQuantity: (key: string, qty: number) => void;
   remove: (key: string) => void;
   clear: () => void;
@@ -143,7 +144,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   );
 
   const add = useCallback(
-    (product: ShopProduct, variant: ShopVariant, qty = 1) => {
+    (product: CartProduct, variant: ShopVariant, qty = 1) => {
       const key = lineKey(product.id, variant.id);
       const prev = getSnapshot();
       const existing = prev.find((l) => lineKey(l.productId, l.variantId) === key);

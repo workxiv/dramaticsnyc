@@ -1,4 +1,5 @@
 import snapshot from "./products-snapshot.json";
+import { PRODUCT_DETAILS, type ProductDetail } from "./product-details";
 
 export type ShopVariant = {
   /** WooCommerce variation id (or product id for single-size products). */
@@ -24,16 +25,59 @@ export type ShopProduct = {
   sku: string | null;
   rating: number | null;
   reviewCount: number;
+  /** Short description shown on cards (= detail.summary) */
   blurb: string;
   hasOptions: boolean;
   inStock: boolean;
-  permalink: string;
   image: string;
-  remoteImage: string | null;
   variants: ShopVariant[];
+  /** URL segment under /shop/ */
+  slug: string;
+  /** Editorial content (tagline, how to use, ingredients…) */
+  detail: ProductDetail;
 };
 
-export const SHOP_PRODUCTS = snapshot as ShopProduct[];
+type SnapshotProduct = Omit<ShopProduct, "slug" | "detail" | "blurb">;
+
+/**
+ * Catalog = pricing/stock/images from the WooCommerce snapshot, merged with
+ * hand-written, CBD-free copy from product-details.ts (which wins for name
+ * and blurb). Products without editorial content are hidden from the shop.
+ */
+export const SHOP_PRODUCTS: ShopProduct[] = (snapshot as SnapshotProduct[])
+  .filter((p) => Boolean(PRODUCT_DETAILS[p.id]))
+  .map((p) => {
+    const detail = PRODUCT_DETAILS[p.id];
+    return {
+      ...p,
+      name: detail.name,
+      blurb: detail.summary,
+      slug: detail.slug,
+      detail,
+    };
+  });
+
+export function productBySlug(slug: string) {
+  return SHOP_PRODUCTS.find((p) => p.slug === slug) ?? null;
+}
+
+export const productPath = (p: Pick<ShopProduct, "slug">) => `/shop/${p.slug}`;
+
+/** The slice of a product that cart UI (client components) needs. */
+export type CartProduct = Pick<
+  ShopProduct,
+  "id" | "name" | "slug" | "image" | "hasOptions" | "variants"
+>;
+
+export const toCartProduct = (p: ShopProduct): CartProduct => ({
+  id: p.id,
+  name: p.name,
+  slug: p.slug,
+  image: p.image,
+  hasOptions: p.hasOptions,
+  variants: p.variants,
+});
+
 
 export const SHOP_CATEGORIES = [
   "All",

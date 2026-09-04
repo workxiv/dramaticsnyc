@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ShopGrid from "@/components/ShopGrid";
-import { GIFT_CARDS_URL, SHOP_PRODUCTS } from "@/lib/shop";
+import { GIFT_CARDS_URL, SHOP_PRODUCTS, productPath } from "@/lib/shop";
 import { SITE } from "@/lib/content";
 
 const SITE_URL = "https://www.dramaticsnyc.com";
@@ -28,6 +28,7 @@ const jsonLd = {
     item: {
       "@type": "Product",
       name: p.name,
+      url: `${SITE_URL}${productPath(p)}`,
       image: `${SITE_URL}${p.image}`,
       category: p.category,
       brand: { "@type": "Brand", name: "DNYC" },
@@ -48,7 +49,7 @@ const jsonLd = {
         availability: p.inStock
           ? "https://schema.org/InStock"
           : "https://schema.org/OutOfStock",
-        url: `${SITE_URL}/shop`,
+        url: `${SITE_URL}${productPath(p)}`,
         seller: { "@type": "Organization", name: "Dramatics NYC" },
       },
     },

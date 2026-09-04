@@ -25,12 +25,6 @@ const decode = (s) =>
     .replaceAll("&rdquo;", "”")
     .replaceAll("&nbsp;", " ");
 
-const stripHtml = (s) =>
-  decode(s.replace(/<[^>]+>/g, " "))
-    .replace(/[✅✔️]/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-
 const money = (cents) => `$${(Number(cents) / 100).toFixed(2)}`;
 const sizeLabel = (l) => l.replace(/-?oz$/i, " oz").replace(/\s+/g, " ").trim();
 
@@ -41,7 +35,6 @@ const raw = await res.json();
 const products = [];
 for (const p of raw) {
   if (p.prices.currency_minor_unit !== 2) throw new Error(`unexpected currency for ${p.id}`);
-  const short = stripHtml(p.short_description || p.description || "");
 
   let variants;
   if (p.variations?.length) {
@@ -88,28 +81,30 @@ for (const p of raw) {
     sku: p.sku || null,
     rating: Number(p.average_rating) || null,
     reviewCount: p.review_count || 0,
-    blurb: short.length > 220 ? `${short.slice(0, 217)}...` : short,
     hasOptions: variants.length > 1,
     inStock: variants.some((v) => v.inStock),
-    permalink: p.permalink,
-    image: `/img/products/${p.id}.png`,
-    remoteImage: p.images?.[0]?.src ?? null,
+    image: existsSync(`public/img/products/${p.id}.jpg`)
+      ? `/img/products/${p.id}.jpg`
+      : `/img/products/${p.id}.png`,
     variants,
   });
 }
 
 mkdirSync("public/img/products", { recursive: true });
 for (const p of products) {
-  if (!p.remoteImage) continue;
+  const remoteImage = raw.find((r) => r.id === p.id)?.images?.[0]?.src;
+  if (!remoteImage) continue;
   const dest = `public/img/products/${p.id}.png`;
-  if (existsSync(dest)) continue;
-  const img = await fetch(p.remoteImage);
+  // Never overwrite a curated local image (the .jpg files were supplied by the
+  // brand and are CBD-free); only fetch when nothing exists for this product.
+  if (existsSync(dest) || existsSync(`public/img/products/${p.id}.jpg`)) continue;
+  const img = await fetch(remoteImage);
   if (!img.ok) {
     console.warn(`skip image for ${p.id}: HTTP ${img.status}`);
     continue;
   }
   writeFileSync(dest, Buffer.from(await img.arrayBuffer()));
-  console.log(`image ${p.id} <- ${p.remoteImage.split("/").pop()}`);
+  console.log(`image ${p.id} <- ${remoteImage.split("/").pop()}`);
 }
 
 writeFileSync(

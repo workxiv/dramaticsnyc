@@ -17,6 +17,7 @@ Built to deploy on **Vercel** with zero configuration.
 - `/` — homepage (all sections)
 - `/book` — first-party booking page listing every salon's own online booking
 - `/shop` — full DNYC product catalog (21 products) with category filters, size variants, and a first-party cart; checkout runs on Square's hosted payment page
+- `/shop/[slug]` — one page per product: benefits, how to use, key ingredients, size picker, related products, Product JSON-LD. Copy lives in `src/lib/product-details.ts` (CBD-free by policy); prices/sizes in `src/lib/products-snapshot.json`; images in `public/img/products/{id}.jpg`
 - `/shop/thank-you` — order confirmation (Square redirects here after payment)
 - `/api/checkout` — creates a Square Payment Link from the cart (server-side price lookup)
 - `/locations/[slug]` — one page per salon, reusing the original site's URL slugs so existing indexed links keep working after migration

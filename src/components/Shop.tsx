@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "./Reveal";
 import { SITE } from "@/lib/content";
-import { FEATURED_PRODUCTS } from "@/lib/shop";
+import { FEATURED_PRODUCTS, productPath, toCartProduct } from "@/lib/shop";
 import AddToCart from "./cart/AddToCart";
 
 function Stars({ rating, count }: { rating: number; count: number }) {
@@ -43,7 +43,11 @@ export default function Shop() {
           {FEATURED_PRODUCTS.map((p, i) => (
             <Reveal key={p.id} delay={0.05 * i} y={40}>
               <div className="group card-soft flex h-full flex-col border border-ink/8 bg-paper p-3">
-                <div className="relative aspect-square overflow-hidden rounded-[1.25rem] bg-white dark:bg-cream">
+                <Link
+                  href={productPath(p)}
+                  className="relative block aspect-square overflow-hidden rounded-[1.25rem] bg-white dark:bg-cream"
+                  aria-label={`${p.name} details`}
+                >
                   <Image
                     src={p.image}
                     alt={`${p.name} — DNYC hair product`}
@@ -54,10 +58,12 @@ export default function Shop() {
                   <span className="absolute left-3 top-3 rounded-full bg-cream px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.12em]">
                     {p.category}
                   </span>
-                </div>
+                </Link>
                 <div className="flex flex-1 flex-col p-3">
                   <h3 className="font-display text-lg font-semibold leading-tight">
-                    {p.name}
+                    <Link href={productPath(p)} className="hover:text-coral">
+                      {p.name}
+                    </Link>
                   </h3>
                   {p.rating ? (
                     <div className="mt-2">
@@ -65,7 +71,7 @@ export default function Shop() {
                     </div>
                   ) : null}
                   <div className="mt-3 flex flex-1 flex-col justify-end">
-                    <AddToCart product={p} compact />
+                    <AddToCart product={toCartProduct(p)} compact />
                   </div>
                 </div>
               </div>
