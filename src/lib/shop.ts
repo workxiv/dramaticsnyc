@@ -63,6 +63,21 @@ export function productBySlug(slug: string) {
 
 export const productPath = (p: Pick<ShopProduct, "slug">) => `/shop/${p.slug}`;
 
+/** /shop filtered to a category ("All" → plain /shop). */
+export const categoryHref = (category: string) =>
+  category === "All"
+    ? "/shop"
+    : `/shop?category=${encodeURIComponent(category)}`;
+
+/** Pastel backdrop per category, used behind product cutouts. */
+export const CATEGORY_TINT: Record<string, string> = {
+  Shampoos: "bg-sage",
+  Conditioners: "bg-apricot",
+  Treatments: "bg-lilac",
+  "Styling Products": "bg-pink",
+};
+export const tintFor = (category: string) => CATEGORY_TINT[category] ?? "bg-cream";
+
 /** The slice of a product that cart UI (client components) needs. */
 export type CartProduct = Pick<
   ShopProduct,

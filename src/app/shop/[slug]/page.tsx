@@ -9,8 +9,10 @@ import BuyPanel from "@/components/cart/BuyPanel";
 import AddToCart from "@/components/cart/AddToCart";
 import {
   SHOP_PRODUCTS,
+  categoryHref,
   productBySlug,
   productPath,
+  tintFor,
   toCartProduct,
 } from "@/lib/shop";
 
@@ -45,13 +47,6 @@ export async function generateMetadata({
   };
 }
 
-const CATEGORY_TINT: Record<string, string> = {
-  Shampoos: "bg-sage",
-  Conditioners: "bg-apricot",
-  Treatments: "bg-lilac",
-  "Styling Products": "bg-pink",
-};
-
 export default async function ProductPage({
   params,
 }: {
@@ -83,15 +78,6 @@ export default async function ProductPage({
     category: p.category,
     brand: { "@type": "Brand", name: "DNYC" },
     ...(p.sku ? { sku: p.sku } : {}),
-    ...(p.rating && p.reviewCount > 0
-      ? {
-          aggregateRating: {
-            "@type": "AggregateRating",
-            ratingValue: p.rating,
-            reviewCount: p.reviewCount,
-          },
-        }
-      : {}),
     offers:
       p.variants.length > 1
         ? {
@@ -122,12 +108,12 @@ export default async function ProductPage({
     "@type": "BreadcrumbList",
     itemListElement: [
       { "@type": "ListItem", position: 1, name: "Shop", item: `${SITE_URL}/shop` },
-      { "@type": "ListItem", position: 2, name: p.category, item: `${SITE_URL}/shop` },
+      { "@type": "ListItem", position: 2, name: p.category, item: `${SITE_URL}${categoryHref(p.category)}` },
       { "@type": "ListItem", position: 3, name: p.name, item: `${SITE_URL}${productPath(p)}` },
     ],
   };
 
-  const tint = CATEGORY_TINT[p.category] ?? "bg-cream";
+  const tint = tintFor(p.category);
 
   return (
     <>
@@ -147,7 +133,11 @@ export default async function ProductPage({
                 </Link>
               </li>
               <li aria-hidden>/</li>
-              <li>{p.category}</li>
+              <li>
+                <Link href={categoryHref(p.category)} className="hover:text-ink">
+                  {p.category}
+                </Link>
+              </li>
               <li aria-hidden>/</li>
               <li className="text-ink-soft">{p.name}</li>
             </ol>
@@ -157,7 +147,7 @@ export default async function ProductPage({
           <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:gap-12">
             <div className="lg:col-span-6">
               <div
-                className={`card-soft relative aspect-square overflow-hidden ${tint} dark:bg-cream`}
+                className={`card-soft relative aspect-square overflow-hidden ${tint}`}
               >
                 <Image
                   src={p.image}
@@ -165,11 +155,14 @@ export default async function ProductPage({
                   fill
                   priority
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-contain p-10 sm:p-14 mix-blend-multiply dark:mix-blend-normal"
+                  className="object-contain p-10 drop-shadow-[0_24px_40px_rgba(23,21,14,0.18)] sm:p-14"
                 />
-                <span className="absolute left-5 top-5 rounded-full bg-paper/90 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] backdrop-blur">
+                <Link
+                  href={categoryHref(p.category)}
+                  className="absolute left-5 top-5 rounded-full bg-paper/90 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.14em] backdrop-blur transition-colors hover:bg-ink hover:text-paper"
+                >
                   {p.category}
-                </span>
+                </Link>
               </div>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {d.badges.map((b) => (
@@ -303,7 +296,7 @@ export default async function ProductPage({
                     <div className="group card-soft flex h-full flex-col border border-ink/8 bg-paper p-3">
                       <Link
                         href={productPath(r)}
-                        className="relative block aspect-square overflow-hidden rounded-[1.25rem] bg-white dark:bg-cream"
+                        className={`relative block aspect-square overflow-hidden rounded-[1.25rem] ${tintFor(r.category)}`}
                       >
                         <Image
                           src={r.image}

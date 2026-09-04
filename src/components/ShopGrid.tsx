@@ -1,13 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
 import {
   SHOP_CATEGORIES,
   SHOP_PRODUCTS,
+  categoryHref,
   productPath,
+  tintFor,
   toCartProduct,
   type ShopProduct,
 } from "@/lib/shop";
@@ -41,7 +44,7 @@ function ProductCard({ p, index }: { p: ShopProduct; index: number }) {
     >
       <Link
         href={productPath(p)}
-        className="relative block aspect-square overflow-hidden rounded-[1.25rem] bg-white dark:bg-cream"
+        className={`relative block aspect-square overflow-hidden rounded-[1.25rem] ${tintFor(p.category)}`}
         aria-label={`${p.name} details`}
       >
         <Image
@@ -80,7 +83,19 @@ function ProductCard({ p, index }: { p: ShopProduct; index: number }) {
 }
 
 export default function ShopGrid() {
-  const [category, setCategory] = useState("All");
+  const router = useRouter();
+  const params = useSearchParams();
+  const fromUrl = params.get("category");
+  // The URL is the source of truth, so links like /shop?category=Conditioners
+  // (breadcrumbs, category badges, back button) land on the right filter.
+  const category =
+    fromUrl && SHOP_CATEGORIES.includes(fromUrl) ? fromUrl : "All";
+
+  const setCategory = useCallback(
+    (c: string) => router.replace(categoryHref(c), { scroll: false }),
+    [router]
+  );
+
   const shown =
     category === "All"
       ? SHOP_PRODUCTS

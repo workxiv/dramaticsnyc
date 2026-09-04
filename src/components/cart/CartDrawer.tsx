@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { useCart } from "./CartProvider";
-import { formatMoney, SHIPPING_LABEL } from "@/lib/shop";
+import { formatMoney, SHIPPING_LABEL, tintFor } from "@/lib/shop";
 
 export default function CartDrawer() {
   const cart = useCart();
@@ -111,7 +111,7 @@ export default function CartDrawer() {
                 <ul className="divide-y divide-ink/10">
                   {cart.lines.map((l) => (
                     <li key={l.key} className="flex gap-4 py-4">
-                      <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl bg-white dark:bg-cream">
+                      <div className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl ${tintFor(l.product.category)}`}>
                         <Image
                           src={l.product.image}
                           alt={l.product.name}

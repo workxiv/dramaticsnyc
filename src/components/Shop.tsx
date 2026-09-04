@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "./Reveal";
 import { SITE } from "@/lib/content";
-import { FEATURED_PRODUCTS, productPath, toCartProduct } from "@/lib/shop";
+import { FEATURED_PRODUCTS, productPath, tintFor, toCartProduct } from "@/lib/shop";
 import AddToCart from "./cart/AddToCart";
 
 function Stars({ rating, count }: { rating: number; count: number }) {
@@ -45,7 +45,7 @@ export default function Shop() {
               <div className="group card-soft flex h-full flex-col border border-ink/8 bg-paper p-3">
                 <Link
                   href={productPath(p)}
-                  className="relative block aspect-square overflow-hidden rounded-[1.25rem] bg-white dark:bg-cream"
+                  className={`relative block aspect-square overflow-hidden rounded-[1.25rem] ${tintFor(p.category)}`}
                   aria-label={`${p.name} details`}
                 >
                   <Image
@@ -55,7 +55,7 @@ export default function Shop() {
                     sizes="(max-width: 1024px) 50vw, 25vw"
                     className="object-contain p-4 transition-transform duration-700 group-hover:scale-105"
                   />
-                  <span className="absolute left-3 top-3 rounded-full bg-cream px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.12em]">
+                  <span className="absolute left-3 top-3 rounded-full bg-paper/90 px-3 py-1 text-[0.62rem] font-bold uppercase tracking-[0.12em] backdrop-blur">
                     {p.category}
                   </span>
                 </Link>

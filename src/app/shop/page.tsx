@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ShopGrid from "@/components/ShopGrid";
@@ -32,15 +33,6 @@ const jsonLd = {
       image: `${SITE_URL}${p.image}`,
       category: p.category,
       brand: { "@type": "Brand", name: "DNYC" },
-      ...(p.rating && p.reviewCount > 0
-        ? {
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: p.rating,
-              reviewCount: p.reviewCount,
-            },
-          }
-        : {}),
       ...(p.sku ? { sku: p.sku } : {}),
       offers: {
         "@type": "Offer",
@@ -77,7 +69,9 @@ export default function ShopPage() {
           </div>
 
           <div className="mt-12">
-            <ShopGrid />
+            <Suspense fallback={null}>
+              <ShopGrid />
+            </Suspense>
           </div>
 
           <div className="card-soft mt-14 flex flex-col items-start justify-between gap-6 bg-lilac p-8 sm:flex-row sm:items-center sm:p-10">
