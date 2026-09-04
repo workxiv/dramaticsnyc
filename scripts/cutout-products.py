@@ -104,10 +104,29 @@ def cutout(path: str, tol=12, tol2=34, inset=4) -> Image.Image:
     alpha = np.where(fg, 255, 0).astype(np.uint8)
     rgb = a.astype(np.uint8).copy()
     if pid in DARK:
+        # Dark packaging casts a grey contact shadow on the white backdrop. Find
+        # the opaque product core (dark pixels, holes such as labels filled),
+        # then treat light pixels near/below its base as a soft shadow instead
+        # of leaving pale blobs behind.
+        core = mn < 150
+        core = ndimage.binary_closing(core, iterations=6)
+        core = ndimage.binary_fill_holes(core)
+        core &= fg
+        rows = np.flatnonzero(core.any(axis=1))
+        if rows.size:
+            base = rows.max()
+            zone = np.zeros_like(fg)
+            zone[max(0, base - 140) :, :] = True
+            shadow = fg & ~core & zone & (mn > 120)
+            t = np.clip((255 - mn) / (255 - 150), 0, 1)
+            alpha[shadow] = (t[shadow] * 140).astype(np.uint8)
+            rgb[shadow] = (40, 35, 30)
+            # anything faint enough is just background
+            alpha[shadow & (mn >= 255 - tol2)] = 0
         m2 = flood(mn >= 255 - tol2, inset)
         soft = m2 & ~m1 & ~fg
         t = np.clip((255 - tol - mn) / (tol2 - tol), 0, 1)
-        alpha[soft] = (t[soft] * 150).astype(np.uint8)
+        alpha[soft] = (t[soft] * 140).astype(np.uint8)
         rgb[soft] = (40, 35, 30)
     al = Image.fromarray(alpha).filter(ImageFilter.GaussianBlur(0.7))
     return Image.fromarray(np.dstack([rgb, np.array(al)]), "RGBA")
