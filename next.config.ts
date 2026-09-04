@@ -32,9 +32,12 @@ const LEGACY_PRODUCT_SLUGS: Record<string, string> = {
  * except Vercel's preview toolbar. Frames are only allowed for the Google Maps
  * embeds on location pages; nobody may frame this site.
  */
+// React's dev tooling needs eval for source-mapped stack traces; production never does.
+const isDev = process.env.NODE_ENV === "development";
+
 const CSP = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://vercel.live",
+  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://vercel.live`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https://images.unsplash.com https://*.vercel.com",
   "font-src 'self' data:",
