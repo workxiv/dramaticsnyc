@@ -40,6 +40,7 @@ const jsonLd = {
             },
           }
         : {}),
+      ...(p.sku ? { sku: p.sku } : {}),
       offers: {
         "@type": "Offer",
         price: p.price.replace("$", ""),
@@ -47,7 +48,8 @@ const jsonLd = {
         availability: p.inStock
           ? "https://schema.org/InStock"
           : "https://schema.org/OutOfStock",
-        url: p.permalink,
+        url: `${SITE_URL}/shop`,
+        seller: { "@type": "Organization", name: "Dramatics NYC" },
       },
     },
   })),

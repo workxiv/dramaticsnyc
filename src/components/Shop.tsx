@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import Reveal from "./Reveal";
 import { SITE } from "@/lib/content";
-import { FEATURED_PRODUCTS, buyUrl } from "@/lib/shop";
+import { FEATURED_PRODUCTS } from "@/lib/shop";
+import AddToCart from "./cart/AddToCart";
 
 function Stars({ rating, count }: { rating: number; count: number }) {
   return (
@@ -63,18 +64,8 @@ export default function Shop() {
                       <Stars rating={p.rating} count={p.reviewCount} />
                     </div>
                   ) : null}
-                  <div className="mt-3 flex flex-1 flex-col justify-end gap-2.5 lg:flex-row lg:items-center lg:justify-between lg:gap-3">
-                    <span className="whitespace-nowrap font-display text-lg font-semibold text-coral">
-                      {p.priceRange ?? p.price}
-                    </span>
-                    <a
-                      href={buyUrl(p)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn-pill w-full whitespace-nowrap px-5 py-2.5 text-[0.8rem] lg:w-auto"
-                    >
-                      {p.hasOptions ? "Choose Size" : "Add to Cart"}
-                    </a>
+                  <div className="mt-3 flex flex-1 flex-col justify-end">
+                    <AddToCart product={p} compact />
                   </div>
                 </div>
               </div>

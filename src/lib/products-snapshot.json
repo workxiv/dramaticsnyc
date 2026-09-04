@@ -12,7 +12,19 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/ocean-beach-sea-salt-texturizing-spray/",
     "image": "/img/products/42263.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2026/03/OCEAN-BEACH-SEA-SALT-SQUARE.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2026/03/OCEAN-BEACH-SEA-SALT-SQUARE.png",
+    "cents": 1795,
+    "sku": null,
+    "variants": [
+      {
+        "id": 42263,
+        "label": null,
+        "cents": 1795,
+        "price": "$17.95",
+        "sku": null,
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 41158,
@@ -27,7 +39,27 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/amnesia-haze-conditioner-moisturizing-cbd-conditioner/",
     "image": "/img/products/41158.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2024/06/AMNESIA-HAZE-COND-SQUARE.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2024/06/AMNESIA-HAZE-COND-SQUARE.png",
+    "cents": 1695,
+    "sku": "M-AH-8-1019",
+    "variants": [
+      {
+        "id": 41159,
+        "label": "8 oz",
+        "cents": 1695,
+        "price": "$16.95",
+        "sku": "M-AH-8-1019",
+        "inStock": true
+      },
+      {
+        "id": 41160,
+        "label": "32 oz",
+        "cents": 3995,
+        "price": "$39.95",
+        "sku": "M-AH-32-1020",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 41152,
@@ -42,7 +74,27 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/amnesia-haze-shampoo-moisturizing-cbd-shampoo/",
     "image": "/img/products/41152.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2024/06/AMNESIA-HAZE-SHAMP-SQUARE.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2024/06/AMNESIA-HAZE-SHAMP-SQUARE.png",
+    "cents": 1695,
+    "sku": "M-AH-8-1017",
+    "variants": [
+      {
+        "id": 41156,
+        "label": "8 oz",
+        "cents": 1695,
+        "price": "$16.95",
+        "sku": "M-AH-8-1017",
+        "inStock": true
+      },
+      {
+        "id": 41157,
+        "label": "32 oz",
+        "cents": 3995,
+        "price": "$39.95",
+        "sku": "M-AH-32-1018",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 40042,
@@ -57,7 +109,19 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/dutch-treat-styling-mousse-for-curly-hair-glycerin-panthenol-styling/",
     "image": "/img/products/40042.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2023/06/DUTCH-TREAT-SQUARE.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2023/06/DUTCH-TREAT-SQUARE.png",
+    "cents": 1295,
+    "sku": "M-DT-7-1014",
+    "variants": [
+      {
+        "id": 40042,
+        "label": null,
+        "cents": 1295,
+        "price": "$12.95",
+        "sku": "M-DT-7-1014",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 40040,
@@ -72,7 +136,19 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/high-society-styling-gel-for-any-type-of-hair-bamboo-extract-aloe-leaf-juice-styling/",
     "image": "/img/products/40040.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2023/06/HIGH-SOCIETY-SQUARE.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2023/06/HIGH-SOCIETY-SQUARE.png",
+    "cents": 1695,
+    "sku": "M-HS-4-1013",
+    "variants": [
+      {
+        "id": 40040,
+        "label": null,
+        "cents": 1695,
+        "price": "$16.95",
+        "sku": "M-HS-4-1013",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 38425,
@@ -87,7 +163,19 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/northern-lights-radiant-shine-gloss-4oz/",
     "image": "/img/products/38425.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2022/12/NORTHERN-LIGHTS-SQUARE.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2022/12/NORTHERN-LIGHTS-SQUARE.png",
+    "cents": 2995,
+    "sku": "M-NL-4-1010",
+    "variants": [
+      {
+        "id": 38425,
+        "label": null,
+        "cents": 2995,
+        "price": "$29.95",
+        "sku": "M-NL-4-1010",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 38424,
@@ -102,7 +190,19 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/skywalker-omg-super-smooth-leave-in/",
     "image": "/img/products/38424.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2022/12/SKYWALKER_OMG_SQUARE.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2022/12/SKYWALKER_OMG_SQUARE.png",
+    "cents": 2495,
+    "sku": "M-SW-4-1009",
+    "variants": [
+      {
+        "id": 38424,
+        "label": null,
+        "cents": 2495,
+        "price": "$24.95",
+        "sku": "M-SW-4-1009",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 38423,
@@ -117,7 +217,27 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/white-widow-liquid-conditioner/",
     "image": "/img/products/38423.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2022/12/WHITE_WIDOW_SQUARE.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2022/12/WHITE_WIDOW_SQUARE.png",
+    "cents": 1295,
+    "sku": "M-WW-4-1006",
+    "variants": [
+      {
+        "id": 38435,
+        "label": "4 oz",
+        "cents": 1295,
+        "price": "$12.95",
+        "sku": "M-WW-4-1006",
+        "inStock": true
+      },
+      {
+        "id": 38436,
+        "label": "8 oz",
+        "cents": 2495,
+        "price": "$24.95",
+        "sku": "M-WW-8-1007",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 38422,
@@ -132,7 +252,19 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/jasper-moroccan-oil-argan-hair-serum/",
     "image": "/img/products/38422.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2022/12/JASPER-OIL-SQUARE.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2022/12/JASPER-OIL-SQUARE.png",
+    "cents": 1195,
+    "sku": "M-JMO-1-1011",
+    "variants": [
+      {
+        "id": 38422,
+        "label": null,
+        "cents": 1195,
+        "price": "$11.95",
+        "sku": "M-JMO-1-1011",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 38421,
@@ -147,7 +279,19 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/diesel-hayes-color-enhancing-hair-mask/",
     "image": "/img/products/38421.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2022/12/DIESEL-HAYES-SQUARE.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2022/12/DIESEL-HAYES-SQUARE.png",
+    "cents": 2595,
+    "sku": "M-DHCP-8-9011",
+    "variants": [
+      {
+        "id": 38421,
+        "label": null,
+        "cents": 2595,
+        "price": "$25.95",
+        "sku": "M-DHCP-8-9011",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 38403,
@@ -162,22 +306,19 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/diamond-reconstruction-extreme-repair-hair-mask/",
     "image": "/img/products/38403.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2022/12/DIAMOND-RECONSTRUCT-SQUARE.png"
-  },
-  {
-    "id": 22682,
-    "name": "Way Shea Repair Hair Mask",
-    "category": "Treatments",
-    "price": "$20.95",
-    "priceRange": null,
-    "rating": 5,
-    "reviewCount": 3,
-    "blurb": "Dramatics NYC’s Way Shea Repairs Hair Mask Treatment There’s nothing worse than dry, brittle hair. That’s why Dramatics NYC created a hair mask treatment made with Shea Butter! It moisturizes, repairs, and leaves you ...",
-    "hasOptions": false,
-    "inStock": true,
-    "permalink": "https://dramaticsnyc.com/shop/way-shea-hair-mask-8-oz/",
-    "image": "/img/products/22682.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2021/05/DNYC-Way-Shea-8-oz.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2022/12/DIAMOND-RECONSTRUCT-SQUARE.png",
+    "cents": 2895,
+    "sku": "M-DRM-8-1008",
+    "variants": [
+      {
+        "id": 38403,
+        "label": null,
+        "cents": 2895,
+        "price": "$28.95",
+        "sku": "M-DRM-8-1008",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 21989,
@@ -188,11 +329,23 @@
     "rating": 5,
     "reviewCount": 4,
     "blurb": "Dramatics NYC’s Forever Young B.T.X. Smoothing Hair Spray This hair product is a must-have. Dramatics NYC has combined two products into one, making it easy for you to care for your hair without having to worry about ...",
-    "hasOptions": true,
+    "hasOptions": false,
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/forever-young-b-t-x-smoothing-spray/",
     "image": "/img/products/21989.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-FY-4-8037-Forever-Young-Blowout-Express-4-oz.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-FY-4-8037-Forever-Young-Blowout-Express-4-oz.png",
+    "cents": 2795,
+    "sku": "M-FY-8-8038",
+    "variants": [
+      {
+        "id": 22703,
+        "label": "8 oz",
+        "cents": 2795,
+        "price": "$27.95",
+        "sku": "M-FY-8-8038",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 21988,
@@ -203,11 +356,23 @@
     "rating": 5,
     "reviewCount": 3,
     "blurb": "Dramatics NYC’s Quantum Leap V.R. Serum for Healthy Hair Losing hair can be difficult, but it doesn’t have to be. Dramatics NYC has a new serum that will save your hair from falling out. Frizz control & shine serum Pa...",
-    "hasOptions": true,
+    "hasOptions": false,
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/quantum-leap-serum/",
     "image": "/img/products/21988.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-QLS-2-8035-Quantum-Leap-Serum-2-oz-Style.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-QLS-2-8035-Quantum-Leap-Serum-2-oz-Style.png",
+    "cents": 2795,
+    "sku": "M-QLS-2-8035",
+    "variants": [
+      {
+        "id": 22234,
+        "label": "4 oz",
+        "cents": 2795,
+        "price": "$27.95",
+        "sku": "M-QLS-8-8036",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 21986,
@@ -218,11 +383,23 @@
     "rating": 5,
     "reviewCount": 3,
     "blurb": "Dramatics NYC’s Big Dreams R.E.M. Volume Hair Styling Spray You want a volumizing spray but you don’t want it to have a specific scent. Dramatics NYC has got you covered. This Big Dreams product is designed for those ...",
-    "hasOptions": true,
+    "hasOptions": false,
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/big-dreams-r-e-m-volume-spray/",
     "image": "/img/products/21986.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-BDVS-4-8032-Big-Dreams-R.E.M-Volume-Spray-4-oz.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-BDVS-4-8032-Big-Dreams-R.E.M-Volume-Spray-4-oz.png",
+    "cents": 2695,
+    "sku": "M-BDVS-4-8032",
+    "variants": [
+      {
+        "id": 22127,
+        "label": "8 oz",
+        "cents": 2695,
+        "price": "$26.95",
+        "sku": "M-BDVS-8-8033",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 21985,
@@ -237,7 +414,27 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/color-protect-p-i-conditioner/",
     "image": "/img/products/21985.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-CPC-2-8029-Color-Protect-P.I.-Conditioner-2-oz.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-CPC-2-8029-Color-Protect-P.I.-Conditioner-2-oz.png",
+    "cents": 1495,
+    "sku": "M-CPC-2-8029",
+    "variants": [
+      {
+        "id": 22131,
+        "label": "10 oz",
+        "cents": 1495,
+        "price": "$14.95",
+        "sku": "M-CPC-10-8030",
+        "inStock": true
+      },
+      {
+        "id": 22132,
+        "label": "32 oz",
+        "cents": 3995,
+        "price": "$39.95",
+        "sku": "M-CPC-32-8031",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 21984,
@@ -252,7 +449,27 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/color-protect-p-i-shampoo/",
     "image": "/img/products/21984.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-CPS-2-8026-Color-Protect-P.I.-Shampoo-2-oz.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-CPS-2-8026-Color-Protect-P.I.-Shampoo-2-oz.png",
+    "cents": 1495,
+    "sku": "M-CPS-2-8026",
+    "variants": [
+      {
+        "id": 22135,
+        "label": "10 oz",
+        "cents": 1495,
+        "price": "$14.95",
+        "sku": "M-CPS-10-8027",
+        "inStock": true
+      },
+      {
+        "id": 22136,
+        "label": "32 oz",
+        "cents": 3995,
+        "price": "$39.95",
+        "sku": "M-CPS-32-8028",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 21979,
@@ -267,7 +484,27 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/silver-screen-conditioner/",
     "image": "/img/products/21979.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-SSVC2-8014-Silver-Screen-Violet-Conditioner-2-oz.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-SSVC2-8014-Silver-Screen-Violet-Conditioner-2-oz.png",
+    "cents": 1495,
+    "sku": "M-SSVC-2-8014",
+    "variants": [
+      {
+        "id": 22227,
+        "label": "10 oz",
+        "cents": 1495,
+        "price": "$14.95",
+        "sku": "M-SSVC10-8016",
+        "inStock": true
+      },
+      {
+        "id": 22228,
+        "label": "32 oz",
+        "cents": 3995,
+        "price": "$39.95",
+        "sku": "M-SSVC-32-8017",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 21978,
@@ -282,7 +519,27 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/silver-screen-shampoo/",
     "image": "/img/products/21978.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-SSVS-2-8010-Silver-Screen-Violet-Shampoo-2-oz.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-SSVS-2-8010-Silver-Screen-Violet-Shampoo-2-oz.png",
+    "cents": 1495,
+    "sku": "M-SSVS-2-8010",
+    "variants": [
+      {
+        "id": 22217,
+        "label": "10 oz",
+        "cents": 1495,
+        "price": "$14.95",
+        "sku": "M-SSVS-10-8012",
+        "inStock": true
+      },
+      {
+        "id": 22218,
+        "label": "32 oz",
+        "cents": 3995,
+        "price": "$39.95",
+        "sku": "M-SSVS-32-8013",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 21977,
@@ -297,7 +554,27 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/just-chill-cbd-conditioner/",
     "image": "/img/products/21977.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-JCC-2-8007-Just-Chill-CBD-Conditioner-2-oz.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-JCC-2-8007-Just-Chill-CBD-Conditioner-2-oz.png",
+    "cents": 1495,
+    "sku": "M-JCC-2-8007",
+    "variants": [
+      {
+        "id": 22220,
+        "label": "10 oz",
+        "cents": 1495,
+        "price": "$14.95",
+        "sku": "M-JCC-10-8008",
+        "inStock": true
+      },
+      {
+        "id": 22221,
+        "label": "32 oz",
+        "cents": 3995,
+        "price": "$39.95",
+        "sku": "M-JCC-32-8009",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 21976,
@@ -312,7 +589,27 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/just-chill-cbd-shampoo/",
     "image": "/img/products/21976.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-JCS-2-8004-Just-Chill-CBD-Shampoo-2-oz.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/M-JCS-2-8004-Just-Chill-CBD-Shampoo-2-oz.png",
+    "cents": 1495,
+    "sku": "M-JCS-2-8004",
+    "variants": [
+      {
+        "id": 22224,
+        "label": "10 oz",
+        "cents": 1495,
+        "price": "$14.95",
+        "sku": "M-JCS-10-8005",
+        "inStock": true
+      },
+      {
+        "id": 22225,
+        "label": "32 oz",
+        "cents": 3995,
+        "price": "$39.95",
+        "sku": "M-JCS-32-8006",
+        "inStock": true
+      }
+    ]
   },
   {
     "id": 160,
@@ -327,6 +624,26 @@
     "inStock": true,
     "permalink": "https://dramaticsnyc.com/shop/drama-putty/",
     "image": "/img/products/160.png",
-    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/A-DP-4-1005-Drama-Putty-4-oz-Style.png"
+    "remoteImage": "https://dramaticsnyc.com/wp-content/uploads/2020/08/A-DP-4-1005-Drama-Putty-4-oz-Style.png",
+    "cents": 1595,
+    "sku": "A-DP-4-1005",
+    "variants": [
+      {
+        "id": 45170,
+        "label": "2 oz",
+        "cents": 1595,
+        "price": "$15.95",
+        "sku": "A-DP-4-1005",
+        "inStock": true
+      },
+      {
+        "id": 45171,
+        "label": "4 oz",
+        "cents": 2295,
+        "price": "$22.95",
+        "sku": "A-DP-4-1005",
+        "inStock": true
+      }
+    ]
   }
 ]

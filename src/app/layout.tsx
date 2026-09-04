@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Anton, Fraunces, Inter } from "next/font/google";
 import "./globals.css";
+import { CartProvider } from "@/components/cart/CartProvider";
+import CartDrawer from "@/components/cart/CartDrawer";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -97,7 +99,12 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-paper text-ink antialiased">{children}</body>
+      <body className="bg-paper text-ink antialiased">
+        <CartProvider>
+          {children}
+          <CartDrawer />
+        </CartProvider>
+      </body>
     </html>
   );
 }

@@ -3,12 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "motion/react";
-import {
-  SHOP_CATEGORIES,
-  SHOP_PRODUCTS,
-  buyUrl,
-  type ShopProduct,
-} from "@/lib/shop";
+import { SHOP_CATEGORIES, SHOP_PRODUCTS, type ShopProduct } from "@/lib/shop";
+import AddToCart from "./cart/AddToCart";
 
 function Stars({ rating, count }: { rating: number; count: number }) {
   return (
@@ -62,18 +58,8 @@ function ProductCard({ p, index }: { p: ShopProduct; index: number }) {
         <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-ink-soft">
           {p.blurb}
         </p>
-        <div className="mt-4 flex flex-col gap-2.5 lg:flex-row lg:items-center lg:justify-between lg:gap-3">
-          <span className="whitespace-nowrap font-display text-lg font-semibold text-coral">
-            {p.priceRange ?? p.price}
-          </span>
-          <a
-            href={buyUrl(p)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-pill w-full whitespace-nowrap px-5 py-2.5 text-[0.8rem] lg:w-auto"
-          >
-            {p.hasOptions ? "Choose Size" : "Add to Cart"}
-          </a>
+        <div className="mt-4">
+          <AddToCart product={p} />
         </div>
       </div>
     </motion.div>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import BrandLogo from "./BrandLogo";
 import ThemeToggle from "./ThemeToggle";
+import CartButton from "./cart/CartButton";
 import { NAV_LINKS, BOOKING_URL, PHONE_PRIMARY } from "@/lib/content";
 
 export default function Nav() {
@@ -52,6 +53,7 @@ export default function Nav() {
 
           <div className="flex items-center gap-2 sm:gap-3">
             <ThemeToggle />
+            <CartButton />
             <a
               href={BOOKING_URL}
               className="btn-pill hidden px-6 py-3 text-[0.9rem] sm:inline-flex"
