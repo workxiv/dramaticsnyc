@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 /* ===========================================================
    DRAMATICS NYC — Warm Editorial Design System
    Cream paper, gloss-black ink, pastel accents, pill buttons.
@@ -19,7 +17,7 @@
   --color-apricot: #ffe5d6;
   --color-sage: #cfe0c3;
   --color-coral: #d14424;
-  /* Footer / inverse surfaces (stay dark in both themes) */
+  /* Footer / inverse surfaces */
   --color-inverse: #17150e;
   --color-inverse-fg: #fbf8f1;
 
@@ -35,42 +33,6 @@
   --foreground: var(--color-ink);
 }
 
-/* Warm editorial night — preview palette */
-.dark {
-  --color-paper: #13110e;
-  --color-cream: #1a1712;
-  --color-ink: #f6efe3;
-  --color-ink-soft: #c4bdb0;
-  --color-ink-mute: #8a8275;
-  --color-tan: #2e2a22;
-  --color-pink: #ffc6e1;
-  --color-lilac: #cba2ff;
-  --color-apricot: #ffe5d6;
-  --color-sage: #cfe0c3;
-  --color-coral: #ff6b4a;
-  --color-inverse: #080706;
-  --color-inverse-fg: #f6efe3;
-
-  --background: var(--color-paper);
-  --foreground: var(--color-ink);
-}
-
-.dark .bg-pink {
-  background-color: color-mix(in srgb, var(--color-pink) 22%, var(--color-cream));
-}
-.dark .bg-lilac {
-  background-color: color-mix(in srgb, var(--color-lilac) 20%, var(--color-cream));
-}
-.dark .bg-apricot {
-  background-color: color-mix(in srgb, var(--color-apricot) 18%, var(--color-cream));
-}
-.dark .bg-sage {
-  background-color: color-mix(in srgb, var(--color-sage) 18%, var(--color-cream));
-}
-.dark .bg-tan {
-  background-color: var(--color-tan);
-}
-
 * {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -79,10 +41,6 @@
 html {
   scroll-behavior: smooth;
   color-scheme: light;
-}
-
-.dark {
-  color-scheme: dark;
 }
 
 html.lenis,
@@ -108,11 +66,6 @@ body {
 ::selection {
   background: var(--color-ink);
   color: var(--color-paper);
-}
-
-.dark ::selection {
-  background: var(--color-coral);
-  color: var(--color-inverse-fg);
 }
 
 ::-webkit-scrollbar {

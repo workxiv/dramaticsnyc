@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import BrandLogo from "./BrandLogo";
-import ThemeToggle from "./ThemeToggle";
 import CartButton from "./cart/CartButton";
 import { NAV_LINKS, BOOKING_URL, PHONE_PRIMARY } from "@/lib/content";
 
@@ -52,7 +51,6 @@ export default function Nav() {
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            <ThemeToggle />
             <CartButton />
             <a
               href={BOOKING_URL}
@@ -86,9 +84,7 @@ export default function Nav() {
           >
             <div className="flex items-center justify-between">
               <BrandLogo className="h-6 w-auto" />
-              <div className="flex items-center gap-2">
-                <ThemeToggle />
-                <button
+              <button
                 type="button"
                 onClick={() => setOpen(false)}
                 className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/15 text-xl"
@@ -96,7 +92,6 @@ export default function Nav() {
               >
                 ✕
               </button>
-              </div>
             </div>
             <div className="flex flex-1 flex-col justify-center gap-3">
               {NAV_LINKS.map((link, i) => (

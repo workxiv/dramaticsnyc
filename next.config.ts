@@ -35,6 +35,11 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       },
     ],
+    // Product images use a ?v= cache-buster; omitting `search` allows any query.
+    localPatterns: [
+      { pathname: "/img/**" },
+      { pathname: "/media/**", search: "" },
+    ],
   },
   async redirects() {
     // Legacy WordPress / WooCommerce URLs → new shop, so old search results

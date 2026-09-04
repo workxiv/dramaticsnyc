@@ -3,7 +3,7 @@ import Image from "next/image";
 type Props = {
   className?: string;
   priority?: boolean;
-  /** Always use the light logo (for dark footer backgrounds). */
+  /** Light logo for dark footer backgrounds. */
   variant?: "default" | "onDark";
 };
 
@@ -12,37 +12,19 @@ export default function BrandLogo({
   priority,
   variant = "default",
 }: Props) {
-  if (variant === "onDark") {
-    return (
-      <Image
-        src="/img/logo-dramatics-light.png"
-        alt="Dramatics NYC"
-        width={972}
-        height={166}
-        priority={priority}
-        className={className}
-      />
-    );
-  }
+  const src =
+    variant === "onDark"
+      ? "/img/logo-dramatics-light.png"
+      : "/img/logo-dramatics.png";
 
   return (
-    <>
-      <Image
-        src="/img/logo-dramatics.png"
-        alt="Dramatics NYC"
-        width={972}
-        height={166}
-        priority={priority}
-        className={`${className} dark:hidden`}
-      />
-      <Image
-        src="/img/logo-dramatics-light.png"
-        alt="Dramatics NYC"
-        width={972}
-        height={166}
-        priority={priority}
-        className={`${className} hidden dark:block`}
-      />
-    </>
+    <Image
+      src={src}
+      alt="Dramatics NYC"
+      width={972}
+      height={166}
+      priority={priority}
+      className={className}
+    />
   );
 }
