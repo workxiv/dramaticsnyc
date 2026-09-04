@@ -42,7 +42,7 @@ type SnapshotProduct = Omit<ShopProduct, "slug" | "detail" | "blurb">;
  * this as a query string so browsers and the image CDN fetch fresh copies
  * instead of serving a cached version under the same file name.
  */
-export const PRODUCT_IMAGE_VERSION = "3";
+export const PRODUCT_IMAGE_VERSION = "4";
 
 /**
  * Catalog = pricing/stock/images from the WooCommerce snapshot, merged with

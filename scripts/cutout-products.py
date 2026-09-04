@@ -17,6 +17,9 @@ from scipy import ndimage
 SRC = "public/img/products"
 # Products photographed as dark packaging (safe to keep a soft shadow pass).
 DARK = {"38403", "38421", "38422", "38423", "38424", "38425", "40040", "41152", "41158", "42263", "21988"}
+# Dark products with a pale part below the dark body that is product, not shadow
+# (Dutch Treat's white pump base). Everything else pale under the base is shadow.
+PALE_BASE = {"40042"}
 
 
 def flood(near: np.ndarray, inset: int) -> np.ndarray:
@@ -103,32 +106,83 @@ def cutout(path: str, tol=12, tol2=34, inset=4) -> Image.Image:
     fg[:, -inset - 1 :] = False
     alpha = np.where(fg, 255, 0).astype(np.uint8)
     rgb = a.astype(np.uint8).copy()
+
+    # ---- contact shadow → soft transparent shadow ----
     if pid in DARK:
-        # Dark packaging casts a grey contact shadow on the white backdrop. Find
-        # the opaque product core (dark pixels, holes such as labels filled),
-        # then treat light pixels near/below its base as a soft shadow instead
-        # of leaving pale blobs behind.
-        core = mn < 150
-        core = ndimage.binary_closing(core, iterations=6)
-        core = ndimage.binary_fill_holes(core)
-        core &= fg
-        rows = np.flatnonzero(core.any(axis=1))
-        if rows.size:
-            base = rows.max()
-            zone = np.zeros_like(fg)
-            zone[max(0, base - 140) :, :] = True
-            shadow = fg & ~core & zone & (mn > 120)
-            t = np.clip((255 - mn) / (255 - 150), 0, 1)
-            alpha[shadow] = (t[shadow] * 140).astype(np.uint8)
-            rgb[shadow] = (40, 35, 30)
-            # anything faint enough is just background
-            alpha[shadow & (mn >= 255 - tol2)] = 0
+        # Body = clearly bright or dark pixels (label text holes filled). Mid-grey
+        # pixels outside it near the base are the backdrop's contact shadow.
+        core = ndimage.binary_closing(mn < 90, iterations=6)
+        core = ndimage.binary_fill_holes(core) & fg
+        body = core.copy()
+        # Keep large bright parts that belong to the product (e.g. a white
+        # pump base) but not small bright patches of backdrop near the base.
+        cols = np.flatnonzero(core.any(axis=0))
+        c0, c1 = (int(cols.min()), int(cols.max())) if cols.size else (0, w)
+        core_w = c1 - c0
+        labels, n = ndimage.label(fg & (mn >= 220) & ~core) if pid in PALE_BASE else (np.zeros_like(fg, dtype=int), 0)
+        touch = ndimage.binary_dilation(core, iterations=3)
+        for i in range(1, n + 1):
+            comp = labels == i
+            if comp.sum() < 2500 or not (comp & touch).any():
+                continue
+            ccols = np.flatnonzero(comp.any(axis=0))
+            wide_enough = (ccols.max() - ccols.min()) >= 0.4 * core_w
+            # a real product part sits within the product's own column span;
+            # backdrop highlights spill out sideways
+            inside = ccols.min() >= c0 - 6 and ccols.max() <= c1 + 6
+            if wide_enough and inside:
+                body |= comp
+        body = ndimage.binary_fill_holes(ndimage.binary_closing(body, iterations=3)) & fg
+        # below the dark body nothing outside its column span is product
+        crow = np.flatnonzero(core.any(axis=1))
+        if crow.size:
+            body[crow.max() + 1 :, : max(0, c0 - 4)] = False
+            body[crow.max() + 1 :, c1 + 5 :] = False
+        rows = np.flatnonzero(body.any(axis=1))
+        base = int(rows.max()) if rows.size else h
+        zone = np.zeros_like(fg)
+        zone[max(0, base - 140) :, :] = True
+        shadow = fg & ~body & zone
+    else:
+        # White packaging is the same brightness as its shadow, so use geometry:
+        # the body keeps a constant width row after row; the shadow below it
+        # spreads wider then tapers. Base = last row still at body width.
+        widths = fg.sum(axis=1)
+        valid = np.flatnonzero(widths > 0)
+        base = h
+        if valid.size:
+            lo = valid[int(valid.size * 0.6)]
+            band = widths[lo : valid.max() + 1]
+            band = band[band > 0]
+            body_w = int(np.median(band))
+            for y in range(valid.max(), lo, -1):
+                if abs(int(widths[y]) - body_w) <= max(6, int(body_w * 0.03)):
+                    base = y
+                    break
+        shadow = fg.copy()
+        shadow[: base + 1, :] = False
+    strength = np.clip((255 - mn) / (255 - 150), 0, 1)
+    strength[~shadow] = 0
+    strength = ndimage.gaussian_filter(strength.astype(np.float32), 5)
+    sh_alpha = np.clip(strength * 170, 0, 110).astype(np.uint8)
+    alpha[shadow] = sh_alpha[shadow]
+    rgb[shadow] = (40, 35, 30)
+    if pid in DARK:
         m2 = flood(mn >= 255 - tol2, inset)
         soft = m2 & ~m1 & ~fg
         t = np.clip((255 - tol - mn) / (tol2 - tol), 0, 1)
-        alpha[soft] = (t[soft] * 140).astype(np.uint8)
+        alpha[soft] = np.minimum((t[soft] * 140), 110).astype(np.uint8)
         rgb[soft] = (40, 35, 30)
-    al = Image.fromarray(alpha).filter(ImageFilter.GaussianBlur(0.7))
+
+    # ---- edge decontamination: kill the white fringe left by the backdrop ----
+    solid = alpha == 255
+    inner = ndimage.binary_erosion(solid, iterations=3)
+    rim = solid & ~inner
+    fringe = rim & (mn >= 232)
+    alpha[fringe] = 0
+    rim2 = ndimage.binary_erosion(solid, iterations=1) & ~ndimage.binary_erosion(solid, iterations=2)
+    alpha[rim2 & (mn >= 232)] = 90
+    al = Image.fromarray(alpha).filter(ImageFilter.GaussianBlur(0.8))
     return Image.fromarray(np.dstack([rgb, np.array(al)]), "RGBA")
 
 
