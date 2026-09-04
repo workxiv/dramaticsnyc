@@ -5,24 +5,6 @@ import { SITE } from "@/lib/content";
 import { FEATURED_PRODUCTS, productPath, tintFor, toCartProduct } from "@/lib/shop";
 import AddToCart from "./cart/AddToCart";
 
-function Stars({ rating, count }: { rating: number; count: number }) {
-  return (
-    <div className="flex items-center gap-1 text-xs">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <span
-          key={i}
-          className={i <= Math.round(rating) ? "text-coral" : "text-ink/15"}
-        >
-          ★
-        </span>
-      ))}
-      <span className="ml-1 text-ink-mute">
-        {rating.toFixed(1)} ({count})
-      </span>
-    </div>
-  );
-}
-
 export default function Shop() {
   return (
     <section id="shop" className="relative bg-cream py-20 sm:py-28">
@@ -65,11 +47,6 @@ export default function Shop() {
                       {p.name}
                     </Link>
                   </h3>
-                  {p.rating ? (
-                    <div className="mt-2">
-                      <Stars rating={p.rating} count={p.reviewCount} />
-                    </div>
-                  ) : null}
                   <div className="mt-3 flex flex-1 flex-col justify-end">
                     <AddToCart product={toCartProduct(p)} compact />
                   </div>

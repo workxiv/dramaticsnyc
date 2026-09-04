@@ -16,24 +16,6 @@ import {
 } from "@/lib/shop";
 import AddToCart from "./cart/AddToCart";
 
-function Stars({ rating, count }: { rating: number; count: number }) {
-  return (
-    <div className="flex items-center gap-1 text-xs">
-      {[1, 2, 3, 4, 5].map((i) => (
-        <span
-          key={i}
-          className={i <= Math.round(rating) ? "text-coral" : "text-ink/15"}
-        >
-          ★
-        </span>
-      ))}
-      <span className="ml-1 text-ink-mute">
-        {rating.toFixed(1)} ({count})
-      </span>
-    </div>
-  );
-}
-
 function ProductCard({ p, index }: { p: ShopProduct; index: number }) {
   return (
     <motion.div
@@ -66,11 +48,6 @@ function ProductCard({ p, index }: { p: ShopProduct; index: number }) {
             </Link>
           </h3>
         </div>
-        {p.rating ? (
-          <div className="mt-2">
-            <Stars rating={p.rating} count={p.reviewCount} />
-          </div>
-        ) : null}
         <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-ink-soft">
           {p.detail.tagline}
         </p>

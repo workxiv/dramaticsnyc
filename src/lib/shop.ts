@@ -23,8 +23,6 @@ export type ShopProduct = {
   /** Lowest price in cents. */
   cents: number;
   sku: string | null;
-  rating: number | null;
-  reviewCount: number;
   /** Short description shown on cards (= detail.summary) */
   blurb: string;
   hasOptions: boolean;

@@ -10,7 +10,7 @@
  * Once WooCommerce is retired, edit products-snapshot.json directly
  * (or point API at wherever the catalog lives).
  */
-import { writeFileSync, readFileSync, mkdirSync, existsSync } from "node:fs";
+import { writeFileSync, mkdirSync, existsSync } from "node:fs";
 
 const BASE = "https://dramaticsnyc.com/wp-json/wc/store/v1";
 const API = `${BASE}/products?per_page=100`;
@@ -27,12 +27,6 @@ const decode = (s) =>
 
 const money = (cents) => `$${(Number(cents) / 100).toFixed(2)}`;
 const sizeLabel = (l) => l.replace(/-?oz$/i, " oz").replace(/\s+/g, " ").trim();
-
-// Ratings shown on the site are curated in the snapshot; keep them across syncs.
-const previous = existsSync("src/lib/products-snapshot.json")
-  ? JSON.parse(readFileSync("src/lib/products-snapshot.json", "utf8"))
-  : [];
-const prevById = new Map(previous.map((p) => [p.id, p]));
 
 const res = await fetch(API);
 if (!res.ok) throw new Error(`Store API returned ${res.status}`);
@@ -85,8 +79,6 @@ for (const p of raw) {
     priceRange: min !== max ? `${money(min)} – ${money(max)}` : null,
     cents: min,
     sku: p.sku || null,
-    rating: prevById.get(p.id)?.rating ?? (Number(p.average_rating) || null),
-    reviewCount: prevById.get(p.id)?.reviewCount ?? (p.review_count || 0),
     hasOptions: variants.length > 1,
     inStock: variants.some((v) => v.inStock),
     // Cutout PNGs are generated from the .jpg sources by scripts/cutout-products.py

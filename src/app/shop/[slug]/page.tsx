@@ -185,15 +185,6 @@ export default async function ProductPage({
                 {p.name}
               </h1>
               <p className="mt-3 text-lg text-ink-soft sm:text-xl">{d.tagline}</p>
-              {p.rating && p.reviewCount > 0 ? (
-                <p className="mt-3 text-sm text-ink-mute">
-                  <span className="text-coral">
-                    {"★".repeat(Math.round(p.rating))}
-                  </span>{" "}
-                  {p.rating.toFixed(1)} · {p.reviewCount} review
-                  {p.reviewCount === 1 ? "" : "s"}
-                </p>
-              ) : null}
               <p className="mt-6 max-w-xl leading-relaxed text-ink-soft">{d.summary}</p>
 
               <dl className="mt-6 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
