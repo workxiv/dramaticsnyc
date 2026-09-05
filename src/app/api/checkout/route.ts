@@ -125,7 +125,9 @@ export async function POST(req: Request) {
         ...(cfg.supportEmail ? { merchant_support_email: cfg.supportEmail } : {}),
       },
     });
-    return NextResponse.json({ url: link.url, orderId: link.order_id ?? null });
+    // Prefer the full checkout.square.site URL: the short square.link domain
+    // is a redirector that some content blockers and network filters stop.
+    return NextResponse.json({ url: link.long_url || link.url, orderId: link.order_id ?? null });
   } catch (e) {
     console.error("[checkout] Square error:", e);
     return NextResponse.json(

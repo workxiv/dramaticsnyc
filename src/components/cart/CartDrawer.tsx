@@ -12,6 +12,9 @@ export default function CartDrawer() {
   const { isOpen, close } = cart;
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // If the browser never leaves the page (blocked redirect, flaky network),
+  // give the shopper a direct link instead of a spinner that never ends.
+  const [fallbackUrl, setFallbackUrl] = useState<string | null>(null);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -28,10 +31,14 @@ export default function CartDrawer() {
   const checkout = async () => {
     setBusy(true);
     setError(null);
+    setFallbackUrl(null);
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 20000);
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
         body: JSON.stringify({
           items: cart.lines.map((l) => ({
             productId: l.productId,
@@ -46,10 +53,23 @@ export default function CartDrawer() {
           data?.error || "We couldn't start checkout. Please try again."
         );
       }
-      window.location.assign(data.url);
+      window.location.href = data.url;
+      // Still here after a few seconds? Offer a tap-to-continue link.
+      window.setTimeout(() => {
+        setFallbackUrl(data.url);
+        setBusy(false);
+      }, 6000);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Checkout failed.");
+      setError(
+        e instanceof DOMException && e.name === "AbortError"
+          ? "Checkout is taking too long. Please check your connection and try again."
+          : e instanceof Error
+            ? e.message
+            : "Checkout failed."
+      );
       setBusy(false);
+    } finally {
+      window.clearTimeout(timeout);
     }
   };
 
@@ -201,14 +221,23 @@ export default function CartDrawer() {
                     {error}
                   </p>
                 )}
-                <button
-                  type="button"
-                  onClick={checkout}
-                  disabled={busy}
-                  className="btn-pill mt-4 w-full py-4 text-sm disabled:opacity-60"
-                >
-                  {busy ? "Opening secure checkout…" : "Checkout"}
-                </button>
+                {fallbackUrl ? (
+                  <a
+                    href={fallbackUrl}
+                    className="btn-pill mt-4 w-full py-4 text-sm"
+                  >
+                    Continue to secure checkout →
+                  </a>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={checkout}
+                    disabled={busy}
+                    className="btn-pill mt-4 w-full py-4 text-sm disabled:opacity-60"
+                  >
+                    {busy ? "Opening secure checkout…" : "Checkout"}
+                  </button>
+                )}
                 <p className="mt-3 text-center text-[0.7rem] text-ink-mute">
                   Secure payment by Square. Ships within the US.
                 </p>
