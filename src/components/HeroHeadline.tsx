@@ -4,7 +4,6 @@ import { motion, useReducedMotion } from "motion/react";
 import {
   Sparkle,
   Taxi,
-  Scissors,
   BlowDryer,
   SubwayTrain,
   SwipeUnderline,
@@ -16,8 +15,6 @@ const ease = [0.16, 1, 0.3, 1] as const;
  * Hero headline choreography (all loops are CSS-driven so they stay in sync):
  * - Subway train + taxi cross BEHIND the letters; a red car crosses in front.
  * - A stationary blow dryer parks next to "HAIR" and only those letters flutter.
- * - Scissors dive onto the period of "New Yorkers.", snip it off, it falls,
- *   then grows back.
  * - Stars pop out of "Color" in a tidy staggered burst; one lingers, twinkling.
  */
 
@@ -92,21 +89,6 @@ function ColorWord() {
   );
 }
 
-function PeriodWithScissors() {
-  return (
-    <span className="relative inline-block">
-      <span className="hero-period inline-block">.</span>
-      {/* scissors dive in from above, snip, and retreat */}
-      <span
-        className="hero-actor hero-scissors absolute -top-[0.72em] right-[-0.12em] hidden w-[0.52em] sm:block"
-        aria-hidden
-      >
-        <Scissors className="w-full" />
-      </span>
-    </span>
-  );
-}
-
 export default function HeroHeadline() {
   const reduce = useReducedMotion();
 
@@ -158,8 +140,7 @@ export default function HeroHeadline() {
           transition={{ duration: 0.9, ease, delay: 0.22 }}
         >
           <span className="headline-swipe">
-            for New Yorkers
-            <PeriodWithScissors />
+            for New Yorkers.
             <SwipeUnderline />
           </span>
         </motion.span>

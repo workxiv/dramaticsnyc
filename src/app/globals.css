@@ -363,7 +363,6 @@ details.faq-item[open] summary .faq-icon {
 /* ===========================================================
    Hero headline choreography
    Shared 9s loop: dryer blows -> HAIR letters flutter.
-   Shared 12s loop: scissors dive -> period gets cut -> regrows.
    6s loop: star pops out of COLOR. Traffic crosses on its own lanes.
    =========================================================== */
 
@@ -474,110 +473,6 @@ details.faq-item[open] summary .faq-icon {
   }
 }
 
-/* --- scissors: dive onto the period, snip, retreat (12s, delay 3s) --- */
-.hero-scissors {
-  opacity: 0;
-  animation: scissors-dive 12s ease-in-out 3s infinite;
-  transform-origin: 45% 50%;
-}
-@keyframes scissors-dive {
-  0%,
-  30%,
-  100% {
-    opacity: 0;
-    transform: translate(0.7em, -0.8em) rotate(20deg) scale(0.7);
-  }
-  6% {
-    opacity: 1;
-    transform: translate(0, -0.06em) rotate(75deg) scale(1);
-  }
-  10% {
-    transform: translate(0, 0.06em) rotate(75deg) scale(1);
-  }
-  13% {
-    transform: translate(0, -0.02em) rotate(75deg) scale(1);
-  }
-  16% {
-    transform: translate(0, 0.05em) rotate(75deg) scale(1);
-  }
-  22% {
-    opacity: 1;
-    transform: translate(0.5em, -0.7em) rotate(35deg) scale(0.9);
-  }
-  28% {
-    opacity: 0;
-    transform: translate(0.8em, -1em) rotate(20deg) scale(0.75);
-  }
-}
-
-.scissors-blade-a,
-.scissors-blade-b {
-  transform-origin: 28px 32px;
-}
-.scissors-blade-a {
-  animation: blade-a 0.5s ease-in-out infinite;
-}
-.scissors-blade-b {
-  animation: blade-b 0.5s ease-in-out infinite;
-}
-@keyframes blade-a {
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(-11deg);
-  }
-}
-@keyframes blade-b {
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(11deg);
-  }
-}
-
-/* --- the period: gets snipped off, falls, then regrows (12s, delay 3s) --- */
-.hero-period {
-  animation: period-cut 12s ease-in 3s infinite;
-  transform-origin: 50% 50%;
-  will-change: transform, opacity;
-}
-@keyframes period-cut {
-  0%,
-  9% {
-    transform: none;
-    opacity: 1;
-  }
-  11% {
-    transform: translate(0.01em, 0.03em) rotate(8deg);
-    opacity: 1;
-  }
-  14% {
-    transform: translate(0.05em, 0.3em) rotate(40deg);
-    opacity: 1;
-  }
-  20% {
-    transform: translate(0.12em, 1em) rotate(90deg);
-    opacity: 0;
-  }
-  44% {
-    transform: scale(0.2);
-    opacity: 0;
-  }
-  48% {
-    transform: scale(1.25);
-    opacity: 1;
-  }
-  52%,
-  100% {
-    transform: none;
-    opacity: 1;
-  }
-}
-
 /* --- star pops out of COLOR (6s loop, staggered via inline delay) --- */
 .star-main {
   animation: star-twinkle 3.4s ease-in-out 2s infinite;
@@ -675,11 +570,9 @@ details.faq-item[open] summary .faq-icon {
   animation: bob 4.5s ease-in-out infinite;
 }
 
-/* On phones the dryer/scissors actors are hidden, so the letters they act on
-   must stay still too */
+/* On phones the dryer is hidden, so the letters it acts on must stay still too */
 @media (max-width: 639px) {
-  .hair-blow,
-  .hero-period {
+  .hair-blow {
     animation: none;
   }
 }
@@ -694,16 +587,12 @@ details.faq-item[open] summary .faq-icon {
   .skyline-car-2,
   .hair-blow,
   .hero-dryer,
-  .hero-scissors,
-  .hero-period,
   .star-main,
   .star-pop,
   .hero-train,
   .hero-train-rumble,
   .hero-taxi-behind,
   .hero-car-front,
-  .scissors-blade-a,
-  .scissors-blade-b,
   .animate-dryer-blow .dryer-air,
   .animate-dryer-blow .dryer-air path,
   .headline-swipe svg path {
