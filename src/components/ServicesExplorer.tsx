@@ -5,19 +5,33 @@ import { motion } from "motion/react";
 import {
   SERVICE_CATEGORIES,
   SERVICE_SUGGESTIONS,
+  type AddOn,
   type PricedService,
 } from "@/lib/services";
 import { BOOKING_URL } from "@/lib/content";
 
-function matches(item: PricedService, q: string) {
-  const hay = [item.name, item.description, item.note ?? "", ...item.keywords]
-    .join(" ")
-    .toLowerCase();
+function matchesWords(hay: string, q: string) {
+  const h = hay.toLowerCase();
   return q
     .toLowerCase()
     .split(/\s+/)
     .filter(Boolean)
-    .every((word) => hay.includes(word));
+    .every((word) => h.includes(word));
+}
+
+function matches(item: PricedService, q: string) {
+  const hay = [
+    item.name,
+    item.description,
+    item.note ?? "",
+    ...(item.tiers ?? []).map((t) => t.label),
+    ...item.keywords,
+  ].join(" ");
+  return matchesWords(hay, q);
+}
+
+function matchesAddOn(addOn: AddOn, q: string) {
+  return matchesWords(`${addOn.name} ${addOn.description}`, q);
 }
 
 const CATEGORY_BG = ["bg-apricot", "bg-pink", "bg-sage"];
@@ -31,7 +45,10 @@ export default function ServicesExplorer() {
     return SERVICE_CATEGORIES.map((cat) => ({
       ...cat,
       items: cat.items.filter((item) => matches(item, q)),
-    })).filter((cat) => cat.items.length > 0);
+      addOns: cat.addOns?.filter((a) => matchesAddOn(a, q)),
+      // Only carry the footnote through when the full category is showing
+      footnote: undefined,
+    })).filter((cat) => cat.items.length > 0 || (cat.addOns?.length ?? 0) > 0);
   }, [query]);
 
   return (
@@ -155,6 +172,23 @@ export default function ServicesExplorer() {
                           {item.note}
                         </p>
                       )}
+                      {item.tiers && (
+                        <dl className="mt-4 flex flex-wrap gap-x-6 gap-y-2 border-t border-ink/10 pt-3">
+                          {item.tiers.map((tier) => (
+                            <div key={tier.label} className="flex items-baseline gap-2">
+                              <dt className="text-[0.68rem] font-bold uppercase tracking-[0.12em] text-ink-mute">
+                                {tier.label}
+                              </dt>
+                              <dd className="font-display text-[0.95rem] font-semibold tabular-nums">
+                                {tier.price}
+                              </dd>
+                            </div>
+                          ))}
+                        </dl>
+                      )}
+                      {item.footnote && (
+                        <p className="mt-2 text-xs text-ink-mute">{item.footnote}</p>
+                      )}
                     </div>
                     <div className="flex shrink-0 items-center gap-5 sm:flex-col sm:items-end sm:gap-3">
                       <span className="font-display text-xl font-semibold sm:text-2xl">
@@ -170,6 +204,37 @@ export default function ServicesExplorer() {
                   </motion.div>
                 ))}
               </div>
+
+              {cat.addOns && cat.addOns.length > 0 && (
+                <div className="card-soft mt-4 border border-ink/8 bg-paper p-6 sm:p-7">
+                  <p className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-ink-mute">
+                    Add-ons
+                  </p>
+                  <ul className="mt-3 divide-y divide-ink/8">
+                    {cat.addOns.map((addOn) => (
+                      <li
+                        key={addOn.id}
+                        className="flex items-baseline justify-between gap-6 py-3"
+                      >
+                        <div>
+                          <p className="font-display text-lg font-semibold">
+                            {addOn.name}
+                          </p>
+                          <p className="mt-0.5 text-sm text-ink-soft">
+                            {addOn.description}
+                          </p>
+                        </div>
+                        <span className="shrink-0 font-display text-lg font-semibold tabular-nums">
+                          {addOn.price}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  {cat.footnote && (
+                    <p className="mt-3 text-xs text-ink-mute">{cat.footnote}</p>
+                  )}
+                </div>
+              )}
             </section>
           );
         })
