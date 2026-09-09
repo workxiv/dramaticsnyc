@@ -16,13 +16,13 @@ Current state (checked 2026-09-03):
 
 ## Pre-cutover checklist
 
-- [x] `SQUARE_LOCATION_ID=L3A1TA4C6BBCK` and `SQUARE_ENVIRONMENT=production` set in Vercel (Production) on 2026-09-03
-- [ ] `SQUARE_ACCESS_TOKEN` set in Vercel as a **Secret** (Production). Source: developer.squareup.com → "The Healthy Color website integration" → Credentials → Production → Access token. Redeploy after adding it (env changes need a new deployment).
+- [x] `SQUARE_LOCATION_ID=LS4C0QNYNTNEB` (Dramatics NYC (Main), 120 E 34th St) and `SQUARE_ENVIRONMENT=production` set in Vercel (Production). Switched from The Healthy Color account on 2026-09-09; app is "Dramatics NYC website" (sq0idp-txc_lKtEI32jr2xewHuiog) in the Dramatics NYC Square developer account.
+- [ ] `SQUARE_ACCESS_TOKEN` set in Vercel as a **Secret** (Production). Source: developer.squareup.com (Dramatics NYC account) → "Dramatics NYC website" → Credentials → Production → Access token. The old The Healthy Color token must be replaced. Redeploy after adding it (env changes need a new deployment).
 - [ ] Leave `NEXT_PUBLIC_SITE_URL` unset: the checkout route derives the post-payment redirect from the request host, so it works on dramaticsnyc.vercel.app before cutover and on www.dramaticsnyc.com after, with no change.
 - [ ] Latest `main` deployed and green on dramaticsnyc.vercel.app
 - [ ] Real test order placed on dramaticsnyc.vercel.app (use a real card for $1 item or Square sandbox), refund it from Square Dashboard
 - [ ] Square Dashboard → Orders shows the order with shipping address
-- [ ] Gift cards: create a Square eGift ordering page (Square Dashboard → Gift Cards → eGift Cards → Online) and set `NEXT_PUBLIC_GIFT_CARDS_URL` in Vercel. Until then the button links to the old WooCommerce gift card page.
+- [x] Gift cards: the old site sold eGift cards per salon through SalonTarget (each location's booking system), not WooCommerce. The new site does the same at `/shop/gift-cards` (links to `<bookingUrl>/egift/`), so cards stay redeemable for services in-salon. `/shop/giftcards/*` redirects there. Leave `NEXT_PUBLIC_GIFT_CARDS_URL` unset unless gift cards move to Square eGift.
 - [ ] Export WooCommerce orders/customers as CSV from WP Admin (WooCommerce → Orders, Customers) for records
 - [ ] Note any old URLs that get traffic (WP Admin → analytics) so they can be redirected
 

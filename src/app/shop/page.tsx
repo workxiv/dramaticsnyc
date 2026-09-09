@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import Link from "next/link";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ShopGrid from "@/components/ShopGrid";
@@ -80,18 +81,13 @@ export default function ShopPage() {
                 Gift cards for any budget
               </h2>
               <p className="mt-3 max-w-xl text-ink-soft">
-                &ldquo;{SITE.giftCardQuote}&rdquo; —{" "}
-                {SITE.giftCardAttribution}
+                &ldquo;{SITE.giftCardQuote}&rdquo;
               </p>
+              <p className="mt-2 text-sm font-semibold text-ink">{SITE.giftCardAttribution}</p>
             </div>
-            <a
-              href={GIFT_CARDS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-pill shrink-0 px-7 py-3.5 text-sm"
-            >
+            <Link href={GIFT_CARDS_URL} className="btn-pill shrink-0 px-7 py-3.5 text-sm">
               Shop Gift Cards
-            </a>
+            </Link>
           </div>
         </div>
       </main>

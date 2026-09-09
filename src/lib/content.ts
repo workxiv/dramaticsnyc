@@ -114,6 +114,15 @@ export type Location = {
   quote?: string;
 };
 
+/**
+ * eGift cards are sold per salon through each location's SalonTarget
+ * booking system (same as the old dramaticsnyc.com/shop/giftcards/ page),
+ * so they can be redeemed for services at that salon.
+ */
+export function giftCardUrl(loc: Location) {
+  return `${loc.bookingUrl.replace(/\/$/, "")}/egift/?guestonly=guestonly`;
+}
+
 /** Convert a Google Maps search link into an embeddable iframe URL. */
 export function mapsEmbedUrl(maps: string) {
   try {

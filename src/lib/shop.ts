@@ -106,13 +106,12 @@ export const SHOP_CATEGORIES = [
 ];
 
 /**
- * Gift cards. Square eGift cards are sold from a Square-hosted page;
- * set NEXT_PUBLIC_GIFT_CARDS_URL to that link once it's created in the
- * Square Dashboard (Gift Cards → eGift Cards → Online).
+ * Gift cards are sold per salon via SalonTarget eGift (see /shop/gift-cards).
+ * NEXT_PUBLIC_GIFT_CARDS_URL can point somewhere else (e.g. a Square eGift
+ * page) if that ever changes.
  */
 export const GIFT_CARDS_URL =
-  process.env.NEXT_PUBLIC_GIFT_CARDS_URL ||
-  "https://dramaticsnyc.com/shop/giftcards/";
+  process.env.NEXT_PUBLIC_GIFT_CARDS_URL || "/shop/gift-cards";
 
 /** Flat-rate shipping, in cents, applied to every order. */
 export const SHIPPING_CENTS = 795;

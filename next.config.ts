@@ -23,7 +23,6 @@ const LEGACY_PRODUCT_SLUGS: Record<string, string> = {
   "big-dreams-r-e-m-volume-spray": "big-dreams-volume-spray",
   // discontinued
   "way-shea-hair-mask-8-oz": "",
-  giftcards: "",
 };
 
 /**
@@ -105,6 +104,8 @@ const nextConfig: NextConfig = {
         destination: to ? `/shop/${to}` : "/shop",
         permanent: true,
       })),
+      { source: "/shop/giftcards", destination: "/shop/gift-cards", permanent: true },
+      { source: "/shop/giftcards/:path*", destination: "/shop/gift-cards", permanent: true },
       { source: "/product-category/:path*", destination: "/shop", permanent: true },
       { source: "/product/:path*", destination: "/shop", permanent: true },
       { source: "/cart", destination: "/shop", permanent: true },

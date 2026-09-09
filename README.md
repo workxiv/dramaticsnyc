@@ -72,7 +72,7 @@ Copy `.env.example` to `.env.local` and set the same values in Vercel → Projec
 | `SQUARE_ENVIRONMENT` | `production` (or `sandbox` with a sandbox token for testing) |
 | `SQUARE_SUPPORT_EMAIL` | Optional, shown on the checkout page |
 | `NEXT_PUBLIC_SITE_URL` | `https://www.dramaticsnyc.com` (post-payment redirect base) |
-| `NEXT_PUBLIC_GIFT_CARDS_URL` | Optional Square eGift card page |
+| `NEXT_PUBLIC_GIFT_CARDS_URL` | Optional. Overrides the Gift Cards link (defaults to `/shop/gift-cards`, which links to each salon's SalonTarget eGift page) |
 
 Without the Square variables the shop still renders; the checkout button returns a friendly "temporarily unavailable" message.
 

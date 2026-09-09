@@ -63,14 +63,19 @@ export default function Shop() {
                 The full DNYC line
               </h3>
               <p className="mt-3 max-w-xl text-ink-soft">
-                Shampoos, conditioners, treatments, and styling products —
+                Shampoos, conditioners, treatments, and styling products,
                 plus gift cards for any budget. Also available in every
                 salon.
               </p>
             </div>
-            <Link href="/shop" className="btn-pill shrink-0 px-7 py-3.5 text-sm">
-              Shop All Products
-            </Link>
+            <div className="flex shrink-0 flex-wrap gap-3">
+              <Link href="/shop" className="btn-pill px-7 py-3.5 text-sm">
+                Shop All Products
+              </Link>
+              <Link href="/shop/gift-cards" className="btn-pill-outline px-7 py-3.5 text-sm">
+                Gift Cards
+              </Link>
+            </div>
           </div>
         </Reveal>
       </div>

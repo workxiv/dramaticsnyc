@@ -52,6 +52,7 @@ const HOT_TOOLS_NOTE = "Hot tools (curling or flat iron) are additional.";
 export const SERVICE_POLICIES = [
   "All prices are determined by the length and texture of hair.",
   "Work is guaranteed for 7 days.",
+  "A 3% fee applies to all credit card transactions.",
   "MasterCard, Visa, and American Express accepted. Checks are not accepted.",
   "Taxes not included.",
 ] as const;
