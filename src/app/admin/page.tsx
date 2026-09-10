@@ -26,10 +26,11 @@ export default async function AdminLogin({
       <div className="card-soft w-full max-w-sm border border-ink/10 bg-paper p-8 sm:p-10">
         <BrandLogo className="h-6 w-auto" />
         <p className="eyebrow mt-8 text-coral">Staff only</p>
-        <h1 className="mt-3 font-display text-2xl font-semibold">Order archive</h1>
+        <h1 className="mt-3 font-display text-2xl font-semibold">Online orders</h1>
         <p className="mt-2 text-sm text-ink-soft">
-          Every online order and customer from the old shop (2019 to 2026). New
-          orders live in the Square Dashboard.
+          New shop orders as they come in, plus every order and customer from
+          the old website (2019 to 2026). Search by order number, name, email
+          or phone.
         </p>
         <form method="post" action="/api/admin/login" className="mt-6 space-y-3">
           {next && <input type="hidden" name="next" value={next} />}

@@ -22,7 +22,7 @@ export default function AdminShell({
               <BrandLogo className="h-5 w-auto" />
             </Link>
             <span className="hidden text-[0.65rem] font-bold uppercase tracking-[0.16em] text-ink-mute sm:inline">
-              Staff · Order archive
+              Staff · Online orders
             </span>
           </div>
           <nav className="flex items-center gap-1 text-sm">
