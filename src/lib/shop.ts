@@ -81,6 +81,7 @@ export const CATEGORY_TINT: Record<string, string> = {
   Conditioners: "bg-apricot",
   Treatments: "bg-lilac",
   "Styling Products": "bg-pink",
+  "Gift Cards": "bg-cream",
 };
 export const tintFor = (category: string) => CATEGORY_TINT[category] ?? "bg-cream";
 
@@ -100,9 +101,12 @@ export const toCartProduct = (p: ShopProduct): CartProduct => ({
 });
 
 
+export const GIFT_CARD_CATEGORY = "Gift Cards";
+
 export const SHOP_CATEGORIES = [
   "All",
   ...Array.from(new Set(SHOP_PRODUCTS.map((p) => p.category))).sort(),
+  GIFT_CARD_CATEGORY,
 ];
 
 /**

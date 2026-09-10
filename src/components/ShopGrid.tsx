@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
 import {
+  GIFT_CARD_CATEGORY,
   SHOP_CATEGORIES,
   SHOP_PRODUCTS,
   categoryHref,
@@ -15,6 +16,21 @@ import {
   type ShopProduct,
 } from "@/lib/shop";
 import AddToCart from "./cart/AddToCart";
+import GiftCardTile from "./GiftCardTile";
+import { LOCATIONS, type Location } from "@/lib/content";
+
+function GiftCardCard({ loc, index }: { loc: Location; index: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.04 * (index % 8) }}
+      className="group card-soft flex h-full flex-col border border-ink/8 bg-paper p-3"
+    >
+      <GiftCardTile loc={loc} />
+    </motion.div>
+  );
+}
 
 function ProductCard({ p, index }: { p: ShopProduct; index: number }) {
   return (
@@ -76,7 +92,12 @@ export default function ShopGrid() {
   const shown =
     category === "All"
       ? SHOP_PRODUCTS
-      : SHOP_PRODUCTS.filter((p) => p.category === category);
+      : category === GIFT_CARD_CATEGORY
+        ? []
+        : SHOP_PRODUCTS.filter((p) => p.category === category);
+  // Gift cards sit alongside products in "All" and get their own filter.
+  const giftCards =
+    category === "All" || category === GIFT_CARD_CATEGORY ? LOCATIONS : [];
 
   return (
     <div>
@@ -103,6 +124,9 @@ export default function ShopGrid() {
       >
         {shown.map((p, i) => (
           <ProductCard key={p.id} p={p} index={i} />
+        ))}
+        {giftCards.map((loc, i) => (
+          <GiftCardCard key={`gc-${loc.id}`} loc={loc} index={shown.length + i} />
         ))}
       </div>
     </div>

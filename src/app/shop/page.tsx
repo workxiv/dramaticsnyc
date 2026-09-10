@@ -5,7 +5,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import ShopGrid from "@/components/ShopGrid";
 import { GIFT_CARDS_URL, SHOP_PRODUCTS, productPath } from "@/lib/shop";
-import { SITE, jsonLdString } from "@/lib/content";
+import { LOCATIONS, SITE, giftCardUrl, jsonLdString } from "@/lib/content";
 
 const SITE_URL = "https://www.dramaticsnyc.com";
 
@@ -23,30 +23,51 @@ const jsonLd = {
   "@type": "ItemList",
   "@id": `${SITE_URL}/shop#products`,
   name: "DNYC Professional Hair Products",
-  numberOfItems: SHOP_PRODUCTS.length,
-  itemListElement: SHOP_PRODUCTS.map((p, i) => ({
-    "@type": "ListItem",
-    position: i + 1,
-    item: {
-      "@type": "Product",
-      name: p.name,
-      url: `${SITE_URL}${productPath(p)}`,
-      image: `${SITE_URL}${p.image}`,
-      category: p.category,
-      brand: { "@type": "Brand", name: "DNYC" },
-      ...(p.sku ? { sku: p.sku } : {}),
-      offers: {
-        "@type": "Offer",
-        price: p.price.replace("$", ""),
-        priceCurrency: "USD",
-        availability: p.inStock
-          ? "https://schema.org/InStock"
-          : "https://schema.org/OutOfStock",
+  numberOfItems: SHOP_PRODUCTS.length + LOCATIONS.length,
+  itemListElement: [
+    ...SHOP_PRODUCTS.map((p, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: {
+        "@type": "Product",
+        name: p.name,
         url: `${SITE_URL}${productPath(p)}`,
-        seller: { "@type": "Organization", name: "Dramatics NYC" },
+        image: `${SITE_URL}${p.image}`,
+        category: p.category,
+        brand: { "@type": "Brand", name: "DNYC" },
+        ...(p.sku ? { sku: p.sku } : {}),
+        offers: {
+          "@type": "Offer",
+          price: p.price.replace("$", ""),
+          priceCurrency: "USD",
+          availability: p.inStock
+            ? "https://schema.org/InStock"
+            : "https://schema.org/OutOfStock",
+          url: `${SITE_URL}${productPath(p)}`,
+          seller: { "@type": "Organization", name: "Dramatics NYC" },
+        },
       },
-    },
-  })),
+    })),
+    ...LOCATIONS.map((loc, i) => ({
+      "@type": "ListItem",
+      position: SHOP_PRODUCTS.length + i + 1,
+      item: {
+        "@type": "Product",
+        name: `${loc.name} Gift Card`,
+        url: `${SITE_URL}/shop/gift-cards`,
+        category: "Gift Cards",
+        brand: { "@type": "Brand", name: "Dramatics NYC" },
+        offers: {
+          "@type": "AggregateOffer",
+          lowPrice: "25.00",
+          highPrice: "500.00",
+          priceCurrency: "USD",
+          availability: "https://schema.org/InStock",
+          url: giftCardUrl(loc),
+        },
+      },
+    })),
+  ],
 };
 
 export default function ShopPage() {
@@ -83,9 +104,14 @@ export default function ShopPage() {
               <p className="mt-3 max-w-xl text-ink-soft">
                 &ldquo;{SITE.giftCardQuote}&rdquo;
               </p>
-              <p className="mt-2 text-sm font-semibold text-ink">{SITE.giftCardAttribution}</p>
+              <p className="mt-2 text-sm font-semibold text-ink">
+                {SITE.giftCardAttribution}
+              </p>
             </div>
-            <Link href={GIFT_CARDS_URL} className="btn-pill shrink-0 px-7 py-3.5 text-sm">
+            <Link
+              href={GIFT_CARDS_URL}
+              className="btn-pill shrink-0 px-7 py-3.5 text-sm"
+            >
               Shop Gift Cards
             </Link>
           </div>
