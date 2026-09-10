@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { randomUUID } from "node:crypto";
 import { createPaymentLink, squareConfig } from "@/lib/square";
-import { SHIPPING_CENTS, SHIPPING_LABEL, findVariant } from "@/lib/shop";
+import { SHIPPING_CENTS, SHIPPING_LABEL, findVariant, newOrderNumber } from "@/lib/shop";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -110,7 +110,7 @@ export async function POST(req: Request) {
       idempotency_key: randomUUID(),
       order: {
         location_id: cfg.locationId,
-        reference_id: `web-${Date.now().toString(36)}`,
+        reference_id: newOrderNumber(),
         line_items: lineItems,
       },
       checkout_options: {

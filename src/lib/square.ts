@@ -80,8 +80,53 @@ export async function createPaymentLink(body: PaymentLinkRequest) {
   return data.payment_link;
 }
 
-/** Fetch an order (used by the thank-you page to show a receipt summary). */
-export async function retrieveOrder(orderId: string) {
+export type SquareAddress = {
+  address_line_1?: string;
+  address_line_2?: string;
+  locality?: string;
+  administrative_district_level_1?: string;
+  postal_code?: string;
+  country?: string;
+};
+
+export type SquareOrder = {
+  id: string;
+  state: string;
+  reference_id?: string;
+  created_at?: string;
+  total_money?: SquareMoney;
+  total_tax_money?: SquareMoney;
+  total_discount_money?: SquareMoney;
+  total_service_charge_money?: SquareMoney;
+  line_items?: Array<{
+    name: string;
+    quantity: string;
+    variation_name?: string;
+    note?: string;
+    base_price_money?: SquareMoney;
+    total_money?: SquareMoney;
+  }>;
+  service_charges?: Array<{ name?: string; total_money?: SquareMoney }>;
+  fulfillments?: Array<{
+    type?: string;
+    shipment_details?: {
+      recipient?: {
+        display_name?: string;
+        email_address?: string;
+        phone_number?: string;
+        address?: SquareAddress;
+      };
+    };
+  }>;
+  tenders?: Array<{
+    id: string;
+    type?: string;
+    card_details?: { card?: { card_brand?: string; last_4?: string } };
+  }>;
+};
+
+/** Fetch an order (thank-you page summary and order notification emails). */
+export async function retrieveOrder(orderId: string): Promise<SquareOrder | null> {
   const cfg = squareConfig();
   if (!cfg) return null;
   const res = await fetch(`${cfg.baseUrl}/v2/orders/${encodeURIComponent(orderId)}`, {
@@ -92,14 +137,30 @@ export async function retrieveOrder(orderId: string) {
     cache: "no-store",
   });
   if (!res.ok) return null;
-  const data = (await res.json()) as {
-    order?: {
-      id: string;
-      state: string;
-      total_money?: SquareMoney;
-      line_items?: Array<{ name: string; quantity: string; variation_name?: string; total_money?: SquareMoney }>;
-      tenders?: Array<{ id: string }>;
-    };
-  };
+  const data = (await res.json()) as { order?: SquareOrder };
   return data.order ?? null;
+}
+
+/**
+ * Verify a Square webhook: base64(HMAC-SHA256(key, notificationUrl + rawBody))
+ * must equal the x-square-hmacsha256-signature header.
+ */
+export async function verifyWebhookSignature(
+  rawBody: string,
+  signature: string | null,
+  notificationUrl: string,
+  signatureKey: string
+) {
+  if (!signature) return false;
+  const { createHmac, timingSafeEqual } = await import("node:crypto");
+  const expected = createHmac("sha256", signatureKey)
+    .update(notificationUrl + rawBody)
+    .digest();
+  let given: Buffer;
+  try {
+    given = Buffer.from(signature, "base64");
+  } catch {
+    return false;
+  }
+  return given.length === expected.length && timingSafeEqual(given, expected);
 }

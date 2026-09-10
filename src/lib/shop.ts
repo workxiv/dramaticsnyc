@@ -117,6 +117,16 @@ export const SHOP_CATEGORIES = [
 export const GIFT_CARDS_URL =
   process.env.NEXT_PUBLIC_GIFT_CARDS_URL || "/shop/gift-cards";
 
+/**
+ * Short, human order number carried in the Square order's reference_id
+ * and shown in emails and the Square Dashboard. Seconds since the shop
+ * launch, so numbers only ever go up and two orders can't share one.
+ */
+const ORDER_NUMBER_EPOCH = Date.UTC(2026, 8, 1); // 2026-09-01
+export function newOrderNumber(now = Date.now()) {
+  return String(Math.floor((now - ORDER_NUMBER_EPOCH) / 1000));
+}
+
 /** Flat-rate shipping, in cents, applied to every order. */
 export const SHIPPING_CENTS = 795;
 export const SHIPPING_LABEL = "Flat rate shipping";

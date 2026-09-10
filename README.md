@@ -72,6 +72,11 @@ Copy `.env.example` to `.env.local` and set the same values in Vercel → Projec
 | `SQUARE_ENVIRONMENT` | `production` (or `sandbox` with a sandbox token for testing) |
 | `SQUARE_SUPPORT_EMAIL` | Optional, shown on the checkout page |
 | `NEXT_PUBLIC_SITE_URL` | `https://www.dramaticsnyc.com` (post-payment redirect base) |
+| `SQUARE_WEBHOOK_SIGNATURE_KEY` | Developer Console → Webhooks → subscription → Signature key. Enables `/api/square/webhook` |
+| `SQUARE_WEBHOOK_URL` | Optional. The exact URL registered with Square, if different from `https://<host>/api/square/webhook` |
+| `RESEND_API_KEY` | resend.com → API Keys. Sends the "new order" email to the salon |
+| `ORDER_NOTIFY_TO` | Comma-separated recipients (default `dramaticsnycs@gmail.com`) |
+| `ORDER_NOTIFY_FROM` | Sender, e.g. `Dramatics NYC <orders@dramaticsnyc.com>` (domain must be verified in Resend; default `onboarding@resend.dev` only delivers to the Resend account owner) |
 | `NEXT_PUBLIC_GIFT_CARDS_URL` | Optional. Overrides the Gift Cards link (defaults to `/shop/gift-cards`, which links to each salon's SalonTarget eGift page) |
 
 Without the Square variables the shop still renders; the checkout button returns a friendly "temporarily unavailable" message.
@@ -83,7 +88,9 @@ Without the Square variables the shop still renders; the checkout button returns
 3. The route re-prices every line from `products-snapshot.json`, adds the $7.95 flat-rate shipping fee, and calls Square's Checkout API to create a Payment Link. Card entry happens on Square's PCI-compliant page; this site never sees card data.
 4. Square redirects to `/shop/thank-you?orderId=…`, which shows the order summary and empties the bag.
 
-Orders appear in the Square Dashboard under Orders, with the shipping address the buyer entered.
+5. When the payment completes, Square calls `/api/square/webhook` (`payment.completed`). The route verifies the HMAC signature, loads the order, and emails "[Dramatics NYC]: You've got a new order: #12345" (items, SKUs, totals, shipping address, customer contact, reply-to the customer) via Resend to `ORDER_NOTIFY_TO`.
+
+Orders appear in the Square Dashboard under Orders, with the shipping address the buyer entered. The order number (`reference_id`) is seconds since 2026-09-01, so it always increases.
 
 ## Notes
 

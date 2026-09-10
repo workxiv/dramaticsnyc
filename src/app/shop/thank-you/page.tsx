@@ -65,7 +65,9 @@ export default async function ThankYouPage({
                 ) : null}
               </ul>
             ) : null}
-            {orderId ? (
+            {order?.reference_id ? (
+              <p className="mt-6 text-sm font-semibold">Order #{order.reference_id}</p>
+            ) : orderId ? (
               <p className="mt-6 text-xs text-ink-mute">Order reference: {orderId}</p>
             ) : null}
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
