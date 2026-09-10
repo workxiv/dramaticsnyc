@@ -23,7 +23,7 @@ Current state (checked 2026-09-03):
 - [ ] Real test order placed on dramaticsnyc.vercel.app (use a real card for $1 item or Square sandbox), refund it from Square Dashboard
 - [ ] Square Dashboard → Orders shows the order with shipping address
 - [x] Gift cards: the old site sold eGift cards per salon through SalonTarget (each location's booking system), not WooCommerce. The new site does the same at `/shop/gift-cards` (links to `<bookingUrl>/egift/`), so cards stay redeemable for services in-salon. `/shop/giftcards/*` redirects there. Leave `NEXT_PUBLIC_GIFT_CARDS_URL` unset unless gift cards move to Square eGift.
-- [ ] Export WooCommerce orders/customers as CSV from WP Admin (WooCommerce → Orders, Customers) for records
+- [x] Full WooCommerce export done 2026-09-10 (`backup/`, gitignored): 1,242 orders, 3,379 order notes, 25,703 WP users, products, pages. Excel archive + encrypted staff archive at `/admin` (needs `ARCHIVE_KEY` + `ADMIN_PASSWORD` in Vercel). 567 buyers imported into the Square customer directory with an order-history note.
 - [ ] Note any old URLs that get traffic (WP Admin → analytics) so they can be redirected
 
 ## Cutover steps (do in order, ~20 minutes plus propagation)
