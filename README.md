@@ -88,7 +88,7 @@ Without the Square variables the shop still renders; the checkout button returns
 3. The route re-prices every line from `products-snapshot.json`, adds the $7.95 flat-rate shipping fee, and calls Square's Checkout API to create a Payment Link. Card entry happens on Square's PCI-compliant page; this site never sees card data.
 4. Square redirects to `/shop/thank-you?orderId=…`, which shows the order summary and empties the bag.
 
-5. When the payment completes, Square calls `/api/square/webhook` (`payment.completed`). The route verifies the HMAC signature, loads the order, and emails "[Dramatics NYC]: You've got a new order: #12345" (items, SKUs, totals, shipping address, customer contact, reply-to the customer) via Resend to `ORDER_NOTIFY_TO`.
+5. When the payment completes, Square calls `/api/square/webhook` (`payment.created` / `payment.updated`, acted on when status is COMPLETED). The route verifies the HMAC signature, loads the order, and emails "[Dramatics NYC]: You've got a new order: #12345" (items, SKUs, totals, shipping address, customer contact, reply-to the customer) via Resend to `ORDER_NOTIFY_TO`.
 
 Orders appear in the Square Dashboard under Orders, with the shipping address the buyer entered. The order number (`reference_id`) is seconds since 2026-09-01, so it always increases.
 

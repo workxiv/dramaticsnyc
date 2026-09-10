@@ -9,8 +9,10 @@ export const dynamic = "force-dynamic";
 const MAX_BODY_BYTES = 64 * 1024;
 
 /**
- * Square → site webhook. Subscribed to `payment.completed`; when a shop
- * order is paid we email the salon a "new order" summary.
+ * Square → site webhook. Subscribed to `payment.created` and
+ * `payment.updated`; once a shop order's payment is COMPLETED we email the
+ * salon a "new order" summary. Both events can carry the completed status
+ * (and Square may retry), so the email send is idempotent per order.
  *
  * Env:
  *   SQUARE_WEBHOOK_SIGNATURE_KEY  from Developer Console → Webhooks → subscription
@@ -52,7 +54,7 @@ export async function POST(req: Request) {
   }
 
   // Acknowledge everything we don't act on so Square stops retrying.
-  if (event.type !== "payment.completed") {
+  if (event.type !== "payment.updated" && event.type !== "payment.created") {
     return NextResponse.json({ ok: true, ignored: event.type });
   }
   const payment = event.data?.object?.payment;
