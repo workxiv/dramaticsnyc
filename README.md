@@ -77,6 +77,8 @@ Copy `.env.example` to `.env.local` and set the same values in Vercel → Projec
 | `RESEND_API_KEY` | resend.com → API Keys. Sends the "new order" email to the salon |
 | `ORDER_NOTIFY_TO` | Comma-separated recipients (default `dramaticsnycs@gmail.com`) |
 | `ORDER_NOTIFY_FROM` | Sender, e.g. `Dramatics NYC <orders@dramaticsnyc.com>` (domain must be verified in Resend; default `onboarding@resend.dev` only delivers to the Resend account owner) |
+| `ARCHIVE_KEY` | 64 hex chars. Decrypts the old-shop order archive (`src/data/archive.enc.ts`) and signs staff sessions |
+| `ADMIN_PASSWORD` | Staff password for `/admin` (order + customer archive) |
 | `NEXT_PUBLIC_GIFT_CARDS_URL` | Optional. Overrides the Gift Cards link (defaults to `/shop/gift-cards`, which links to each salon's SalonTarget eGift page) |
 
 Without the Square variables the shop still renders; the checkout button returns a friendly "temporarily unavailable" message.
@@ -91,6 +93,12 @@ Without the Square variables the shop still renders; the checkout button returns
 5. When the payment completes, Square calls `/api/square/webhook` (`payment.created` / `payment.updated`, acted on when status is COMPLETED). The route verifies the HMAC signature, loads the order, and emails "[Dramatics NYC]: You've got a new order: #12345" (items, SKUs, totals, shipping address, customer contact, reply-to the customer) via Resend to `ORDER_NOTIFY_TO`.
 
 Orders appear in the Square Dashboard under Orders, with the shipping address the buyer entered. The order number (`reference_id`) is seconds since 2026-09-01, so it always increases.
+
+## Staff area (/admin)
+
+Password-protected archive of every order and customer from the old WooCommerce shop (Oct 2019 to Sep 2026): search by order number, name, email, phone, product, SKU or zip; order detail with items, totals, addresses and the full note history; customer profiles with lifetime spend. New orders live in the Square Dashboard.
+
+The data is AES-256-GCM encrypted at rest in `src/data/archive.enc.ts` and decrypted on the server with `ARCHIVE_KEY`, so customer details never sit readable in the repo. Sessions are HttpOnly signed cookies (12 h); logins are rate-limited; the area is `noindex` and disallowed in robots.txt. The raw export lives in `backup/` (gitignored). Rebuild the archive with `node scripts/build-archive.mjs backup/dramaticsnyc-woocommerce-backup.json`.
 
 ## Notes
 
