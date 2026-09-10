@@ -30,7 +30,12 @@ export type ArchiveItem = {
 };
 
 export type ArchiveOrder = {
-  id: number;
+  /** WooCommerce post id (number) or Square order id (string). */
+  id: number | string;
+  /** "woo" for the 2019-2026 archive, "square" for live orders. */
+  source?: "woo" | "square";
+  /** Square only: fulfillment state, e.g. PROPOSED, RESERVED, PREPARED, COMPLETED. */
+  fulfillment?: string;
   number: string;
   status: string;
   date: string;
@@ -65,7 +70,7 @@ export type ArchiveCustomer = {
   userId?: number;
   username?: string;
   registered?: string;
-  orderIds: number[];
+  orderIds: Array<number | string>;
   orderCount: number;
   spent: number;
   first: string;
@@ -141,8 +146,8 @@ export function searchCustomers(archive: Archive, q: string) {
   });
 }
 
-export const orderById = (archive: Archive, id: number) =>
-  archive.orders.find((o) => o.id === id) ?? null;
+export const orderById = (archive: Archive, id: number | string) =>
+  archive.orders.find((o) => String(o.id) === String(id)) ?? null;
 
 export const customerByKey = (archive: Archive, key: string) =>
   archive.customers.find((c) => c.key === key) ?? null;

@@ -4,6 +4,7 @@ import AdminShell from "@/components/admin/AdminShell";
 import { STATUS_TONE, fmtDate, usd } from "@/components/admin/format";
 import { isAdmin } from "@/lib/admin-auth";
 import { STATUS_LABEL, customerByKey, loadArchive } from "@/lib/archive";
+import { loadCombined } from "@/lib/square-orders";
 
 export const dynamic = "force-dynamic";
 
@@ -11,10 +12,11 @@ export default async function CustomerDetail({ params }: { params: Promise<{ key
   const { key: rawKey } = await params;
   const key = decodeURIComponent(rawKey);
   if (!(await isAdmin())) redirect(`/admin?next=/admin/customers/${encodeURIComponent(key)}`);
-  const archive = loadArchive();
+  const archive = await loadCombined(loadArchive());
   const c = customerByKey(archive, key);
   if (!c) notFound();
-  const orders = archive.orders.filter((o) => c.orderIds.includes(o.id));
+  const ids = new Set(c.orderIds.map(String));
+  const orders = archive.orders.filter((o) => ids.has(String(o.id)));
   const a = c.address;
 
   return (
@@ -73,6 +75,9 @@ export default async function CustomerDetail({ params }: { params: Promise<{ key
               <tr key={o.id} className="hover:bg-cream/70">
                 <td className="px-4 py-3 font-semibold">
                   <Link href={`/admin/orders/${o.id}`} className="hover:text-coral">#{o.number}</Link>
+                  {o.source === "square" && (
+                    <span className="ml-2 rounded-full bg-coral px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-[0.1em] text-paper">New</span>
+                  )}
                 </td>
                 <td className="whitespace-nowrap px-4 py-3 text-ink-soft">{fmtDate(o.date)}</td>
                 <td className="px-4 py-3 text-ink-soft">{o.items.map((i) => `${i.qty}× ${i.name}`).join(", ")}</td>

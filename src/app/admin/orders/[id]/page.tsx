@@ -4,6 +4,7 @@ import AdminShell from "@/components/admin/AdminShell";
 import { STATUS_TONE, fmtDate, usd } from "@/components/admin/format";
 import { isAdmin } from "@/lib/admin-auth";
 import { STATUS_LABEL, loadArchive, orderById, type ArchiveAddress } from "@/lib/archive";
+import { fetchSquareOrder, loadCombined } from "@/lib/square-orders";
 
 export const dynamic = "force-dynamic";
 
@@ -31,9 +32,10 @@ function Address({ a }: { a: ArchiveAddress }) {
 export default async function OrderDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   if (!(await isAdmin())) redirect(`/admin?next=/admin/orders/${encodeURIComponent(id)}`);
-  const archive = loadArchive();
-  const o = orderById(archive, Number(id));
+  const archive = await loadCombined(loadArchive());
+  const o = /^\d+$/.test(id) ? orderById(archive, Number(id)) : (orderById(archive, id) ?? (await fetchSquareOrder(id)));
   if (!o) notFound();
+  const isLive = o.source === "square";
   const customerKey = o.email ? o.email.toLowerCase() : `order-${o.id}`;
   const customer = archive.customers.find((c) => c.key === customerKey);
   const refunded = o.refunds.reduce((s, r) => s + Number(r.amount), 0);
@@ -48,9 +50,24 @@ export default async function OrderDetail({ params }: { params: Promise<{ id: st
         <span className={`rounded-full px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.1em] ${STATUS_TONE[o.status] ?? "bg-ink/10"}`}>
           {STATUS_LABEL[o.status] ?? o.status}
         </span>
+        {isLive && o.fulfillment && o.fulfillment !== "COMPLETED" && (
+          <span className="rounded-full bg-apricot px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.1em]">
+            To ship
+          </span>
+        )}
+        {isLive && (
+          <a
+            href={`https://app.squareup.com/dashboard/orders/overview/${encodeURIComponent(String(o.id))}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-pill-outline ml-auto px-4 py-2 text-xs"
+          >
+            Open in Square (print slip, mark shipped) ↗
+          </a>
+        )}
       </div>
       <p className="mt-1 text-sm text-ink-soft">
-        Placed {fmtDate(o.date, true)}
+        {isLive ? "New shop order · " : "Old website order · "}Placed {fmtDate(o.date, true)}
         {o.paid ? ` · paid ${fmtDate(o.paid, true)}` : ""}
         {o.payment ? ` · ${o.payment}` : ""}
         {o.transaction ? ` · txn ${o.transaction}` : ""}

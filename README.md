@@ -96,7 +96,7 @@ Orders appear in the Square Dashboard under Orders, with the shipping address th
 
 ## Staff area (/admin)
 
-Password-protected archive of every order and customer from the old WooCommerce shop (Oct 2019 to Sep 2026): search by order number, name, email, phone, product, SKU or zip; order detail with items, totals, addresses and the full note history; customer profiles with lifetime spend. New orders live in the Square Dashboard.
+Password-protected order desk: every order and customer from the old WooCommerce shop (Oct 2019 to Sep 2026) plus live web orders pulled from Square (`src/lib/square-orders.ts`, only orders whose `reference_id` is our numeric order number; POS sales are excluded). Search by order number, name, email, phone, product, SKU or zip; order detail with items, totals, addresses, payment and shipping status, with an "Open in Square" link for packing slips and marking shipped; customer profiles with lifetime spend across old and new orders.
 
 The data is AES-256-GCM encrypted at rest in `src/data/archive.enc.ts` and decrypted on the server with `ARCHIVE_KEY`, so customer details never sit readable in the repo. Sessions are HttpOnly signed cookies (12 h); logins are rate-limited; the area is `noindex` and disallowed in robots.txt. The raw export lives in `backup/` (gitignored). Rebuild the archive with `node scripts/build-archive.mjs backup/dramaticsnyc-woocommerce-backup.json`.
 

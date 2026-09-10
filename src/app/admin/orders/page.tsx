@@ -4,6 +4,7 @@ import AdminShell from "@/components/admin/AdminShell";
 import { STATUS_TONE, fmtDate, usd } from "@/components/admin/format";
 import { isAdmin } from "@/lib/admin-auth";
 import { STATUS_LABEL, loadArchive, searchOrders } from "@/lib/archive";
+import { loadCombined } from "@/lib/square-orders";
 
 export const dynamic = "force-dynamic";
 
@@ -20,7 +21,8 @@ export default async function OrdersPage({
   const status = typeof sp.status === "string" ? sp.status : "all";
   const page = Math.max(1, Number(sp.page) || 1);
 
-  const archive = loadArchive();
+  const archive = await loadCombined(loadArchive());
+  const liveCount = archive.orders.filter((o) => o.source === "square").length;
   const results = searchOrders(archive, q, status);
   const shown = results.slice((page - 1) * PAGE, page * PAGE);
   const pages = Math.max(1, Math.ceil(results.length / PAGE));
@@ -37,8 +39,9 @@ export default async function OrdersPage({
         <div>
           <h1 className="font-display text-3xl font-semibold">Orders</h1>
           <p className="mt-1 text-sm text-ink-soft">
-            {archive.orders.length.toLocaleString()} orders from the old shop,{" "}
-            {fmtDate(archive.orders.at(-1)!.date)} to {fmtDate(archive.orders[0].date)}.
+            {archive.orders.length.toLocaleString()} orders, {fmtDate(archive.orders.at(-1)!.date)} to{" "}
+            {fmtDate(archive.orders[0].date)}. {liveCount} new order{liveCount === 1 ? "" : "s"} from the new
+            shop (Square), the rest from the old website.
           </p>
         </div>
       </div>
@@ -92,6 +95,11 @@ export default async function OrdersPage({
                   <Link href={`/admin/orders/${o.id}`} className="hover:text-coral">
                     #{o.number}
                   </Link>
+                  {o.source === "square" && (
+                    <span className="ml-2 rounded-full bg-coral px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-[0.1em] text-paper">
+                      New
+                    </span>
+                  )}
                 </td>
                 <td className="whitespace-nowrap px-4 py-3 text-ink-soft">{fmtDate(o.date)}</td>
                 <td className="px-4 py-3">

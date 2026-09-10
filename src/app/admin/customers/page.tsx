@@ -4,6 +4,7 @@ import AdminShell from "@/components/admin/AdminShell";
 import { fmtDate, usd } from "@/components/admin/format";
 import { isAdmin } from "@/lib/admin-auth";
 import { loadArchive, searchCustomers } from "@/lib/archive";
+import { loadCombined } from "@/lib/square-orders";
 
 export const dynamic = "force-dynamic";
 
@@ -20,7 +21,7 @@ export default async function CustomersPage({
   const sort = sp.sort === "spent" ? "spent" : sp.sort === "name" ? "name" : "last";
   const page = Math.max(1, Number(sp.page) || 1);
 
-  const archive = loadArchive();
+  const archive = await loadCombined(loadArchive());
   const results = [...searchCustomers(archive, q)].sort((a, b) =>
     sort === "spent" ? b.spent - a.spent : sort === "name" ? a.name.localeCompare(b.name) : b.last.localeCompare(a.last)
   );
@@ -33,8 +34,8 @@ export default async function CustomersPage({
     <AdminShell active="customers">
       <h1 className="font-display text-3xl font-semibold">Customers</h1>
       <p className="mt-1 text-sm text-ink-soft">
-        {archive.customers.length.toLocaleString()} people who ordered from the old shop. Contact details
-        come from their most recent order.
+        {archive.customers.length.toLocaleString()} people who ordered online, old shop and new. Contact
+        details come from their most recent order.
       </p>
 
       <form method="get" className="mt-6 flex flex-col gap-2 sm:flex-row">
