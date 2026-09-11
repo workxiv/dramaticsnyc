@@ -1,6 +1,6 @@
 import BrandLogo from "./BrandLogo";
 import Reveal from "./Reveal";
-import { Skyline } from "./NycArt";
+import SkylineDivider from "./SkylineDivider";
 import { BOOKING_URL, LOCATIONS, NAV_LINKS, SOCIAL } from "@/lib/content";
 
 export default function Footer() {
@@ -9,12 +9,7 @@ export default function Footer() {
   return (
     <footer className="relative bg-inverse text-inverse-fg">
       {/* NYC skyline divider */}
-      <div
-        className="flex justify-center overflow-hidden bg-paper text-ink"
-        aria-hidden
-      >
-        <Skyline className="w-full min-w-[880px] shrink-0" />
-      </div>
+      <SkylineDivider />
 
       {/* Closing CTA */}
       <div className="mx-auto max-w-[1440px] px-5 py-20 text-center sm:px-8 sm:py-28 lg:px-12">

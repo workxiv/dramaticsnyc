@@ -31,23 +31,24 @@ export default function Locations() {
             </Reveal>
           ))}
 
-          <Reveal delay={0.3} y={40} className="col-span-2 sm:col-span-1">
-            <div className="card-soft relative flex h-full flex-col justify-between bg-lilac p-5 sm:p-7">
+          <Reveal delay={0.3} y={40}>
+            <div className="card-soft relative flex h-full flex-col justify-between bg-lilac p-4 sm:p-7">
               <SubwayToken
                 letter="D"
-                className="animate-bob absolute right-6 top-6 h-12 w-12"
+                className="animate-bob absolute right-4 top-4 h-9 w-9 sm:right-6 sm:top-6 sm:h-12 sm:w-12"
               />
-              <p className="max-w-[80%] font-display text-2xl font-semibold leading-snug sm:text-3xl">
+              <p className="max-w-[80%] font-display text-lg font-semibold leading-snug sm:text-3xl">
                 Not sure which salon is closest?
               </p>
-              <div className="mt-6">
-                <p className="text-sm leading-relaxed text-ink-soft">
+              <div className="mt-4 sm:mt-6">
+                <p className="text-xs leading-relaxed text-ink-soft sm:text-sm">
                   We&apos;re in Murray Hill, the Upper East Side, near Columbus
                   Circle, and twice on the Upper West Side. Every salon takes
                   online bookings.
                 </p>
-                <a href={BOOKING_URL} className="btn-flow mt-6 px-6 py-3 text-sm">
-                  Book an Appointment
+                <a href={BOOKING_URL} className="btn-flow mt-4 px-4 py-2.5 text-xs sm:mt-6 sm:px-6 sm:py-3 sm:text-sm">
+                  <span className="sm:hidden">Book Now</span>
+                  <span className="hidden sm:inline">Book an Appointment</span>
                 </a>
               </div>
             </div>

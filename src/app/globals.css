@@ -385,11 +385,19 @@ details.faq-item[open] summary .faq-icon {
   }
 }
 .skyline-car {
-  animation: skyline-drive 17s linear infinite;
+  animation: skyline-drive 14s linear infinite;
+  animation-play-state: paused;
 }
 .skyline-car-2 {
-  animation: skyline-drive 23s linear infinite;
-  animation-delay: -14s;
+  animation: skyline-drive 18s linear infinite;
+  animation-delay: 2.5s;
+  animation-play-state: paused;
+}
+/* SkylineDivider adds this when the footer scrolls into view, so the
+   cars always start their run right as the visitor arrives */
+.skyline-live .skyline-car,
+.skyline-live .skyline-car-2 {
+  animation-play-state: running;
 }
 
 /* ===========================================================
