@@ -8,7 +8,7 @@ import { LOCATIONS } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Book an Appointment",
   description:
-    "Book a hair appointment online at any of Dramatics NYC's five Manhattan salons — Murray Hill, Upper East Side, 57th Street, and the Upper West Side. Open Mon–Sat 9am–7pm.",
+    "Book a hair appointment online at any of Dramatics NYC's five Manhattan salons — Murray Hill, Upper East Side, 57th Street, and the Upper West Side. Open Mon–Sat 9am–7pm, Sun 9am–6pm.",
   alternates: {
     canonical: "https://www.dramaticsnyc.com/book",
   },

@@ -11,7 +11,7 @@ const ease = [0.16, 1, 0.3, 1] as const;
 const TRUST_CHIPS = [
   "Since 1984",
   "5 Manhattan locations",
-  "Open Mon–Sat 9am–7pm",
+  "Open Mon–Sat 9–7 · Sun 9–6",
 ];
 
 export default function Hero() {

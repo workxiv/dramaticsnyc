@@ -14,7 +14,7 @@
 - Every location also has its own online booking page and accepts phone bookings.
 
 ## Locations
-- Dramatics NYC 120 E. 34th St. (Murray Hill), New York, NY 10016 — +1 (212) 686-8430 — Mon–Sat 9am–7pm, closed Sunday — https://www.dramaticsnyc.com/locations/34th-street-salon
+- Dramatics NYC 120 E. 34th St. (Murray Hill), New York, NY 10016 — +1 (212) 686-8430 — Mon–Sat 9am–7pm, Sun 9am–6pm — https://www.dramaticsnyc.com/locations/34th-street-salon
 - Dramatics NYC 1488 3rd Ave. (Upper East Side), New York, NY 10028 — +1 (212) 535-0073 — Mon–Sat 9am–7pm, Sun 9am–6pm — https://www.dramaticsnyc.com/locations/3rd-avenue-salon
 - Dramatics NYC 352 W. 57th St. (Parc Vendome Condominiums), New York, NY 10019 — +1 (212) 586-1035 — Mon–Sat 9am–7pm, Sun 9am–6pm — https://www.dramaticsnyc.com/locations/57th-street-salon
 - Dramatics NYC 2146 Broadway at 75th St. (Upper West Side), New York, NY 10023 — +1 (212) 496-6430 — Mon–Sat 9am–7pm, Sun 9am–6pm — https://www.dramaticsnyc.com/locations/dramatics-nyc-2146-broadway-hair-salon

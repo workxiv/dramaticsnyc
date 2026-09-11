@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     template: "%s · Dramatics NYC",
   },
   description:
-    "Dramatics NYC is a hair salon chain with 5 Manhattan locations offering Cutting & Styling, Hair Coloring, and Hair Treatment services since 1984. Book online or call your nearest salon — open Mon–Sat 9am–7pm.",
+    "Dramatics NYC is a hair salon chain with 5 Manhattan locations offering Cutting & Styling, Hair Coloring, and Hair Treatment services since 1984. Book online or call your nearest salon — open Mon–Sat 9am–7pm, Sun 9am–6pm.",
   keywords: [
     "Dramatics NYC",
     "hair salon NYC",
