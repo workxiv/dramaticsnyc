@@ -1,11 +1,11 @@
 export const IMG = {
   heroPortrait: "/img/1492106087820-71f1a00d2b11.jpg",
-  /** real salon photos (34th St, 57th St, 91st St) */
+  /** real salon photos (34th St, 57th St, 75th St, 91st St) */
   salon34th: "/img/salon-34th.jpg",
   salon57th: "/img/salon-57th.jpg",
+  salon75th: "/img/salon-75th.jpg",
   salon91st: "/img/salon-91st.jpg",
   colorVivid: "/img/1554519515-242161756769.jpg",
-  styling: "/img/1562322140-8baeececf3df.jpg",
   /** real client results shot in our salons */
   cut: "/img/real-cut-style.jpg",
   treatment: "/img/real-treatment.jpg",
@@ -218,7 +218,7 @@ export const LOCATIONS: Location[] = [
       "Sun 9:00 am – 6:00 pm",
     ],
     openingHours: ["Mo-Sa 09:00-19:00", "Su 09:00-18:00"],
-    image: IMG.styling,
+    image: IMG.salon75th,
     maps: "https://maps.google.com/?q=2146+Broadway+New+York+NY+10023",
     bookingUrl: "https://dramaticsspa.salontarget.com/",
     quote:
