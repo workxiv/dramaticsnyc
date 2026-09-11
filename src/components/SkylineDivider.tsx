@@ -13,6 +13,15 @@ export default function SkylineDivider() {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    // The skyline is 880px wide and centered, so on narrow screens its left
+    // part is clipped. Start the cars just left of the visible edge so they
+    // roll into view right away instead of crossing the hidden part first.
+    const setStart = () => {
+      const hidden = Math.max(0, (880 - el.clientWidth) / 2);
+      el.style.setProperty("--car-start", `${Math.round(hidden - 60)}px`);
+    };
+    setStart();
+    window.addEventListener("resize", setStart);
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -27,7 +36,10 @@ export default function SkylineDivider() {
       { threshold: 0.2 }
     );
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", setStart);
+    };
   }, []);
 
   return (

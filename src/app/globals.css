@@ -382,7 +382,7 @@ details.faq-item[open] summary .faq-icon {
 
 @keyframes skyline-drive {
   from {
-    transform: translateX(-60px);
+    transform: translateX(var(--car-start, -60px));
   }
   to {
     transform: translateX(1500px);
@@ -394,7 +394,7 @@ details.faq-item[open] summary .faq-icon {
 }
 .skyline-car-2 {
   animation: skyline-drive 18s linear infinite;
-  animation-delay: 2.5s;
+  animation-delay: 1.4s;
   animation-play-state: paused;
 }
 /* SkylineDivider adds this when the footer scrolls into view, so the
