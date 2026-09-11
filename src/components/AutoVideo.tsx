@@ -11,6 +11,8 @@ type AutoVideoProps = {
    * Use for anything below the fold; hero videos should stay eager.
    */
   lazy?: boolean;
+  /** Poster frame shown until the first video frame decodes (defaults to /media/posters/<name>.jpg). */
+  poster?: string;
 };
 
 /**
@@ -22,7 +24,8 @@ type AutoVideoProps = {
  * sets muted/playsInline imperatively and calls play() itself, retrying
  * on visibility and first interaction (covers Safari Low Power Mode).
  */
-export default function AutoVideo({ src, label, className, lazy = false }: AutoVideoProps) {
+export default function AutoVideo({ src, label, className, lazy = false, poster }: AutoVideoProps) {
+  const posterSrc = poster ?? src.replace(/^\/media\/(.+)\.mp4$/, "/media/posters/$1.jpg");
   const ref = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -109,6 +112,7 @@ export default function AutoVideo({ src, label, className, lazy = false }: AutoV
       loop
       playsInline
       preload={lazy ? "none" : "metadata"}
+      poster={posterSrc}
       aria-label={label}
       className={className}
       style={{ transform: "translateZ(0)", backfaceVisibility: "hidden" }}

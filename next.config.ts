@@ -70,7 +70,7 @@ const nextConfig: NextConfig = {
       // product cutouts (?v=) can be cached hard. Later rules win on conflict.
       {
         source: "/(img|media)/:path*",
-        headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }],
+        headers: [{ key: "Cache-Control", value: "public, max-age=2592000, stale-while-revalidate=604800" }],
       },
       {
         source: "/img/products/:path*",

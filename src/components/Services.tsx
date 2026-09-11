@@ -26,9 +26,18 @@ export default function Services() {
 
         <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:grid-cols-3 sm:gap-6">
           {SERVICES.map((service, i) => (
-            <Reveal key={service.id} delay={0.08 * i} y={40}>
+            <Reveal
+              key={service.id}
+              delay={0.08 * i}
+              y={40}
+              className={i === 2 ? "col-span-2 sm:col-span-1" : undefined}
+            >
               <div className={`group card-soft flex h-full flex-col ${CARD_BG[i]}`}>
-                <div className="relative m-2 aspect-[4/3] overflow-hidden rounded-[1rem] sm:m-3 sm:rounded-[1.25rem]">
+                <div
+                  className={`relative m-2 overflow-hidden rounded-[1rem] sm:m-3 sm:aspect-[4/3] sm:rounded-[1.25rem] ${
+                    i === 2 ? "aspect-[16/7]" : "aspect-[4/3]"
+                  }`}
+                >
                   <Image
                     src={service.image}
                     alt={`${service.title} at Dramatics NYC in Manhattan`}

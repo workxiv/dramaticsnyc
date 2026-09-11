@@ -22,12 +22,12 @@ export default function Hero() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease }}
-          className="mx-auto mb-7 flex flex-wrap items-center justify-center gap-2"
+          className="mx-auto mb-6 flex flex-wrap items-center justify-center gap-1.5 sm:mb-7 sm:gap-2"
         >
           {TRUST_CHIPS.map((chip) => (
             <span
               key={chip}
-              className="rounded-full border border-ink/15 bg-paper px-4 py-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-ink-soft"
+              className="rounded-full border border-ink/15 bg-paper px-2.5 py-1 text-[0.58rem] font-semibold uppercase tracking-[0.1em] text-ink-soft sm:px-4 sm:py-1.5 sm:text-[0.72rem] sm:tracking-[0.14em]"
             >
               {chip}
             </span>

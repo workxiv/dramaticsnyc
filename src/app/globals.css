@@ -10,7 +10,7 @@
   --color-paper: #fbf8f1;
   --color-ink: #17150e;
   --color-ink-soft: #4a463c;
-  --color-ink-mute: #8a8577;
+  --color-ink-mute: #6d685a; /* AA contrast on paper/cream */
   --color-tan: #ebdbbf;
   --color-pink: #ffc6e1;
   --color-lilac: #cba2ff;
@@ -100,6 +100,10 @@ body {
     letter-spacing: 0.28em;
     font-size: 1rem;
     font-weight: 700;
+  }
+  /* slightly deeper coral for small eyebrow text so it clears AA contrast */
+  .eyebrow.text-coral {
+    color: #bf3c1e;
   }
 }
 
