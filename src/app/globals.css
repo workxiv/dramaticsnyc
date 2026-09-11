@@ -517,7 +517,7 @@ details.faq-item[open] summary .faq-icon {
 .hero-train {
   left: 0;
   animation: lane-ltr 20s linear 2s infinite;
-  transform: translateX(-40vw);
+  transform: translateX(calc(-40vw - 400px));
 }
 .hero-train-rumble {
   animation: train-rumble 0.34s linear infinite;
@@ -534,7 +534,7 @@ details.faq-item[open] summary .faq-icon {
 .hero-taxi-behind {
   left: 0;
   animation: lane-ltr 13s linear 8s infinite;
-  transform: translateX(-40vw);
+  transform: translateX(calc(-40vw - 400px));
 }
 .hero-car-front {
   left: 0;
@@ -543,7 +543,7 @@ details.faq-item[open] summary .faq-icon {
 }
 @keyframes lane-ltr {
   from {
-    transform: translateX(-40vw);
+    transform: translateX(calc(-40vw - 400px));
   }
   to {
     transform: translateX(115vw);

@@ -71,8 +71,8 @@ export default function Hero() {
         >
           <div className="card-soft relative aspect-[3/4] overflow-hidden bg-apricot sm:mt-12">
             <AutoVideo
-              src="/media/hero-cutting.mp4"
-              label="A stylist cutting hair inside a Dramatics NYC salon"
+              src="/media/insta-foiling.mp4"
+              label="A Dramatics NYC colorist foiling highlights in the salon"
               className="absolute inset-0 h-full w-full object-cover"
             />
           </div>

@@ -1,5 +1,5 @@
 export const IMG = {
-  heroPortrait: "/img/1492106087820-71f1a00d2b11.jpg",
+  heroPortrait: "/img/hero-portrait.jpg",
   /** real salon photos (34th St, 57th St, 75th St, 91st St) */
   salon34th: "/img/salon-34th.jpg",
   salon57th: "/img/salon-57th.jpg",

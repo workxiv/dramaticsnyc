@@ -6,14 +6,14 @@ import { ABOUT, IMG } from "@/lib/content";
 const STATS = [
   { value: "1984", label: "Established" },
   { value: "5", label: "Manhattan salons" },
-  { value: "96%", label: "Natural ingredients" },
+  { value: "4.5★", label: "Google rating · 1,300+ reviews" },
 ];
 
 export default function About() {
   return (
     <section id="house" className="relative bg-paper py-20 sm:py-28">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-        <div className="grid items-start gap-14 lg:grid-cols-12 lg:gap-12">
+        <div className="grid items-stretch gap-14 lg:grid-cols-12 lg:gap-12">
           <div className="lg:col-span-6">
             <Reveal>
               <p className="eyebrow text-coral">About Us</p>
@@ -53,8 +53,8 @@ export default function About() {
             </Reveal>
           </div>
 
-          <div className="lg:col-span-6">
-            <div className="grid grid-cols-2 gap-3 sm:gap-5">
+          <div className="lg:col-span-6 lg:flex lg:flex-col">
+            <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:flex-1 lg:grid-rows-[auto_minmax(280px,1fr)]">
               <Reveal className="col-span-2" y={40}>
                 <div className="group card-soft relative aspect-[16/10]">
                   <Image
@@ -66,8 +66,8 @@ export default function About() {
                   />
                 </div>
               </Reveal>
-              <Reveal y={40} delay={0.08}>
-                <div className="group card-soft relative aspect-[3/4] overflow-hidden">
+              <Reveal y={40} delay={0.08} className="lg:h-full">
+                <div className="group card-soft relative aspect-[3/4] overflow-hidden lg:aspect-auto lg:h-full">
                   <AutoVideo
                     src="/media/about-styling.mp4"
                     label="A Dramatics NYC colorist applying treatment at the salon"
@@ -76,17 +76,19 @@ export default function About() {
                   />
                 </div>
               </Reveal>
-              <Reveal y={40} delay={0.16}>
-                <div className="card-soft relative flex aspect-[3/4] flex-col justify-between bg-tan p-6">
+              <Reveal y={40} delay={0.16} className="lg:h-full">
+                <div className="card-soft relative flex aspect-[3/4] flex-col justify-between bg-tan p-6 lg:aspect-auto lg:h-full">
                   <span className="font-display text-5xl leading-none">
                     &ldquo;
                   </span>
                   <p className="font-display text-lg font-medium leading-snug sm:text-xl">
-                    Our clients get haircuts before first dates, job
-                    interviews, and nights out — we help install confidence.
+                    One of the best haircuts and experiences I&rsquo;ve had in
+                    NYC. Calypso is an absolute delight and so talented. The
+                    energy and vibe of the salon is immaculate and I cannot
+                    wait to come back.
                   </p>
                   <span className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-ink-soft">
-                    Dramatics NYC
+                    Kayleigh W. · Google review, 34th St.
                   </span>
                 </div>
               </Reveal>

@@ -3,7 +3,6 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Services from "@/components/Services";
-import Trust from "@/components/Trust";
 import Locations from "@/components/Locations";
 import Shop from "@/components/Shop";
 import InstaFeed from "@/components/InstaFeed";
@@ -97,7 +96,6 @@ export default function Home() {
         <Hero />
         <About />
         <Services />
-        <Trust />
         <Locations />
         <InstaFeed />
         <Shop />

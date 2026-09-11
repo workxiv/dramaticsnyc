@@ -87,7 +87,22 @@ export default async function LocationPage({
           <h1 className="heading-fluid mt-4 font-display font-medium">
             {loc.street}
           </h1>
-          <p className="mt-3 text-lg text-ink-soft">{loc.cityLine}</p>
+          <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <p className="text-lg text-ink-soft">{loc.cityLine}</p>
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href={loc.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-pill px-6 py-3 text-sm"
+              >
+                Book Now
+              </a>
+              <a href={`tel:${loc.tel}`} className="btn-pill-outline px-6 py-3 text-sm">
+                Call Now
+              </a>
+            </div>
+          </div>
 
           <div className="card-soft relative mt-8 aspect-[16/8] w-full">
             <Image
@@ -100,14 +115,6 @@ export default async function LocationPage({
             />
           </div>
 
-          {loc.quote && (
-            <blockquote className="mt-8 max-w-2xl font-display text-xl font-medium leading-snug sm:text-2xl">
-              &ldquo;{loc.quote}&rdquo;
-              <footer className="mt-2 font-sans text-sm font-normal text-ink-mute">
-                — Larry Kolber
-              </footer>
-            </blockquote>
-          )}
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             <div className="card-soft bg-apricot p-6">
