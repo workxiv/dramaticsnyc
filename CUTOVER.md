@@ -86,3 +86,13 @@ Change the two records back (`A` apex → `67.225.241.28`, `CNAME www` → `dram
 - Cancel or downsize the Liquid Web VPS (unless it hosts mail or thehealthycolor.com / whatisthebuzz.com; those DNS zones also live in this Liquid Web account, so keep the account itself).
 - Remove `ftp`, `shop`, wildcard records.
 - Remove the WooCommerce sync script dependency (`scripts/sync-shop.mjs`) and manage `products-snapshot.json` directly.
+
+## Old WordPress admin after cutover (2026-09-11)
+
+The old WordPress/WooCommerce install still runs on the VPS (cPanel account `dramsync`, database `dramsync_wp`, table prefix `wp_4cyyip_`). Since `dramaticsnyc.com` now points at Vercel, it is reachable at:
+
+- **https://old.dramaticsnyc.com/wp-admin** (normal WordPress login)
+
+How it was set up: cPanel subdomain `old.dramaticsnyc.com` sharing `/home/dramsync/public_html`, explicit PHP 8.1 + PHP-FPM in WHM MultiPHP Manager (needed `chattr -i` on the locked `.htaccess` first), `siteurl`/`home` in `wp_4cyyip_options` and the URLs in `wp-config.php` changed to `https://old.dramaticsnyc.com`. AutoSSL issued the certificate automatically.
+
+If DNS is ever rolled back to the VPS, set those URLs back to `https://dramaticsnyc.com` (same two places).
