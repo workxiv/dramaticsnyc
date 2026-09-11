@@ -22,9 +22,9 @@ from scipy.ndimage import binary_fill_holes, binary_dilation, label
 SHADOW_RGB = (50, 46, 43)
 PEAK_ALPHA = 0.50
 LEFT = 0.13      # of body height
-DOWN = 0.025     # of body height
+DOWN = 0.04      # of body height
 FOOT = 0.40      # footprint ellipse height / width
-BLUR = 0.013     # of body height
+BLUR = 0.012     # of body height
 
 
 def body_mask(alpha: np.ndarray) -> np.ndarray:
@@ -70,9 +70,15 @@ def shadow(src: str, dst: str) -> None:
     bw = br - bl + 1
     cx = (bl + br) / 2
 
-    ew, eh = bw, FOOT * bw
-    ecx = cx - LEFT * h
-    ecy = bottom - eh / 2 + DOWN * h
+    # The shadow runs from LEFT*h beyond the base's left edge to just past its
+    # right edge, and hangs DOWN*h below the base line, so the product sits on
+    # it instead of floating next to it.
+    x_left = bl - LEFT * h
+    x_right = br + 0.01 * h
+    ew = x_right - x_left
+    eh = max(0.075 * h, 0.25 * bw)
+    ecx = (x_left + x_right) / 2
+    ecy = bottom + DOWN * h - eh / 2
     blur = float(max(5, BLUR * h))
 
     pad = int(LEFT * h + blur * 4 + 8)
@@ -80,7 +86,9 @@ def shadow(src: str, dst: str) -> None:
     yy, xx = np.mgrid[0:H, 0:W]
     r2 = ((xx - (ecx + pad)) / (ew / 2)) ** 2 + ((yy - ecy) / (eh / 2)) ** 2
     r = np.sqrt(np.clip(r2, 0, None))
-    sh = np.where(r <= 1, PEAK_ALPHA * (0.75 + 0.25 * (1 - r)), 0.0)
+    # darkest against the body, fading toward the far left tip
+    fade = np.clip((xx - (x_left + pad)) / max(1.0, LEFT * h), 0, 1)
+    sh = np.where(r <= 1, PEAK_ALPHA * (0.45 + 0.55 * fade) * (0.7 + 0.3 * (1 - r)), 0.0)
     mask = Image.fromarray((sh * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(blur))
 
     out = Image.new("RGBA", (W, H), (0, 0, 0, 0))
