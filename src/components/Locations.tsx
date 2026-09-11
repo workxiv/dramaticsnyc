@@ -46,7 +46,7 @@ export default function Locations() {
                   Circle, and twice on the Upper West Side. Every salon takes
                   online bookings.
                 </p>
-                <a href={BOOKING_URL} className="btn-pill mt-6 px-6 py-3 text-sm">
+                <a href={BOOKING_URL} className="btn-flow mt-6 px-6 py-3 text-sm">
                   Book an Appointment
                 </a>
               </div>

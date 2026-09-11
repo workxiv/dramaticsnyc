@@ -61,7 +61,7 @@ export default function BookPage() {
                   <span className="btn-pill-outline pointer-events-none px-5 py-3 text-sm">
                     {loc.phone}
                   </span>
-                  <span className="btn-pill pointer-events-none px-6 py-3 text-sm">
+                  <span className="btn-flow pointer-events-none px-6 py-3 text-sm">
                     Choose Salon
                   </span>
                 </div>

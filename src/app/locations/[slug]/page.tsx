@@ -94,11 +94,11 @@ export default async function LocationPage({
                 href={loc.bookingUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-pill px-6 py-3 text-sm"
+                className="btn-flow px-8 py-3.5 text-[0.95rem]"
               >
                 Book Now
               </a>
-              <a href={`tel:${loc.tel}`} className="btn-pill-outline px-6 py-3 text-sm">
+              <a href={`tel:${loc.tel}`} className="btn-pill-outline px-8 py-3.5 text-[0.95rem]">
                 Call Now
               </a>
             </div>
@@ -165,7 +165,7 @@ export default async function LocationPage({
               href={loc.bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-pill px-9 py-4 text-[0.95rem]"
+              className="btn-flow px-9 py-4 text-[0.95rem]"
             >
               Book at this salon
             </a>

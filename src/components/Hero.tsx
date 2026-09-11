@@ -54,7 +54,7 @@ export default function Hero() {
         >
           <a
             href={BOOKING_URL}
-            className="btn-pill px-9 py-4 text-[0.95rem]"
+            className="btn-flow px-9 py-4 text-[0.95rem]"
           >
             Book an Appointment
           </a>

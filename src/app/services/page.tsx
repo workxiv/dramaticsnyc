@@ -115,7 +115,7 @@ export default function ServicesPage() {
               easiest for you.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <a href={BOOKING_URL} className="btn-pill px-9 py-4 text-[0.95rem]">
+              <a href={BOOKING_URL} className="btn-flow px-9 py-4 text-[0.95rem]">
                 Book an Appointment
               </a>
               <a

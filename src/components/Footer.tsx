@@ -30,7 +30,7 @@ export default function Footer() {
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
             <a
               href={BOOKING_URL}
-              className="btn-pill-light px-9 py-4 text-[0.95rem]"
+              className="btn-flow px-9 py-4 text-[0.95rem]"
             >
               Book an Appointment
             </a>

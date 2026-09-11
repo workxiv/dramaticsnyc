@@ -26,7 +26,7 @@ export default function StickyBook() {
       <div className="flex items-center gap-3">
         <a
           href={BOOKING_URL}
-          className="btn-pill flex-1 py-3.5 text-sm"
+          className="btn-flow flex-1 py-3.5 text-sm"
         >
           Book an Appointment
         </a>

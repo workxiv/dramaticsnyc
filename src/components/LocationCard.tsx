@@ -58,7 +58,7 @@ export default function LocationCard({ loc }: { loc: Location }) {
             href={loc.bookingUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-pill px-6 py-3 text-sm"
+            className="btn-flow px-6 py-3 text-sm"
           >
             Book Now
           </a>

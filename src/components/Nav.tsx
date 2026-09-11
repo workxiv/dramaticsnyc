@@ -54,7 +54,7 @@ export default function Nav() {
             <CartButton />
             <a
               href={BOOKING_URL}
-              className="btn-pill hidden px-6 py-3 text-[0.9rem] sm:inline-flex"
+              className="btn-flow hidden px-6 py-3 text-[0.9rem] sm:inline-flex"
             >
               Book Now
             </a>
@@ -111,7 +111,7 @@ export default function Nav() {
             <div className="space-y-3">
               <a
                 href={BOOKING_URL}
-                className="btn-pill w-full py-4 text-sm"
+                className="btn-flow w-full py-4 text-sm"
               >
                 Book an Appointment
               </a>

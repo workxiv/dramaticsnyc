@@ -74,7 +74,7 @@ export default async function ThankYouPage({
               <Link href="/shop" className="btn-pill px-7 py-3.5 text-sm">
                 Keep Shopping
               </Link>
-              <Link href="/book" className="btn-pill-outline px-7 py-3.5 text-sm">
+              <Link href="/book" className="btn-flow px-7 py-3.5 text-sm">
                 Book an Appointment
               </Link>
             </div>
