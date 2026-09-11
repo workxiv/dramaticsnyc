@@ -58,7 +58,7 @@ export default function About() {
               <Reveal className="col-span-2" y={40}>
                 <div className="group card-soft relative aspect-[16/10]">
                   <Image
-                    src={IMG.salonBW}
+                    src={IMG.salon57th}
                     alt="Inside a Dramatics NYC hair salon in Manhattan"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"

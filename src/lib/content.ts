@@ -1,14 +1,15 @@
 export const IMG = {
   heroPortrait: "/img/1492106087820-71f1a00d2b11.jpg",
-  salonChairs: "/img/1600948836101-f9ffda59d250.jpg",
+  /** real salon photos (34th St, 57th St, 91st St) */
+  salon34th: "/img/salon-34th.jpg",
+  salon57th: "/img/salon-57th.jpg",
+  salon91st: "/img/salon-91st.jpg",
   colorVivid: "/img/1554519515-242161756769.jpg",
   styling: "/img/1562322140-8baeececf3df.jpg",
   /** real client results shot in our salons */
   cut: "/img/real-cut-style.jpg",
   treatment: "/img/real-treatment.jpg",
   salonPink: "/img/1521590832167-7bcbfaa6381f.jpg",
-  salonBW: "/img/1560066984-138dadb4c035.jpg",
-  salonModern: "/img/1633681926022-84c23e8cb2d6.jpg",
 } as const;
 
 /** First-party booking page — lists every salon's own online booking. */
@@ -153,7 +154,7 @@ export const LOCATIONS: Location[] = [
       "Sunday Closed",
     ],
     openingHours: ["Mo-Sa 09:00-19:00"],
-    image: IMG.salonModern,
+    image: IMG.salon34th,
     maps: "https://maps.google.com/?q=120+E+34th+St+New+York+NY+10016",
     bookingUrl: "https://dramatics34th.salontarget.com/",
     quote:
@@ -197,7 +198,7 @@ export const LOCATIONS: Location[] = [
       "Sun 9:00 am – 6:00 pm",
     ],
     openingHours: ["Mo-Sa 09:00-19:00", "Su 09:00-18:00"],
-    image: IMG.salonBW,
+    image: IMG.salon57th,
     maps: "https://maps.google.com/?q=352+W+57th+St+New+York+NY+10019",
     bookingUrl: "https://dramatics57th.salontarget.com/",
   },
@@ -238,7 +239,7 @@ export const LOCATIONS: Location[] = [
       "Sun 9:00 am – 6:00 pm",
     ],
     openingHours: ["Mo-Sa 09:00-19:00", "Su 09:00-18:00"],
-    image: IMG.salonChairs,
+    image: IMG.salon91st,
     maps: "https://maps.google.com/?q=2468+Broadway+New+York+NY+10025",
     bookingUrl: "https://dramatics2468broadway.salontarget.com/",
   },
