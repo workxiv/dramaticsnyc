@@ -15,7 +15,7 @@ export default function LocationCard({ loc }: { loc: Location }) {
       <Link
         href={`/locations/${loc.slug}`}
         aria-label={`${loc.street} salon details`}
-        className="relative m-3 block aspect-[16/10] overflow-hidden rounded-[1.25rem]"
+        className="relative m-3 block aspect-[16/9] overflow-hidden rounded-[1.25rem] sm:aspect-[16/10]"
       >
         <Image
           src={loc.image}
@@ -29,8 +29,8 @@ export default function LocationCard({ loc }: { loc: Location }) {
         </span>
       </Link>
 
-      <div className="flex flex-1 flex-col p-6 pt-2">
-        <h3 className="font-display text-2xl font-semibold">
+      <div className="flex flex-1 flex-col p-5 pt-2 sm:p-6">
+        <h3 className="font-display text-xl font-semibold sm:text-2xl">
           <Link
             href={`/locations/${loc.slug}`}
             className="transition-colors hover:text-coral"
@@ -40,7 +40,7 @@ export default function LocationCard({ loc }: { loc: Location }) {
         </h3>
         <p className="mt-1 text-sm text-ink-mute">{loc.cityLine}</p>
 
-        <div className="mt-4 space-y-1 text-sm text-ink-soft">
+        <div className="mt-3 space-y-0.5 text-sm text-ink-soft sm:mt-4 sm:space-y-1">
           {loc.hours.map((line) => (
             <p key={line}>{line}</p>
           ))}
@@ -48,12 +48,12 @@ export default function LocationCard({ loc }: { loc: Location }) {
 
         <a
           href={`tel:${loc.tel}`}
-          className="link-underline mt-4 inline-block self-start font-display text-lg font-medium"
+          className="link-underline mt-3 inline-block self-start font-display text-lg font-medium sm:mt-4"
         >
           {loc.phone}
         </a>
 
-        <div className="mt-5 flex flex-wrap items-center gap-3">
+        <div className="mt-4 flex flex-wrap items-center gap-3 sm:mt-5">
           <a
             href={loc.bookingUrl}
             target="_blank"

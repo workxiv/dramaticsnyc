@@ -23,7 +23,7 @@ function HairWord() {
     <span className="relative inline-block">
       {/* stationary dryer aimed at the letters */}
       <span
-        className="hero-actor hero-dryer absolute -left-[1em] top-[0.16em] hidden w-[0.78em] sm:block"
+        className="hero-actor hero-dryer absolute -left-[0.7em] top-[0.16em] block w-[0.78em] sm:-left-[1em]"
         aria-hidden
       >
         <BlowDryer className="animate-dryer-blow w-full" />
@@ -110,12 +110,12 @@ export default function HeroHeadline() {
     <h1 className="display-fluid relative mx-auto max-w-5xl">
       {/* ----- behind the letters: subway + taxi ----- */}
       <span className="pointer-events-none absolute inset-0" aria-hidden>
-        <span className="hero-actor hero-train absolute top-[56%] hidden w-[15em] max-w-[340px] sm:block">
+        <span className="hero-actor hero-train absolute top-[56%] block w-[15em] max-w-[340px]">
           <span className="hero-train-rumble block">
             <SubwayTrain className="w-full" />
           </span>
         </span>
-        <span className="hero-actor hero-taxi-behind absolute top-[24%] hidden w-[0.62em] sm:block">
+        <span className="hero-actor hero-taxi-behind absolute top-[24%] block w-[0.62em]">
           {/* taxi svg faces left; flip to face its left->right direction */}
           <Taxi className="w-full -scale-x-100" />
         </span>
@@ -148,7 +148,7 @@ export default function HeroHeadline() {
 
       {/* ----- in front of the letters: red car, opposite direction ----- */}
       <span className="pointer-events-none absolute inset-0 z-[2]" aria-hidden>
-        <span className="hero-actor hero-car-front absolute top-[76%] hidden w-[0.5em] sm:block">
+        <span className="hero-actor hero-car-front absolute top-[76%] block w-[0.5em]">
           {/* faces left by default; driving right->left, so no flip */}
           <svg viewBox="0 0 72 40" className="w-full" aria-hidden>
             <rect x="4" y="16" width="60" height="14" rx="5" fill="#d14424" stroke="#17150e" strokeWidth="2" />

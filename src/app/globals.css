@@ -41,6 +41,9 @@
 html {
   scroll-behavior: smooth;
   color-scheme: light;
+  /* iOS ignores overflow-x on body alone; clip on html too so wide
+     animated actors never let the page drift sideways on phones */
+  overflow-x: clip;
 }
 
 html.lenis,
@@ -597,13 +600,6 @@ details.faq-item[open] summary .faq-icon {
 }
 .animate-bob {
   animation: bob 4.5s ease-in-out infinite;
-}
-
-/* On phones the dryer is hidden, so the letters it acts on must stay still too */
-@media (max-width: 639px) {
-  .hair-blow {
-    animation: none;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

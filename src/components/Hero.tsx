@@ -66,7 +66,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease, delay: 0.55 }}
-          className="mt-14 grid grid-cols-3 gap-3 sm:mt-16 sm:gap-5"
+          className="mt-12 grid grid-cols-2 gap-3 sm:mt-16 sm:grid-cols-3 sm:gap-5"
         >
           <div className="card-soft relative aspect-[3/4] overflow-hidden bg-apricot sm:mt-12">
             <AutoVideo
@@ -75,7 +75,7 @@ export default function Hero() {
               className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
-          <div className="card-soft relative aspect-[3/4] bg-pink">
+          <div className="card-soft relative hidden aspect-[3/4] bg-pink sm:block">
             <Image
               src={IMG.heroPortrait}
               alt="Hair coloring results by Dramatics NYC colorists"

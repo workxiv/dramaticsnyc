@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { BOOKING_URL, PHONE_PRIMARY } from "@/lib/content";
+import Link from "next/link";
+import { BOOKING_URL } from "@/lib/content";
 
 /**
  * Mobile-only sticky booking bar: keeps the primary conversion action
@@ -30,13 +31,13 @@ export default function StickyBook() {
         >
           Book an Appointment
         </a>
-        <a
-          href={`tel:${PHONE_PRIMARY.replace(/[^0-9]/g, "").replace(/^/, "+1")}`}
-          className="btn-pill-outline px-5 py-3.5 text-sm"
-          aria-label={`Call Dramatics NYC at ${PHONE_PRIMARY}`}
+        <Link
+          href="/book"
+          className="btn-pill-outline px-7 py-3.5 text-base"
+          aria-label="Call a Dramatics NYC salon"
         >
           Call
-        </a>
+        </Link>
       </div>
     </div>
   );

@@ -24,11 +24,11 @@ export default function Services() {
           </Reveal>
         </div>
 
-        <div className="mt-14 grid gap-5 sm:grid-cols-3 sm:gap-6">
+        <div className="mt-10 grid gap-4 sm:mt-14 sm:grid-cols-3 sm:gap-6">
           {SERVICES.map((service, i) => (
             <Reveal key={service.id} delay={0.08 * i} y={40}>
               <div className={`group card-soft flex h-full flex-col ${CARD_BG[i]}`}>
-                <div className="relative m-3 aspect-[4/3] overflow-hidden rounded-[1.25rem]">
+                <div className="relative m-3 aspect-[16/9] overflow-hidden rounded-[1.25rem] sm:aspect-[4/3]">
                   <Image
                     src={service.image}
                     alt={`${service.title} at Dramatics NYC in Manhattan`}
@@ -37,14 +37,14 @@ export default function Services() {
                     className="img-cover object-cover"
                   />
                 </div>
-                <div className="flex flex-1 flex-col p-6 pt-3">
-                  <h3 className="font-display text-2xl font-semibold">
+                <div className="flex flex-1 flex-col p-5 pt-2 sm:p-6 sm:pt-3">
+                  <h3 className="font-display text-xl font-semibold sm:text-2xl">
                     {service.title}
                   </h3>
-                  <p className="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-soft sm:mt-3">
                     {service.description}
                   </p>
-                  <div className="mt-6 flex flex-wrap gap-3">
+                  <div className="mt-4 flex flex-wrap gap-3 sm:mt-6">
                     <a
                       href={BOOKING_URL}
                       className="btn-flow px-6 py-3 text-sm"
