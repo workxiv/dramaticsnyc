@@ -1,5 +1,19 @@
 # Cutover plan: www.dramaticsnyc.com → Vercel
 
+## DONE 2026-09-11 (went live)
+
+- Vercel project domains: `www.dramaticsnyc.com` (Production) and `dramaticsnyc.com` (308 → www). Both show Valid Configuration with SSL.
+- Liquid Web zone as of go-live:
+  - `A dramaticsnyc.com` → `216.150.1.1` (Vercel)
+  - `CNAME www` → `cf5605ddb9e7e5f2.vercel-dns-016.com`
+  - `A mail` → `67.225.241.28` (VPS), `MX` → `0 mail.dramaticsnyc.com`, `CNAME webmail` → mail, `CNAME *` → mail (unknown subdomains still hit the VPS, e.g. host.dramaticsnyc.com)
+  - SPF: `v=spf1 +a:mail.dramaticsnyc.com +mx +ip4:67.225.241.28 +ip4:64.91.240.80 +include:websitewelcome.com ~all`
+  - `ftp`, `shop` A records and the Resend/DKIM/DMARC TXT records untouched.
+- Verified: https://www.dramaticsnyc.com loads, apex and old-style URLs (e.g. `https://dramaticsnyc.com/locations/57th-street-salon/`) redirect to www, shop/gift cards/salon pages/sitemap/robots/admin all 200, old WooCommerce URLs redirect, `/api/checkout` from the live domain returns a Square checkout link, MX/A/mail resolve correctly on public DNS.
+- Square webhook + `SQUARE_WEBHOOK_URL` intentionally left on `https://dramaticsnyc.vercel.app/api/square/webhook` (that hostname stays live). Switch both together if ever desired.
+- Rollback: `A dramaticsnyc.com` → `67.225.241.28`, `CNAME www` → `dramaticsnyc.com`.
+
+
 Current state (checked 2026-09-03):
 
 | Thing | Where |
