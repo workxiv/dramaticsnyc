@@ -6,7 +6,7 @@ import { ABOUT, IMG } from "@/lib/content";
 const STATS = [
   { value: "1984", label: "Established" },
   { value: "5", label: "Manhattan salons" },
-  { value: "4.5★", label: "Google rating · 1,300+ reviews" },
+  { value: "Top", label: "Haircut & color experts" },
 ];
 
 export default function About() {
@@ -82,13 +82,13 @@ export default function About() {
                     &ldquo;
                   </span>
                   <p className="font-display text-lg font-medium leading-snug sm:text-xl">
-                    One of the best haircuts and experiences I&rsquo;ve had in
-                    NYC. Calypso is an absolute delight and so talented. The
-                    energy and vibe of the salon is immaculate and I cannot
-                    wait to come back.
+                    I couldn&rsquo;t be happier with the results. The color is
+                    absolutely stunning, and the haircut is not just a simple
+                    trim, it&rsquo;s a work of art. I&rsquo;ve received so
+                    many compliments and I feel more confident than ever.
                   </p>
                   <span className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-ink-soft">
-                    Kayleigh W. · Google review, 34th St.
+                    Vialka G. · Verified client review
                   </span>
                 </div>
               </Reveal>
