@@ -20,7 +20,7 @@ export const SITE = {
   tagline: "Hair Cuts & Color for New Yorkers",
   heroTagline: "Locally owned. Intentionally run. Built on great hair.",
   heroStatement:
-    "We care about the people in our chairs, and it shows: from the first consultation to the finished look, we raise the bar on what a salon visit can be.",
+    "We care about the people in our chairs, and it shows. From your first consultation to the finished look, every visit is a chance to raise the bar.",
   servicesIntro:
     "Are you looking for a whole new style, or a beautifully finished classic cut? Our stylists are here to take care of your hair.",
   servicesDetail:
