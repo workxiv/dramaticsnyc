@@ -24,15 +24,15 @@ export default function Locations() {
           </Reveal>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:mt-14 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:gap-5 lg:grid-cols-3">
           {LOCATIONS.map((loc, i) => (
             <Reveal key={loc.id} delay={0.06 * i} y={40}>
               <LocationCard loc={loc} />
             </Reveal>
           ))}
 
-          <Reveal delay={0.3} y={40}>
-            <div className="card-soft relative flex h-full flex-col justify-between bg-lilac p-7">
+          <Reveal delay={0.3} y={40} className="col-span-2 sm:col-span-1">
+            <div className="card-soft relative flex h-full flex-col justify-between bg-lilac p-5 sm:p-7">
               <SubwayToken
                 letter="D"
                 className="animate-bob absolute right-6 top-6 h-12 w-12"

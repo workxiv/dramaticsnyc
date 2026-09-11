@@ -33,7 +33,7 @@ export default function StickyBook() {
         </a>
         <Link
           href="/book"
-          className="btn-pill-outline px-7 py-3.5 text-base"
+          className="btn-pill-outline basis-[42%] py-3.5 text-base"
           aria-label="Call a Dramatics NYC salon"
         >
           Call

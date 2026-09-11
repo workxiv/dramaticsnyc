@@ -15,7 +15,7 @@ export default function LocationCard({ loc }: { loc: Location }) {
       <Link
         href={`/locations/${loc.slug}`}
         aria-label={`${loc.street} salon details`}
-        className="relative m-3 block aspect-[16/9] overflow-hidden rounded-[1.25rem] sm:aspect-[16/10]"
+        className="relative m-2 block aspect-[4/3] overflow-hidden rounded-[1rem] sm:m-3 sm:aspect-[16/10] sm:rounded-[1.25rem]"
       >
         <Image
           src={loc.image}
@@ -24,13 +24,13 @@ export default function LocationCard({ loc }: { loc: Location }) {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="img-cover object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
-        <span className="absolute left-3 top-3 rounded-full bg-paper/90 px-3.5 py-1.5 text-[0.68rem] font-bold uppercase tracking-[0.12em] backdrop-blur">
+        <span className="absolute left-2 top-2 rounded-full bg-paper/90 px-2.5 py-1 text-[0.58rem] font-bold uppercase tracking-[0.1em] backdrop-blur sm:left-3 sm:top-3 sm:px-3.5 sm:py-1.5 sm:text-[0.68rem] sm:tracking-[0.12em]">
           {loc.neighborhood}
         </span>
       </Link>
 
-      <div className="flex flex-1 flex-col p-5 pt-2 sm:p-6">
-        <h3 className="font-display text-xl font-semibold sm:text-2xl">
+      <div className="flex flex-1 flex-col p-3 pt-1 sm:p-6 sm:pt-2">
+        <h3 className="font-display text-base font-semibold leading-tight sm:text-2xl">
           <Link
             href={`/locations/${loc.slug}`}
             className="transition-colors hover:text-coral"
@@ -38,9 +38,9 @@ export default function LocationCard({ loc }: { loc: Location }) {
             {loc.street}
           </Link>
         </h3>
-        <p className="mt-1 text-sm text-ink-mute">{loc.cityLine}</p>
+        <p className="mt-1 hidden text-sm text-ink-mute sm:block">{loc.cityLine}</p>
 
-        <div className="mt-3 space-y-0.5 text-sm text-ink-soft sm:mt-4 sm:space-y-1">
+        <div className="mt-2 hidden space-y-0.5 text-sm text-ink-soft sm:mt-4 sm:block sm:space-y-1">
           {loc.hours.map((line) => (
             <p key={line}>{line}</p>
           ))}
@@ -48,23 +48,23 @@ export default function LocationCard({ loc }: { loc: Location }) {
 
         <a
           href={`tel:${loc.tel}`}
-          className="link-underline mt-3 inline-block self-start font-display text-lg font-medium sm:mt-4"
+          className="link-underline mt-2 inline-block self-start font-display text-sm font-medium sm:mt-4 sm:text-lg"
         >
           {loc.phone}
         </a>
 
-        <div className="mt-4 flex flex-wrap items-center gap-3 sm:mt-5">
+        <div className="mt-3 flex flex-col gap-2 sm:mt-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
           <a
             href={loc.bookingUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-flow px-6 py-3 text-sm"
+            className="btn-flow px-4 py-2.5 text-xs sm:px-6 sm:py-3 sm:text-sm"
           >
             Book Now
           </a>
           <Link
             href={`/locations/${loc.slug}`}
-            className="btn-pill-outline px-6 py-3 text-sm"
+            className="btn-pill-outline px-4 py-2.5 text-xs sm:px-6 sm:py-3 sm:text-sm"
           >
             Salon Details
           </Link>
@@ -74,7 +74,7 @@ export default function LocationCard({ loc }: { loc: Location }) {
           type="button"
           onClick={() => setMapOpen((v) => !v)}
           aria-expanded={mapOpen}
-          className="mt-3 inline-flex min-h-10 items-center gap-2 self-start py-2 text-sm font-semibold text-ink-soft transition-colors hover:text-ink"
+          className="mt-3 hidden min-h-10 items-center gap-2 self-start py-2 text-sm font-semibold text-ink-soft transition-colors hover:text-ink sm:inline-flex"
         >
           <span
             className={`inline-flex h-6 w-6 items-center justify-center rounded-full border border-ink/15 text-[0.7rem] transition-transform duration-300 ${

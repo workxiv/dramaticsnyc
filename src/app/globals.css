@@ -602,6 +602,19 @@ details.faq-item[open] summary .faq-icon {
   animation: bob 4.5s ease-in-out infinite;
 }
 
+/* Phones: the lanes are measured in vw, so shorter loops keep the traffic moving */
+@media (max-width: 639px) {
+  .hero-train {
+    animation-duration: 9s;
+  }
+  .hero-taxi-behind {
+    animation-duration: 7s;
+  }
+  .hero-car-front {
+    animation-duration: 8s;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
   .text-flow,

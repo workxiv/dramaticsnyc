@@ -110,7 +110,7 @@ export default function HeroHeadline() {
     <h1 className="display-fluid relative mx-auto max-w-5xl">
       {/* ----- behind the letters: subway + taxi ----- */}
       <span className="pointer-events-none absolute inset-0" aria-hidden>
-        <span className="hero-actor hero-train absolute top-[56%] block w-[15em] max-w-[340px]">
+        <span className="hero-actor hero-train absolute top-[56%] block w-[15em] max-w-[150px] sm:max-w-[340px]">
           <span className="hero-train-rumble block">
             <SubwayTrain className="w-full" />
           </span>

@@ -54,7 +54,7 @@ export default function About() {
           </div>
 
           <div className="lg:col-span-6 lg:flex lg:flex-col">
-            <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:flex-1 lg:grid-rows-[auto_minmax(280px,1fr)]">
+            <div className="grid grid-cols-2 items-stretch gap-3 sm:gap-5 lg:flex-1 lg:grid-rows-[auto_minmax(280px,1fr)]">
               <Reveal className="col-span-2" y={40}>
                 <div className="group card-soft relative aspect-[16/10]">
                   <Image
@@ -66,8 +66,8 @@ export default function About() {
                   />
                 </div>
               </Reveal>
-              <Reveal y={40} delay={0.08} className="lg:h-full">
-                <div className="group card-soft relative aspect-[3/4] overflow-hidden lg:aspect-auto lg:h-full">
+              <Reveal y={40} delay={0.08} className="h-full">
+                <div className="group card-soft relative h-full min-h-[240px] overflow-hidden sm:aspect-[3/4] sm:min-h-0 lg:aspect-auto lg:h-full">
                   <AutoVideo
                     src="/media/about-styling.mp4"
                     label="A Dramatics NYC colorist applying treatment at the salon"
@@ -76,19 +76,19 @@ export default function About() {
                   />
                 </div>
               </Reveal>
-              <Reveal y={40} delay={0.16} className="lg:h-full">
-                <div className="card-soft relative flex aspect-[3/4] flex-col justify-between bg-tan p-6 lg:aspect-auto lg:h-full">
-                  <span className="font-display text-5xl leading-none">
+              <Reveal y={40} delay={0.16} className="h-full">
+                <div className="card-soft relative flex h-full flex-col justify-between gap-3 bg-tan p-4 sm:aspect-[3/4] sm:p-6 lg:aspect-auto lg:h-full">
+                  <span className="font-display text-4xl leading-none sm:text-5xl">
                     &ldquo;
                   </span>
-                  <p className="font-display text-lg font-medium leading-snug sm:text-xl">
+                  <p className="font-display text-[0.95rem] font-medium leading-snug sm:text-lg lg:text-xl">
                     Dramatics NYC is amazing. I couldn&rsquo;t be happier with
                     the results. The color is absolutely stunning, and the
                     haircut is not just a simple trim, it&rsquo;s a work of
                     art. I&rsquo;ve received so many compliments and I feel
                     more confident than ever.
                   </p>
-                  <span className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-ink-soft">
+                  <span className="text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-ink-soft sm:text-[0.7rem] sm:tracking-[0.16em]">
                     Vialka G. · Google reviews
                   </span>
                 </div>
