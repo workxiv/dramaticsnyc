@@ -1,53 +1,86 @@
 #!/usr/bin/env python3
 """
-Give a clean product cutout (transparent PNG, no baked-in shadow) the same soft
-floor shadow the Ocean Beach Sea Salt Spray photo (42263.png) has: the base
-ellipse of the product, pushed to the lower left and heavily blurred, so most of
-it peeks out on the left of the base with a little under the bottom edge.
+Product cutout shadows, matched to the photographed shadow on the Healthy Color
+line (Diesel Hayes 38421.png, Ocean Beach 42263.png): the product's footprint
+ellipse cast to the lower left, soft, dark, strongest against the body.
 
 Usage:
-  python3 scripts/product-shadows.py <cutout.png> <out.png>
+  python3 scripts/product-shadows.py strip <in.png> <out.png>   # remove baked shadow
+  python3 scripts/product-shadows.py shadow <in.png> <out.png>  # add the house shadow
+  python3 scripts/product-shadows.py measure <in.png>           # print shadow geometry
 
-Only run this on cutouts WITHOUT an existing shadow. Products whose original
-photo already carries a real shadow (the Healthy Color line, Quantum Leap,
-Forever Young, Color Protect Shampoo) are left untouched.
+Measured on the reference photos (1024px): the shadow is offset left by about
+0.13 of the product height and down by about 0.02, the footprint ellipse is
+about 0.4 as tall as it is wide (camera slightly above), peak alpha about 0.43,
+color about (50, 46, 43).
 """
 import sys
 import numpy as np
 from PIL import Image, ImageFilter
+from scipy.ndimage import binary_fill_holes, binary_dilation, label
 
-SHADOW_RGB = (50, 46, 43)   # sampled from 42263.png
-PEAK_ALPHA = 0.55           # centre of the ellipse (42263 peaks ~0.43 next to the body)
+SHADOW_RGB = (50, 46, 43)
+PEAK_ALPHA = 0.50
+LEFT = 0.13      # of body height
+DOWN = 0.025     # of body height
+FOOT = 0.40      # footprint ellipse height / width
+BLUR = 0.013     # of body height
 
 
-def add_shadow(src: str, dst: str) -> None:
+def body_mask(alpha: np.ndarray) -> np.ndarray:
+    solid = binary_fill_holes(alpha >= 250)
+    lab, n = label(solid)
+    if n == 0:
+        return alpha > 128
+    sizes = np.bincount(lab.ravel())
+    sizes[0] = 0
+    return lab == sizes.argmax()
+
+
+def strip(src: str, dst: str) -> None:
+    """Keep the solid product (plus its 2px anti-aliased edge); drop any
+    semi-transparent baked-in shadow around it."""
+    im = Image.open(src).convert("RGBA")
+    a = np.array(im)
+    alpha = a[..., 3]
+    core = body_mask(alpha)
+    keep = binary_dilation(core, iterations=2)
+    # feathered product pixels that blend into the shadow: keep anything whose
+    # colour is clearly not the shadow colour, as long as it touches the body
+    rgb = a[..., :3].astype(int)
+    dist = np.abs(rgb - np.array(SHADOW_RGB)).sum(axis=2)
+    candidate = (alpha > 0) & (dist > 90)
+    grown = candidate & binary_dilation(core, iterations=12)
+    keep |= grown
+    a[..., 3] = np.where(keep, alpha, 0)
+    Image.fromarray(a).save(dst, optimize=True)
+
+
+def shadow(src: str, dst: str) -> None:
     im = Image.open(src).convert("RGBA")
     alpha = np.array(im)[..., 3]
-    ys, xs = np.where(alpha > 128)
+    body = body_mask(alpha)
+    ys, xs = np.where(body)
     top, bottom = ys.min(), ys.max()
     h = bottom - top + 1
 
-    # base span: widest rows in the bottom 5% of the body
-    base_rows = alpha[bottom - int(h * 0.05):bottom + 1]
-    cols = np.where(base_rows.max(axis=0) > 128)[0]
+    base_rows = body[bottom - int(h * 0.06):bottom + 1]
+    cols = np.where(base_rows.any(axis=0))[0]
     bl, br = cols.min(), cols.max()
     bw = br - bl + 1
     cx = (bl + br) / 2
 
-    # Ocean Beach proportions (bottle 250 wide, 916 tall):
-    # shadow reaches ~0.44 bw left of the body, spans ~0.055 h vertically,
-    # sits mostly above the bottom edge with ~0.012 h showing below it.
-    ew = 1.0 * bw                    # ellipse width
-    eh = max(24, 0.055 * h)          # ellipse height
-    ecx = cx - 0.42 * bw             # pushed left
-    ecy = bottom - 0.28 * eh         # a little below the base line
-    blur = float(max(6, 0.014 * h))
+    ew, eh = bw, FOOT * bw
+    ecx = cx - LEFT * h
+    ecy = bottom - eh / 2 + DOWN * h
+    blur = float(max(5, BLUR * h))
 
-    pad = int(0.6 * bw + blur * 4)
-    W, H = im.width + pad, im.height + int(blur * 4)
+    pad = int(LEFT * h + blur * 4 + 8)
+    W, H = im.width + pad, im.height + int(DOWN * h + blur * 4 + 8)
     yy, xx = np.mgrid[0:H, 0:W]
     r2 = ((xx - (ecx + pad)) / (ew / 2)) ** 2 + ((yy - ecy) / (eh / 2)) ** 2
-    sh = np.clip(1 - r2, 0, 1) ** 0.7 * PEAK_ALPHA
+    r = np.sqrt(np.clip(r2, 0, None))
+    sh = np.where(r <= 1, PEAK_ALPHA * (0.75 + 0.25 * (1 - r)), 0.0)
     mask = Image.fromarray((sh * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(blur))
 
     out = Image.new("RGBA", (W, H), (0, 0, 0, 0))
@@ -64,5 +97,25 @@ def add_shadow(src: str, dst: str) -> None:
     out.save(dst, optimize=True)
 
 
+def measure(src: str) -> None:
+    im = Image.open(src).convert("RGBA")
+    alpha = np.array(im)[..., 3]
+    body = body_mask(alpha)
+    ys, xs = np.where(body)
+    outside = ~binary_dilation(body, iterations=2)
+    sh = np.where(outside, alpha, 0)
+    sy, sx = np.where(sh > 8)
+    h = ys.max() - ys.min() + 1
+    print(f"{src}: body x{xs.min()}-{xs.max()} y{ys.min()}-{ys.max()} h={h}; "
+          f"shadow x{sx.min()}-{sx.max()} y{sy.min()}-{sy.max()} peak={sh.max()/255:.2f}; "
+          f"left={(xs.min()-sx.min())/h:.3f}h down={(sy.max()-ys.max())/h:.3f}h")
+
+
 if __name__ == "__main__":
-    add_shadow(sys.argv[1], sys.argv[2])
+    cmd = sys.argv[1]
+    if cmd == "strip":
+        strip(sys.argv[2], sys.argv[3])
+    elif cmd == "shadow":
+        shadow(sys.argv[2], sys.argv[3])
+    elif cmd == "measure":
+        measure(sys.argv[2])
