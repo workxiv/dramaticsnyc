@@ -1,9 +1,21 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 
 export default function SmoothScroll() {
+  const lenisRef = useRef<Lenis | null>(null);
+  const pathname = usePathname();
+
+  // Lenis outlives client-side navigation, so without this a salon page
+  // opened from halfway down the homepage would start halfway down too.
+  useEffect(() => {
+    if (window.location.hash) return;
+    window.scrollTo(0, 0);
+    lenisRef.current?.scrollTo(0, { immediate: true, force: true });
+  }, [pathname]);
+
   useEffect(() => {
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -15,6 +27,7 @@ export default function SmoothScroll() {
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
     });
+    lenisRef.current = lenis;
 
     let frame = 0;
     function raf(time: number) {
@@ -45,6 +58,7 @@ export default function SmoothScroll() {
       cancelAnimationFrame(frame);
       document.removeEventListener("click", handleClick);
       lenis.destroy();
+      lenisRef.current = null;
     };
   }, []);
 
