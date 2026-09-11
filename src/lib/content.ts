@@ -9,7 +9,7 @@ export const IMG = {
   /** real client results shot in our salons */
   cut: "/img/real-cut-style.jpg",
   treatment: "/img/real-treatment.jpg",
-  salonPink: "/img/1521590832167-7bcbfaa6381f.jpg",
+  salon3rd: "/img/salon-3rd.jpg",
 } as const;
 
 /** First-party booking page — lists every salon's own online booking. */
@@ -178,7 +178,7 @@ export const LOCATIONS: Location[] = [
       "Sun 9:00 am – 6:00 pm",
     ],
     openingHours: ["Mo-Sa 09:00-19:00", "Su 09:00-18:00"],
-    image: IMG.salonPink,
+    image: IMG.salon3rd,
     maps: "https://maps.google.com/?q=1488+3rd+Avenue+New+York+NY+10028",
     bookingUrl: "https://dramatics3rdave.salontarget.com/",
     quote:
