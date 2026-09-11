@@ -71,21 +71,24 @@ export const SERVICES: Service[] = [
     id: "cut",
     index: "01",
     title: "Cutting & Styling Services",
-    description: SITE.servicesDetail,
+    description:
+      "Precision haircuts for every length and texture, blowouts that last, updos for the big night, hot-tool styling and length extensions. Every cut starts with a consultation so you leave with a shape that works with your hair, not against it.",
     image: IMG.cut,
   },
   {
     id: "color",
     index: "02",
     title: "Hair Coloring Services",
-    description: SITE.servicesDetail,
+    description:
+      "Balayage, full and half highlights, face-framing pieces and special effects, single and double process, root touch-ups, toners and glosses. Our colorists build dimension that grows out gracefully and keep your hair healthy with Dramaplex.",
     image: IMG.colorVivid,
   },
   {
     id: "treatment",
     index: "03",
     title: "Hair Treatment Services",
-    description: SITE.servicesDetail,
+    description:
+      "Keratin and formaldehyde-free smoothing, hair Botox, relaxers, volumizing and deep conditioning. Treatments that tame frizz, add shine and strength, and make everyday styling faster.",
     image: IMG.treatment,
   },
 ];
