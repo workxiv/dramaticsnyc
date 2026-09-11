@@ -545,7 +545,7 @@ details.faq-item[open] summary .faq-icon {
 /* --- traffic lanes --- */
 .hero-train {
   left: 0;
-  animation: lane-ltr 20s linear 2s infinite;
+  animation: lane-ltr 18s linear 0.3s infinite;
   transform: translateX(calc(-40vw - 400px));
 }
 .hero-train-rumble {
@@ -562,12 +562,12 @@ details.faq-item[open] summary .faq-icon {
 }
 .hero-taxi-behind {
   left: 0;
-  animation: lane-ltr 13s linear 8s infinite;
+  animation: lane-ltr 13s linear 2.5s infinite;
   transform: translateX(calc(-40vw - 400px));
 }
 .hero-car-front {
   left: 0;
-  animation: lane-rtl 15s linear 5.5s infinite;
+  animation: lane-rtl 15s linear 1s infinite;
   transform: translateX(115vw);
 }
 @keyframes lane-ltr {
