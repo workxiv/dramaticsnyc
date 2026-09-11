@@ -41,7 +41,7 @@ export default function Services() {
                   <h3 className="font-display text-base font-semibold leading-tight sm:text-2xl">
                     {service.title}
                   </h3>
-                  <p className="mt-1.5 line-clamp-3 flex-1 text-xs leading-relaxed text-ink-soft sm:mt-3 sm:line-clamp-none sm:text-sm">
+                  <p className="mt-1.5 flex-1 text-xs leading-relaxed text-ink-soft sm:mt-3 sm:text-sm">
                     {service.description}
                   </p>
                   <div className="mt-3 flex flex-col gap-2 sm:mt-6 sm:flex-row sm:flex-wrap sm:gap-3">
