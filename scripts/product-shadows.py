@@ -1,111 +1,84 @@
+#!/usr/bin/env python3
 """
-Give every product cutout in public/img/products/{id}.png the same soft,
-angled contact shadow (like the Ocean Beach spray photo) instead of whatever
-the original studio shot had (white, faint, or none).
+Give a clean product cutout (transparent PNG, no baked-in shadow) the same soft,
+angled floor shadow the Ocean Beach Sea Salt Spray photo (42263.png) has: a dark,
+blurred wedge hugging the base and stretching to the lower left.
 
-Run:  python3 scripts/product-shadows.py    (needs Pillow, numpy, scipy)
-Then bump PRODUCT_IMAGE_VERSION in src/lib/shop.ts.
+Usage:
+  python3 scripts/product-shadows.py <cutout.png> <out.png>
+
+Only run this on cutouts WITHOUT an existing shadow (the Dramatics NYC white
+products were re-cut with a background remover first). The Healthy Color
+products already carry their original photographed shadow and are left alone.
 """
-import glob
+import sys
 import numpy as np
 from PIL import Image, ImageFilter
-from scipy import ndimage
 
-SRC = "public/img/products"
-SHADOW_RGB = (38, 33, 28)
-SHEAR = 0.34        # how far the shadow leans to the right per unit of height
-FLATTEN = 0.22      # shadow height as a fraction of product height
-MAX_ALPHA = 150     # darkest point of the cast shadow
-CONTACT_ALPHA = 150 # darkest point of the tight contact shadow under the base
+SHADOW_RGB = (50, 46, 43)   # sampled from 42263.png
+PEAK_ALPHA = 0.5           # next to the base
+FAR_ALPHA = 0.10            # at the far tip
+BLUR = 9
 
 
-def process(path: str) -> None:
-    im = Image.open(path).convert("RGBA")
-    arr = np.array(im)
-    alpha = arr[:, :, 3].astype(np.float32)
-    h, w = alpha.shape
+def add_shadow(src: str, dst: str) -> None:
+    im = Image.open(src).convert("RGBA")
+    a = np.array(im)
+    alpha = a[..., 3]
+    ys, xs = np.where(alpha > 128)
+    top, bottom, left, right = ys.min(), ys.max(), xs.min(), xs.max()
+    h, w = bottom - top + 1, right - left + 1
 
-    # Body = the solid product. Old shadows are the semi-transparent pixels that
-    # sit outside the (slightly grown) solid region; drop them.
-    solid = alpha >= 250
-    solid = ndimage.binary_fill_holes(solid)
-    body = ndimage.binary_dilation(solid, iterations=2)
-    keep = alpha.copy()
-    keep[~body] = 0
-    # Re-soften the cut edge so it isn't jagged.
-    keep = np.where(body & (alpha > 0), np.maximum(keep, alpha * (alpha >= 40)), keep)
+    # base span: widest rows in the bottom 6% of the body
+    base_rows = alpha[bottom - int(h * 0.06):bottom + 1]
+    cols = np.where(base_rows.max(axis=0) > 128)[0]
+    bl, br = cols.min(), cols.max()
+    bw = br - bl + 1
 
-    ys, xs = np.where(solid)
-    if ys.size == 0:
-        return
-    y0, y1 = ys.min(), ys.max()
-    x0, x1 = xs.min(), xs.max()
-    ph = int(y1 - y0)
+    # Ocean Beach proportions: the shadow is the base of the silhouette sheared
+    # to the lower left: no offset at the top of the band, ~0.44 of the base
+    # width at the bottom (capped by height so wide jars stay sane), band
+    # ~0.05 of the height tall, alpha strongest against the body.
+    ext = int(min(0.44 * bw, 0.2 * h))
+    band = max(18, int(h * 0.05))
+    drop = max(4, int(h * 0.01))
+    pad = ext + BLUR * 4
+    W, H = im.width + pad, im.height + BLUR * 4
 
-    # Make room on the right / bottom for the cast shadow if needed.
-    extra_r = int(SHEAR * ph) + 60
-    extra_b = 60
-    W, H = w + extra_r, h + extra_b
+    body = alpha > 128
+    sh = np.zeros((H, W), dtype=np.float32)
+    for y in range(bottom - band, bottom + drop + 1):
+        sy = min(y, bottom)                       # rows below the base reuse it
+        t = 1 - (bottom - sy) / band              # 0 at top of band, 1 at base
+        off = int(ext * t)
+        row = body[sy]
+        xs_row = np.where(row)[0]
+        if len(xs_row) == 0:
+            continue
+        xl = xs_row.min()
+        # shifted silhouette row, alpha fading with distance from the body edge
+        for x in range(xl - off, xl + int(0.6 * bw)):
+            if x < 0 or x + off >= im.width or not row[min(im.width - 1, x + off)]:
+                continue
+            d = max(0, xl - x) / max(1, ext)
+            wy = 0.45 + 0.55 * t
+            sh[y, x + pad] = (PEAK_ALPHA - (PEAK_ALPHA - FAR_ALPHA) * d) * wy
+    mask = Image.fromarray((sh * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(BLUR))
 
-    # Silhouette -> flatten to FLATTEN of its height and lean it right,
-    # anchored at the base line y1 (a low, angled cast shadow).
-    sil = (solid[y0 : y1 + 1, x0 : x1 + 1] * 255).astype(np.uint8)
-    sh_h = max(8, int(ph * FLATTEN))
-    flat = np.array(Image.fromarray(sil).resize((x1 - x0 + 1, sh_h), Image.BILINEAR)).astype(np.float32) / 255.0
-    cast_a = np.zeros((H, W), np.float32)
-    for i in range(sh_h):
-        # row i of the flattened silhouette sits (sh_h - 1 - i) rows above the base
-        up = sh_h - 1 - i
-        dx = int(round(SHEAR * up / FLATTEN))   # lean grows with (original) height above base
-        yy = y1 - up
-        xs0 = x0 + dx
-        seg = flat[i]
-        x_end = min(W, xs0 + seg.size)
-        if 0 <= yy < H and x_end > xs0:
-            cast_a[yy, xs0:x_end] = np.maximum(cast_a[yy, xs0:x_end], seg[: x_end - xs0])
-    cast_img = Image.fromarray((cast_a * 255).astype(np.uint8)).filter(
-        ImageFilter.GaussianBlur(radius=float(max(8, int(ph * 0.025))))
-    )
-    cast_a = np.array(cast_img).astype(np.float32) / 255.0
-    # Fade the shadow as it stretches away from the product.
-    yy, xx = np.mgrid[0:H, 0:W]
-    reach = max(1.0, SHEAR * ph)
-    dist = np.clip((xx - x1) / reach, 0, 1)
-    cast_a *= (1.0 - 0.7 * dist)
-    cast_a *= MAX_ALPHA
+    out = Image.new("RGBA", (W, H), (0, 0, 0, 0))
+    layer = Image.new("RGBA", (W, H), SHADOW_RGB + (255,))
+    layer.putalpha(mask)
+    out.alpha_composite(layer)
+    out.alpha_composite(im, (pad, 0))
 
-    # Tight contact shadow: the bottom sliver of the silhouette, barely blurred.
-    contact = np.zeros((H, W), np.float32)
-    band = solid.copy()
-    band[: max(0, y1 - int(ph * 0.04)), :] = False
-    contact[:h, :w] = band
-    contact = np.array(Image.fromarray((contact * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(6))).astype(np.float32) / 255.0
-    contact *= CONTACT_ALPHA
-
-    shadow_a = np.clip(np.maximum(cast_a, contact), 0, 255)
-
-    out = np.zeros((H, W, 4), np.uint8)
-    out[:, :, 0] = SHADOW_RGB[0]
-    out[:, :, 1] = SHADOW_RGB[1]
-    out[:, :, 2] = SHADOW_RGB[2]
-    out[:, :, 3] = shadow_a.astype(np.uint8)
-    shadow = Image.fromarray(out, "RGBA")
-
-    product = Image.fromarray(np.dstack([arr[:, :, :3], keep.astype(np.uint8)]), "RGBA")
-    result = Image.new("RGBA", (W, H), (0, 0, 0, 0))
-    result.alpha_composite(shadow)
-    result.alpha_composite(product, (0, 0))
-
-    # Trim transparent margins but keep a small padding.
-    bbox = result.getbbox()
-    if bbox:
-        pad = 24
-        bbox = (max(0, bbox[0] - pad), max(0, bbox[1] - pad), min(W, bbox[2] + pad), min(H, bbox[3] + pad))
-        result = result.crop(bbox)
-    result.save(path, optimize=True)
+    # trim to content with a small pad
+    oa = np.array(out)[..., 3]
+    ys, xs = np.where(oa > 2)
+    p = 16
+    out = out.crop((max(0, xs.min() - p), max(0, ys.min() - p),
+                    min(W, xs.max() + p + 1), min(H, ys.max() + p + 1)))
+    out.save(dst, optimize=True)
 
 
 if __name__ == "__main__":
-    for p in sorted(glob.glob(f"{SRC}/*.png")):
-        process(p)
-        print("shadowed", p)
+    add_shadow(sys.argv[1], sys.argv[2])
