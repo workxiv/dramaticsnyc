@@ -119,7 +119,11 @@ export default function GiftCardsPage() {
             {LOCATIONS.map((loc, i) => (
               <Reveal key={loc.id} delay={0.05 * i} y={30} className="h-full">
                 <article className="group card-soft flex h-full flex-col border border-ink/8 bg-paper p-3">
-                  <div className="relative aspect-[16/10] overflow-hidden rounded-[1.25rem] bg-lilac">
+                  <Link
+                    href={`/locations/${loc.slug}`}
+                    aria-label={`${loc.street} salon details`}
+                    className="relative block aspect-[16/10] overflow-hidden rounded-[1.25rem] bg-lilac"
+                  >
                     <Image
                       src={loc.image}
                       alt={`Dramatics NYC ${loc.street} salon`}
@@ -130,7 +134,7 @@ export default function GiftCardsPage() {
                     <span className="absolute left-4 top-4 rounded-full bg-paper/90 px-3.5 py-2 text-[0.68rem] font-bold uppercase tracking-[0.14em] backdrop-blur">
                       {loc.neighborhood}
                     </span>
-                  </div>
+                  </Link>
                   <div className="flex flex-1 flex-col p-4 sm:p-5">
                     <h2 className="font-display text-2xl font-semibold leading-tight">
                       {loc.name}

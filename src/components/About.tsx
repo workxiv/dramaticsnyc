@@ -62,7 +62,7 @@ export default function About() {
                     alt="Inside a Dramatics NYC hair salon in Manhattan"
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="img-cover object-cover"
+                    className="img-cover object-cover grayscale"
                   />
                 </div>
               </Reveal>

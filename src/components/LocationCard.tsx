@@ -12,18 +12,22 @@ export default function LocationCard({ loc }: { loc: Location }) {
 
   return (
     <article className="group card-soft flex h-full flex-col border border-ink/8 bg-cream">
-      <div className="relative m-3 aspect-[16/10] overflow-hidden rounded-[1.25rem]">
+      <Link
+        href={`/locations/${loc.slug}`}
+        aria-label={`${loc.street} salon details`}
+        className="relative m-3 block aspect-[16/10] overflow-hidden rounded-[1.25rem]"
+      >
         <Image
           src={loc.image}
           alt={`Dramatics NYC ${loc.name} — hair salon at ${loc.street}, ${loc.neighborhood}`}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-          className="img-cover object-cover"
+          className="img-cover object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
         <span className="absolute left-3 top-3 rounded-full bg-paper/90 px-3.5 py-1.5 text-[0.68rem] font-bold uppercase tracking-[0.12em] backdrop-blur">
           {loc.neighborhood}
         </span>
-      </div>
+      </Link>
 
       <div className="flex flex-1 flex-col p-6 pt-2">
         <h3 className="font-display text-2xl font-semibold">
