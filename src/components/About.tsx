@@ -82,13 +82,14 @@ export default function About() {
                     &ldquo;
                   </span>
                   <p className="font-display text-lg font-medium leading-snug sm:text-xl">
-                    I couldn&rsquo;t be happier with the results. The color is
-                    absolutely stunning, and the haircut is not just a simple
-                    trim, it&rsquo;s a work of art. I&rsquo;ve received so
-                    many compliments and I feel more confident than ever.
+                    Dramatics NYC is amazing. I couldn&rsquo;t be happier with
+                    the results. The color is absolutely stunning, and the
+                    haircut is not just a simple trim, it&rsquo;s a work of
+                    art. I&rsquo;ve received so many compliments and I feel
+                    more confident than ever.
                   </p>
                   <span className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-ink-soft">
-                    Vialka G. · Verified client review
+                    Vialka G. · Google reviews
                   </span>
                 </div>
               </Reveal>

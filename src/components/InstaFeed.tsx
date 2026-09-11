@@ -16,8 +16,8 @@ const REELS = [
     label: "Rich red curls colored and styled at Dramatics NYC",
   },
   {
-    src: "/media/hero-cutting.mp4",
-    label: "A stylist cutting hair inside a Dramatics NYC salon",
+    src: "/media/insta-foiling.mp4",
+    label: "A colorist foiling highlights at Dramatics NYC",
   },
   {
     src: "/media/insta-75th-broadway.mp4",
