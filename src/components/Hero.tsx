@@ -40,11 +40,8 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease, delay: 0.35 }}
-          className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-ink-soft sm:text-lg"
+          className="mx-auto mt-6 max-w-3xl text-balance text-base leading-relaxed text-ink-soft sm:text-lg"
         >
-          <span className="mb-2 block text-[0.72rem] font-bold uppercase tracking-[0.18em] text-ink">
-            {SITE.heroTagline}
-          </span>
           {SITE.heroStatement}
         </motion.p>
 

@@ -18,7 +18,6 @@ export const PHONE_PRIMARY = "(212) 535-0073";
 
 export const SITE = {
   tagline: "Hair Cuts & Color for New Yorkers",
-  heroTagline: "Locally owned. Intentionally run. Built on great hair.",
   heroStatement:
     "Since 1984 we've cared about the people in our chairs, and it shows. From the first consultation to the finished look, every visit raises the bar on what a salon experience should be.",
   servicesIntro:
