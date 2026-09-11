@@ -42,8 +42,10 @@ export default function Hero() {
           transition={{ duration: 0.8, ease, delay: 0.35 }}
           className="mx-auto mt-6 max-w-2xl text-balance text-base leading-relaxed text-ink-soft sm:text-lg"
         >
-          &ldquo;{SITE.heroQuote}&rdquo;{" "}
-          <span className="text-ink-mute">— {SITE.heroQuoteAttribution}</span>
+          <span className="mb-2 block text-[0.72rem] font-bold uppercase tracking-[0.18em] text-ink">
+            {SITE.heroTagline}
+          </span>
+          {SITE.heroStatement}
         </motion.p>
 
         <motion.div

@@ -63,16 +63,18 @@ export default function AutoVideo({ src, label, className, lazy = false }: AutoV
     tryPlay();
     el.addEventListener("loadedmetadata", tryPlay);
 
-    // Play only while on screen; also acts as a retry point for Safari.
+    // Play while any part is near the screen; pause only once fully off
+    // screen. A tighter threshold made the video pause/resume while the
+    // user scrolled past its edge, which showed up as flicker.
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           tryPlay();
-        } else {
+        } else if (!el.paused) {
           el.pause();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0, rootMargin: "200px 0px" }
     );
     observer.observe(el);
 
@@ -109,6 +111,7 @@ export default function AutoVideo({ src, label, className, lazy = false }: AutoV
       preload={lazy ? "none" : "metadata"}
       aria-label={label}
       className={className}
+      style={{ transform: "translateZ(0)", backfaceVisibility: "hidden" }}
     />
   );
 }

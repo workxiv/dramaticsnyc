@@ -18,9 +18,9 @@ export const PHONE_PRIMARY = "(212) 535-0073";
 
 export const SITE = {
   tagline: "Hair Cuts & Color for New Yorkers",
-  heroQuote:
-    "We have 5 Hair Salon locations in Manhattan, all of them with a uniquely relaxing atmosphere.",
-  heroQuoteAttribution: "Larry Kolber",
+  heroTagline: "Locally owned. Intentionally run. Built on great hair.",
+  heroStatement:
+    "We care about the people in our chairs, and it shows: from the first consultation to the finished look, we raise the bar on what a salon visit can be.",
   servicesIntro:
     "Are you looking for a whole new style, or a beautifully finished classic cut? Our stylists are here to take care of your hair.",
   servicesDetail:
