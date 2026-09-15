@@ -30,12 +30,12 @@ export default function ContactPage() {
             your salon or use online booking.
           </p>
 
-          <div className="mt-12 grid gap-8 lg:grid-cols-12 lg:gap-10">
+          <div className="mt-12 grid items-stretch gap-8 lg:grid-cols-12 lg:gap-10">
             <div className="lg:col-span-7">
               <ContactForm />
             </div>
 
-            <aside className="space-y-6 lg:col-span-5">
+            <aside className="flex flex-col gap-6 lg:col-span-5">
               <div className="card-soft border border-ink/8 bg-pink p-6 sm:p-8">
                 <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-ink-mute">
                   Email
@@ -65,11 +65,11 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="card-soft border border-ink/8 bg-cream p-6 sm:p-8">
+              <div className="card-soft flex flex-1 flex-col border border-ink/8 bg-cream p-6 sm:p-8">
                 <p className="text-[0.72rem] font-semibold uppercase tracking-[0.18em] text-ink-mute">
                   Call a salon
                 </p>
-                <ul className="mt-4 divide-y divide-ink/10">
+                <ul className="mt-4 flex flex-1 flex-col justify-around divide-y divide-ink/10">
                   {LOCATIONS.map((l) => (
                     <li key={l.id} className="flex items-center justify-between gap-4 py-3">
                       <div>

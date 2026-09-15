@@ -52,8 +52,8 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="card-soft border border-ink/8 bg-cream p-6 sm:p-8">
-      <div className="grid gap-5 sm:grid-cols-2">
+    <form onSubmit={onSubmit} className="card-soft flex h-full flex-col border border-ink/8 bg-cream p-6 sm:p-8">
+      <div className="grid flex-1 gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="c-name" className={label}>Name</label>
           <input id="c-name" name="name" required maxLength={120} autoComplete="name" className={field} />
@@ -77,9 +77,9 @@ export default function ContactForm() {
             ))}
           </select>
         </div>
-        <div className="sm:col-span-2">
+        <div className="flex flex-col sm:col-span-2">
           <label htmlFor="c-message" className={label}>Message</label>
-          <textarea id="c-message" name="message" required rows={6} maxLength={4000} className={field} />
+          <textarea id="c-message" name="message" required rows={6} maxLength={4000} className={`${field} min-h-[10rem] flex-1`} />
         </div>
         {/* honeypot, hidden from people */}
         <div className="hidden" aria-hidden="true">
