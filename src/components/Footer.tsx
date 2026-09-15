@@ -1,7 +1,7 @@
 import BrandLogo from "./BrandLogo";
 import Reveal from "./Reveal";
 import SkylineDivider from "./SkylineDivider";
-import { BOOKING_URL, LOCATIONS, NAV_LINKS, SOCIAL } from "@/lib/content";
+import { BOOKING_URL, CONTACT_EMAIL, LOCATIONS, NAV_LINKS, SOCIAL } from "@/lib/content";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -48,6 +48,12 @@ export default function Footer() {
               Hair Cuts &amp; Color for New Yorkers. Five Hair Salon locations
               in Manhattan since 1984.
             </p>
+            <a
+              href={`mailto:${CONTACT_EMAIL}`}
+              className="link-underline mt-4 inline-block py-1 text-sm text-inverse-fg/70 hover:text-inverse-fg"
+            >
+              {CONTACT_EMAIL}
+            </a>
             <div className="mt-6 flex flex-wrap gap-5 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-inverse-fg/50">
               {SOCIAL.map((s) => (
                 <a

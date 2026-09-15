@@ -43,18 +43,29 @@ export const ABOUT = {
   ],
 } as const;
 
+/** Main email for the business (contact form, order notices). */
+export const CONTACT_EMAIL = "dramaticsnycs@gmail.com";
+
+/**
+ * Company-wide social profiles. Each salon also has its own Facebook page
+ * (see LOCATIONS[].facebook). All links verified 2026-09-15.
+ */
 export const SOCIAL = [
   {
     label: "Instagram",
-    href: "https://instagram.com/dramaticsnycsalons",
+    href: "https://www.instagram.com/dramaticsnycsalons/",
+  },
+  {
+    label: "TikTok",
+    href: "https://www.tiktok.com/@dramatics.nyc",
   },
   {
     label: "Facebook",
-    href: "https://facebook.com/DramaticsNYC",
+    href: "https://www.facebook.com/DramaticsNYC34th/",
   },
   {
     label: "YouTube",
-    href: "https://youtube.com/user/DramaticsNYCvideos",
+    href: "https://www.youtube.com/user/DramaticsNYCvideos",
   },
 ] as const;
 
@@ -115,6 +126,10 @@ export type Location = {
   maps: string;
   bookingUrl: string;
   quote?: string;
+  /** This salon's own Facebook page */
+  facebook?: string;
+  /** This salon's own Instagram, if it has one */
+  instagram?: string;
 };
 
 /**
@@ -143,6 +158,7 @@ export function mapsEmbedUrl(maps: string) {
 export const LOCATIONS: Location[] = [
   {
     id: "34th",
+    facebook: "https://www.facebook.com/DramaticsNYC34th/",
     slug: "34th-street-salon",
     name: "34th St. Salon",
     neighborhood: "Murray Hill",
@@ -164,6 +180,7 @@ export const LOCATIONS: Location[] = [
   },
   {
     id: "3rd",
+    facebook: "https://www.facebook.com/DramaticsNYC3rdAve/",
     slug: "3rd-avenue-salon",
     name: "3rd Ave. Salon",
     neighborhood: "Upper East Side",
@@ -186,6 +203,8 @@ export const LOCATIONS: Location[] = [
   },
   {
     id: "57th",
+    facebook: "https://www.facebook.com/dramaticswestmidtown57/",
+    instagram: "https://www.instagram.com/dramaticsnyc_57/",
     slug: "57th-street-salon",
     name: "57th St. Salon",
     neighborhood: "Parc Vendome",
@@ -206,6 +225,7 @@ export const LOCATIONS: Location[] = [
   },
   {
     id: "75th",
+    facebook: "https://www.facebook.com/DramaticsNYC75thst/",
     slug: "dramatics-nyc-2146-broadway-hair-salon",
     name: "75th St. Salon",
     neighborhood: "Upper West Side",
@@ -228,6 +248,7 @@ export const LOCATIONS: Location[] = [
   },
   {
     id: "91st",
+    facebook: "https://www.facebook.com/dramaticsbroadway91st/",
     slug: "2468-broadway-salon",
     name: "91st St. Salon",
     neighborhood: "Upper West Side",
@@ -253,6 +274,7 @@ export const NAV_LINKS = [
   { label: "Salons", href: "/#salons" },
   { label: "Shop", href: "/shop" },
   { label: "FAQ", href: "/#faq" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export type Faq = {

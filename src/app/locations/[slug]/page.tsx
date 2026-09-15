@@ -141,6 +141,20 @@ export default async function LocationPage({
                   {loc.email}
                 </a>
               )}
+              {(loc.facebook || loc.instagram) && (
+                <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-ink-soft">
+                  {loc.instagram && (
+                    <a href={loc.instagram} target="_blank" rel="noopener noreferrer" className="link-underline py-1 hover:text-ink">
+                      Instagram
+                    </a>
+                  )}
+                  {loc.facebook && (
+                    <a href={loc.facebook} target="_blank" rel="noopener noreferrer" className="link-underline py-1 hover:text-ink">
+                      Facebook
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
             <div className="card-soft bg-sage p-6">
               <p className="eyebrow text-ink-soft">Visit</p>
