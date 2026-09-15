@@ -391,11 +391,14 @@ details.faq-item[open] summary .faq-icon {
 .skyline-car {
   animation: skyline-drive 14s linear infinite;
   animation-play-state: paused;
+  /* hold the off-screen start position while paused or delayed */
+  animation-fill-mode: both;
 }
 .skyline-car-2 {
   animation: skyline-drive 18s linear infinite;
   animation-delay: 1.4s;
   animation-play-state: paused;
+  animation-fill-mode: both;
 }
 /* SkylineDivider adds this when the footer scrolls into view, so the
    cars always start their run right as the visitor arrives */
