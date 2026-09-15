@@ -204,7 +204,6 @@ export const LOCATIONS: Location[] = [
   {
     id: "57th",
     facebook: "https://www.facebook.com/dramaticswestmidtown57/",
-    instagram: "https://www.instagram.com/dramaticsnyc_57/",
     slug: "57th-street-salon",
     name: "57th St. Salon",
     neighborhood: "Parc Vendome",
