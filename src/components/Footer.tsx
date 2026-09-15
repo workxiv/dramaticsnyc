@@ -50,11 +50,11 @@ export default function Footer() {
             </p>
             <a
               href={`mailto:${CONTACT_EMAIL}`}
-              className="link-underline mt-4 inline-block py-1 text-sm text-inverse-fg/70 hover:text-inverse-fg"
+              className="link-underline mt-3 inline-block py-1 text-sm font-semibold text-inverse-fg/80 hover:text-inverse-fg"
             >
-              {CONTACT_EMAIL}
+              Email us!
             </a>
-            <div className="mt-6 flex flex-wrap gap-5 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-inverse-fg/50">
+            <div className="mt-3 flex flex-wrap gap-5 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-inverse-fg/50">
               {SOCIAL.map((s) => (
                 <a
                   key={s.label}

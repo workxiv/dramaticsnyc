@@ -53,7 +53,7 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="card-soft flex h-full flex-col border border-ink/8 bg-cream p-6 sm:p-8">
-      <div className="grid flex-1 gap-5 sm:grid-cols-2">
+      <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="c-name" className={label}>Name</label>
           <input id="c-name" name="name" required maxLength={120} autoComplete="name" className={field} />
@@ -77,15 +77,15 @@ export default function ContactForm() {
             ))}
           </select>
         </div>
-        <div className="flex flex-col sm:col-span-2">
-          <label htmlFor="c-message" className={label}>Message</label>
-          <textarea id="c-message" name="message" required rows={6} maxLength={4000} className={`${field} min-h-[10rem] flex-1`} />
-        </div>
         {/* honeypot, hidden from people */}
         <div className="hidden" aria-hidden="true">
           <label htmlFor="c-company">Company</label>
           <input id="c-company" name="company" tabIndex={-1} autoComplete="off" />
         </div>
+      </div>
+      <div className="mt-5 flex flex-1 flex-col">
+        <label htmlFor="c-message" className={label}>Message</label>
+        <textarea id="c-message" name="message" required rows={6} maxLength={4000} className={`${field} min-h-[10rem] flex-1`} />
       </div>
       {status === "error" && (
         <p role="alert" className="mt-4 text-sm font-semibold text-coral">
