@@ -75,15 +75,15 @@ export default function ContactPage() {
                 </p>
                 <p className="mt-2 text-sm text-ink-soft sm:mt-3">
                   For general questions, product orders and anything not tied to
-                  a specific appointment,{" "}
-                  <a
-                    href={`mailto:${CONTACT_EMAIL}`}
-                    className="link-underline font-semibold text-ink hover:text-coral"
-                  >
-                    send us an email
-                  </a>
-                  .
+                  a specific appointment.
                 </p>
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="btn-pill mt-4 inline-flex items-center gap-2 px-6 py-3 text-sm"
+                >
+                  Email us
+                  <span aria-hidden>→</span>
+                </a>
                 <div className="mt-4 flex flex-wrap gap-4 text-[0.72rem] font-semibold uppercase tracking-[0.16em] text-ink-mute sm:mt-5">
                   {SOCIAL.map((s) => (
                     <a

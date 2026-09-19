@@ -63,7 +63,7 @@ export default function ContactForm() {
           <input id="c-email" name="email" type="email" required maxLength={200} autoComplete="email" className={field} />
         </div>
         <div>
-          <label htmlFor="c-phone" className={label}>Phone (optional)</label>
+          <label htmlFor="c-phone" className={label}>Phone</label>
           <input id="c-phone" name="phone" type="tel" maxLength={40} autoComplete="tel" className={field} />
         </div>
         <div>
