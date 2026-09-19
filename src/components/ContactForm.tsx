@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CONTACT_EMAIL, LOCATIONS } from "@/lib/content";
 
 const field =
-  "w-full rounded-2xl border border-ink/15 bg-paper px-4 py-3 text-[0.95rem] text-ink placeholder:text-ink-mute/70 outline-none transition-colors focus:border-ink/50";
+  "w-full rounded-2xl border border-ink/15 bg-paper px-4 py-2.5 text-[0.95rem] sm:py-3 text-ink placeholder:text-ink-mute/70 outline-none transition-colors focus:border-ink/50";
 const label = "mb-1.5 block text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-ink-mute";
 
 export default function ContactForm() {
@@ -52,8 +52,8 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={onSubmit} className="card-soft flex h-full flex-col border border-ink/8 bg-cream p-6 sm:p-8">
-      <div className="grid gap-5 sm:grid-cols-2">
+    <form onSubmit={onSubmit} className="card-soft flex h-full flex-col border border-ink/8 bg-cream p-5 sm:p-8">
+      <div className="grid gap-3.5 sm:grid-cols-2 sm:gap-5">
         <div>
           <label htmlFor="c-name" className={label}>Name</label>
           <input id="c-name" name="name" required maxLength={120} autoComplete="name" className={field} />
@@ -83,21 +83,21 @@ export default function ContactForm() {
           <input id="c-company" name="company" tabIndex={-1} autoComplete="off" />
         </div>
       </div>
-      <div className="mt-5 flex flex-1 flex-col">
+      <div className="mt-3.5 flex flex-1 flex-col sm:mt-5">
         <label htmlFor="c-message" className={label}>Message</label>
-        <textarea id="c-message" name="message" required rows={6} maxLength={4000} className={`${field} min-h-[10rem] flex-1`} />
+        <textarea id="c-message" name="message" required rows={4} maxLength={4000} className={`${field} min-h-[7rem] flex-1 sm:min-h-[10rem]`} />
       </div>
       {status === "error" && (
         <p role="alert" className="mt-4 text-sm font-semibold text-coral">
           {error}
         </p>
       )}
-      <div className="mt-6 flex flex-wrap items-center gap-4">
+      <div className="mt-5 flex flex-wrap items-center gap-4 sm:mt-6">
         <button type="submit" disabled={status === "sending"} className="btn-flow px-9 py-3.5 text-[0.95rem] disabled:opacity-60">
           {status === "sending" ? "Sending…" : "Send message"}
         </button>
         <span className="text-sm text-ink-mute">
-          or email <a href={`mailto:${CONTACT_EMAIL}`} className="link-underline text-ink">{CONTACT_EMAIL}</a>
+          or <a href={`mailto:${CONTACT_EMAIL}`} className="link-underline text-ink">email us</a>
         </span>
       </div>
     </form>
