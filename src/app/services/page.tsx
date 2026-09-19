@@ -92,9 +92,9 @@ export default function ServicesPage() {
               <h2 className="font-display text-2xl font-semibold">
                 Good to know
               </h2>
-              <ul className="mt-5 grid gap-3 text-sm text-ink-soft sm:grid-cols-2">
+              <ul className="mt-5 text-sm text-ink-soft sm:columns-2 sm:gap-x-8">
                 {SERVICE_POLICIES.map((p) => (
-                  <li key={p} className="flex gap-3">
+                  <li key={p} className="mb-3 flex break-inside-avoid gap-3 last:mb-0">
                     <span aria-hidden className="text-coral">
                       ✦
                     </span>
