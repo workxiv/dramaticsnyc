@@ -168,10 +168,10 @@ export const LOCATIONS: Location[] = [
     phone: "(212) 686-8430",
     tel: "+12126868430",
     hours: [
-      "Mon–Sat 9:00 am – 7:00 pm",
-      "Sun 9:00 am – 6:00 pm",
+      "Mon–Sat 10:00 am – 7:00 pm",
+      "Sun 10:00 am – 6:00 pm",
     ],
-    openingHours: ["Mo-Sa 09:00-19:00", "Su 09:00-18:00"],
+    openingHours: ["Mo-Sa 10:00-19:00", "Su 10:00-18:00"],
     image: IMG.salon34th,
     maps: "https://maps.google.com/?q=120+E+34th+St+New+York+NY+10016",
     bookingUrl: "https://dramatics34th.salontarget.com/",
@@ -296,7 +296,7 @@ export const FAQS: Faq[] = [
   {
     question: "What are Dramatics NYC's hours?",
     answer:
-      "All Dramatics NYC salons are open Monday through Saturday from 9:00 am to 7:00 pm, and Sundays from 9:00 am to 6:00 pm.",
+      "Most Dramatics NYC salons are open Monday through Saturday from 9:00 am to 7:00 pm, and Sundays from 9:00 am to 6:00 pm. The 34th St. Salon opens at 10:00 am (Mon–Sat until 7:00 pm, Sun until 6:00 pm).",
   },
   {
     question: "What services does Dramatics NYC offer?",
