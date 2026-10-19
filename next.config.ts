@@ -12,6 +12,7 @@ const LEGACY_PRODUCT_SLUGS: Record<string, string> = {
   "amnesia-haze-shampoo-moisturizing-cbd-shampoo": "amnesia-haze-shampoo",
   "amnesia-haze-conditioner-moisturizing-cbd-conditioner": "amnesia-haze-conditioner",
   "skywalker-omg-super-smooth-leave-in": "skywalker-omg-leave-in",
+  "total-recoil-c-r-l-leave-in-cream": "total-recoil-leave-in-cream",
   "diamond-reconstruction-extreme-repair-hair-mask": "diamond-reconstruction-hair-mask",
   "diesel-hayes-color-enhancing-hair-mask": "diesel-hayes-color-mask",
   "ocean-beach-sea-salt-texturizing-spray": "ocean-beach-sea-salt-spray",

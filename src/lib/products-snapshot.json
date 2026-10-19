@@ -148,6 +148,28 @@
     ]
   },
   {
+    "id": 43010,
+    "name": "Total Recoil C.R.L. Leave-In Cream",
+    "category": "Conditioners",
+    "price": "$24.95",
+    "priceRange": null,
+    "hasOptions": false,
+    "inStock": true,
+    "image": "/img/products/43010.png",
+    "cents": 2495,
+    "sku": "M-TR-4-1090",
+    "variants": [
+      {
+        "id": 43010,
+        "label": "8 oz",
+        "cents": 2495,
+        "price": "$24.95",
+        "sku": "M-TR-4-1090",
+        "inStock": true
+      }
+    ]
+  },
+  {
     "id": 38424,
     "name": "Skywalker OMG – Super Smooth Leave-In",
     "category": "Conditioners",

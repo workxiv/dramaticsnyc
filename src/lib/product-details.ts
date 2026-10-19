@@ -281,6 +281,33 @@ export const PRODUCT_DETAILS: Record<number, ProductDetail> = {
     badges: CLEAN,
     pairsWith: [38425, 41158],
   },
+  // Not in the WooCommerce export (added Oct 2026 from the order archive:
+  // SKU M-TR-4-1090, 8 oz at $24.95). 43010 is a house id, not a Woo id.
+  43010: {
+    slug: "total-recoil-leave-in-cream",
+    name: "Total Recoil C.R.L. Leave-In Cream",
+    tagline: "Leave-in styling cream for curls, locks and waves",
+    hairType: "Curly, wavy and loc'd hair, any texture",
+    summary:
+      "Total Recoil is the leave-in cream for curls that have lost their bounce. Ideal for styling curls, locks and waves, it defines and separates, keeps frizz in check and leaves hair soft and touchable. Use on damp or towel-dried hair, then air-dry or diffuse. A long-time salon favorite, back on the shelf.",
+    benefits: [
+      "Ideal for styling curls, locks and waves",
+      "Defines and springs curls back to shape",
+      "Controls frizz with a soft, touchable finish",
+      "Color safe, paraben and sulfate free",
+    ],
+    howToUse: [
+      "Shampoo and condition, then towel-dry so hair is damp, not dripping.",
+      "Work a pump or two through from mid-lengths to ends, scrunching curls upward.",
+      "Air-dry or diffuse. Do not rinse. Smooth a little onto dry ends to refresh curls on day two.",
+    ],
+    keyIngredients: [
+      { name: "Lightweight Conditioning Agents", why: "Soften and detangle curls without weighing them down." },
+      { name: "Humectants", why: "Draw moisture into the curl so it holds its shape and stays bouncy." },
+    ],
+    badges: CLEAN,
+    pairsWith: [40042, 38425],
+  },
   38423: {
     slug: "white-widow-liquid-conditioner",
     name: "White Widow Liquid Conditioner",
